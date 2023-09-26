@@ -2,17 +2,6 @@ function p(value){
     console.log(value);
 }
 
-function getIframeContent(frameID) {
-    var frameObj = 
-        document.getElementById(frameID);
-    var frameContent = frameObj
-        .contentWindow.document.body.innerHTML;
-
-    alert("frame content : " + frameContent);
-}
-
-let button;
-
 function showBlurOverlay() {
     const modal = document.querySelector(".panel");
     modal.style.display = 'block';
@@ -24,8 +13,6 @@ function hideBlurOverlay() {
     const modal = document.querySelector(".panel");
     modal.style.display = 'none';
 }
-
-addEventListener("DOMContentLoaded", main);
 
 function main(){
     document.getElementById("openModalButton").addEventListener("click", showBlurOverlay);
@@ -43,3 +30,4 @@ function main(){
 }
 
 
+addEventListener("DOMContentLoaded", main);
