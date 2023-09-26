@@ -2,32 +2,35 @@ function p(value){
     console.log(value);
 }
 
-function showBlurOverlay() {
-    const modal = document.querySelector(".panel");
-    modal.style.display = 'block';
-    button = document.getElementById("panel").contentWindow.document.querySelector("#closeModalButton");
-    p(button);
+function loadPanelContent() {
+    const panelContainer = document.getElementById("panel");
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "panel-login.html", true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            panelContainer.innerHTML = xhr.responseText;
+
+            panelContainer.style.display = 'block';
+
+            const closeButton = panelContainer.querySelector("#closeModalButton");
+            if (closeButton) {
+                closeButton.addEventListener("click", hidePanelContent);
+            }
+        }
+    };
+
+    xhr.send();
 }
 
-function hideBlurOverlay() {
-    const modal = document.querySelector(".panel");
-    modal.style.display = 'none';
+function hidePanelContent() {
+    const panelContainer = document.getElementById("panel");
+    panelContainer.style.display = 'none';
 }
 
-function main(){
-    document.getElementById("openModalButton").addEventListener("click", showBlurOverlay);
-
-    const iframe = document.getElementById('panel');
-
-    iframe.addEventListener('load', function() {
-    
-        const iframeElement = iframe.contentDocument.getElementById('closeModalButton');
-
-        iframeElement.addEventListener("click", hideBlurOverlay);
-
-    });
-    
+function main() {
+    document.getElementById("openModalButton").addEventListener("click", loadPanelContent);
 }
-
 
 addEventListener("DOMContentLoaded", main);

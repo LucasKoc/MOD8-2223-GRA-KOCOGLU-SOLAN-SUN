@@ -1,4 +1,4 @@
-.panel {
+#panel {
     display: none;
     position: fixed;
     top: 0;
@@ -22,7 +22,7 @@
 
 .modal-content {
     background-color: #fff;
-    max-width: 40%;
+    max-width: 50%;
     height: 60%;
     max-height: 80%;
     margin: 100px auto;
@@ -54,7 +54,7 @@ h4 {
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
