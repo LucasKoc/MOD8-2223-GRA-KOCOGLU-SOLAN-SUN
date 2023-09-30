@@ -1,0 +1,102 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+</script>
+
+<template>
+  <header>
+    <RouterLink to="/">
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    </RouterLink>
+    <div class="wrapper">
+
+      <ul class="menuclick">
+        <li>
+          <RouterLink class="redirect" to="/">See Reservation</RouterLink>
+        </li>
+        <li>
+          <RouterLink class="redirect" to="/about">Login</RouterLink>
+        </li>
+      </ul>
+
+    </div>
+  </header>
+
+  <RouterView />
+
+  <footer>
+    <p>
+      <RouterLink to="/about">About</RouterLink>
+    </p>
+  </footer>
+</template>
+
+<style scoped>
+header {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.logo {
+  display: block;
+  margin: 0 2rem;
+}
+
+nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.menuclick {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.menuclick li {
+  margin-right: 10px;
+}
+
+.menuclick li:last-child {
+  margin-right: 0; /* Remove margin from the last item to prevent extra space */
+}
+
+.redirect {
+  text-decoration: none;
+  padding: 10px;
+  border: 1px solid black;
+  color: black;
+  transition: color 0.2s, background-color 0.2s;
+  background-color: white;
+}
+
+.redirect:hover {
+  color: red;
+  background-color: black;
+}
+</style>
+
+<style scoped>
+  footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
