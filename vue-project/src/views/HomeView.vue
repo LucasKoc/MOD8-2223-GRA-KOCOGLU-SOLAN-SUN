@@ -2,6 +2,7 @@
   import Login from '@/components/Login.vue'
   import RoomRes from '../components/RoomRes.vue';
   import EquipRes from '../components/EquipRes.vue';
+  import UserManage from '../components/UserManage.vue';
 </script>
 
 <template>
@@ -24,6 +25,7 @@
     <EquipRes />
     <Login />
     <RoomRes />
+    <UserManage />
     
     
   </main>
