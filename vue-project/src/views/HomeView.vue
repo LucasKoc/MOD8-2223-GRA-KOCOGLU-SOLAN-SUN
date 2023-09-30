@@ -1,5 +1,7 @@
 <script setup>
   import Login from '@/components/Login.vue'
+  import RoomRes from '../components/RoomRes.vue';
+  import EquipRes from '../components/EquipRes.vue';
 </script>
 
 <template>
@@ -18,7 +20,10 @@
         <li>Users can delete their reservations.</li>
       </ul>
     </article>
+
+    <EquipRes />
     <Login />
+    <RoomRes />
     
     
   </main>
