@@ -1,5 +1,13 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+  import { ref } from 'vue';
+  import { RouterLink, RouterView } from 'vue-router';
+  import Login from './components/login.vue';
+
+  const isUserModalOpen = ref(false);
+
+  function exit(){
+    isUserModalOpen.value = false;
+  }
 </script>
 
 <template>
@@ -14,7 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/reservation">Login</RouterLink>
+          <RouterLink class="redirect" to="/" @click="isUserModalOpen = true">Login</RouterLink>
         </li>
       </ul>
 
@@ -30,6 +38,12 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/about">About</RouterLink>
     </p>
   </footer>
+
+  <!-- Backdrop for the modal -->
+  <div class="backdrop" v-if="isUserModalOpen"></div>
+
+
+  <Login class="user-modal" @exit="exit()" v-if="isUserModalOpen"/>
 </template>
 
 <style scoped>
@@ -106,5 +120,26 @@ nav {
     text-align: center;
     padding: 10px;
     box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<style scoped>
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+
+  /* Center the modal */
+  .user-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001
   }
 </style>

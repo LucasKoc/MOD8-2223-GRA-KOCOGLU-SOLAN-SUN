@@ -3,11 +3,13 @@
     const roomNumber = ref('');
     const key = ref('');
     const lastName = ref('');
+    const emit = defineEmits(['exit']);
     
     const submitForm = () => {
         console.log("Room Number:", roomNumber.value);
         console.log("Key:", key.value);
         console.log("Last Name:", lastName.value);
+        emit('exit');
     };
 </script>
 
