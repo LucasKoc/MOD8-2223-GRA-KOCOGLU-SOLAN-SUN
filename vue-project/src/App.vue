@@ -5,23 +5,25 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
     <RouterLink to="/">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
     </RouterLink>
     <div class="wrapper">
 
       <ul class="menuclick">
         <li>
-          <RouterLink class="redirect" to="/">See Reservation</RouterLink>
+          <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/about">Login</RouterLink>
+          <RouterLink class="redirect" to="/reservation">Login</RouterLink>
         </li>
       </ul>
 
     </div>
   </header>
 
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 
   <footer>
     <p>
@@ -42,6 +44,12 @@ header {
   top: 0;
   left: 0;
   right: 0;
+}
+
+main {
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 50px;
 }
 
 .logo {
