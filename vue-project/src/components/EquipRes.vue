@@ -29,7 +29,7 @@
             <label for="reservationHours">Hour of Reservation</label>
             <input
                 type="time"
-                id="reservationHours"
+                id="equipmentreservationHours"
                 v-model="reservationHours"
                 required
             />
