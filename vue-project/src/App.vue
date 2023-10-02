@@ -27,6 +27,9 @@
         <li>
           <RouterLink class="redirect" to="/rooms/5">Room(debug)</RouterLink>
         </li>
+        <li>
+          <RouterLink class="redirect" to="/equipments/5">Equipment(debug)</RouterLink>
+        </li>
       </ul>
 
     </div>
