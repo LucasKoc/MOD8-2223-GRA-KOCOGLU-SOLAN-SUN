@@ -1,15 +1,23 @@
 .admin-item {
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
     padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-background);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 1s, color 1s;
+    cursor: pointer;
 }
 
 .admin-info {
     text-align: center;
+
 }
 
 .equipment-info p {
     margin: 5px 0;
+}
+
+.admin-item:hover{
+    background-color: var(--color-background-soft);
+
 }

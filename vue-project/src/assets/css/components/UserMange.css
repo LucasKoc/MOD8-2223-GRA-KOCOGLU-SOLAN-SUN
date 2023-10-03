@@ -28,6 +28,7 @@ h2 {
 label {
     display: block;
     font-weight: bold;
+    color:var(--color-heading);
 }
 
 input[type="text"],
