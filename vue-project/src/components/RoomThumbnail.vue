@@ -1,6 +1,6 @@
 <template>
   <div class="room-thumbnail" @click="hrefToRoom">
-    <span class="room-title">{{ room["room-name"] }}</span>
+    <span class="room-title">{{ room["roomname"] }}</span>
     <span :class="'availability ' + availabilityClass()">{{ room.availability }}</span>
   </div>
 </template>
@@ -16,6 +16,7 @@ export default {
   },
   methods: {
     availabilityClass() {
+      if (!this.room.availability) return 'ERROR';
       if (this.room.availability === 'Available') {
         return 'available';
       } else if (this.room.availability === 'Unavailable') {

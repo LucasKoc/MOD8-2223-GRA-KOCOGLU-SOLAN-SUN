@@ -1,7 +1,7 @@
 <script setup>
   import { ref } from 'vue';
   import { RouterLink, RouterView } from 'vue-router';
-  import Login from './components/login.vue';
+  import Login from './components/Login.vue';
 
   const isUserModalOpen = ref(false);
 

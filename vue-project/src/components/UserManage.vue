@@ -1,14 +1,26 @@
 <script setup>
     import {ref} from 'vue';
-    const userName = ref('');
-    const userKey = ref('');
-    const userLastName = ref('');
-    const banDuration = ref('');
 
     const emits = defineEmits(['getInfo']);
+
+    const props = defineProps({
+        existsData: {
+            type: Object,
+            default: () => {}
+        }
+    });
+
+    const data = ref(props.existsData);
+
+    const userName = ref( data.value.name || '' );
+    const userKey = ref( data.value.key || '' );
+    const userRoom = ref( data.value.room || '' );
+    const banDuration = ref( data.value.ban || '' );
+    const userid = ref( data.value.id || '' );
+
     
     const saveChanges = () => {
-        emits('getInfo');
+        emits('getInfo', {id: userid.value, room: userRoom.value, key: userKey.value, name: userName.value});
     };
     
     const deleteUser = () => {
@@ -32,11 +44,11 @@
                 </div>
                 <div class="form-group">
                 <label for="userKey">Key</label>
-                <input type="password" id="userKey" v-model="userKey" />
+                <input type="text" id="userKey" v-model="userKey" />
                 </div>
                 <div class="form-group">
-                <label for="userLastName">Last Name</label>
-                <input type="text" id="userLastName" v-model="userLastName" />
+                <label for="userLastName">Room</label>
+                <input type="text" id="userRoom" v-model="userRoom" />
                 </div>
                 <div class="button-group">
                 <button @click="saveChanges">Save Changes</button>

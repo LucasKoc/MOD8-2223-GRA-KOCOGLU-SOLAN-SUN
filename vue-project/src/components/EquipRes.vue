@@ -6,16 +6,13 @@
         { id: 1, name: 'Equipment 1' },
         { id: 2, name: 'Equipment 2' },
         { id: 3, name: 'Equipment 3' },
-        // Add more equipment items as needed
     ];
     const selectedEquipmentId = ref();
     const emits = defineEmits(['sendData']);
 
     const submitForm = () => {
-        // Handle equipment reservation submission logic here
-        console.log("Hour of Reservation:", reservationHours.value);
         emits('sendData');
-        // You can also access the selected equipment items here if needed
+
     };
 
     function selectedEquipment(equipment){
