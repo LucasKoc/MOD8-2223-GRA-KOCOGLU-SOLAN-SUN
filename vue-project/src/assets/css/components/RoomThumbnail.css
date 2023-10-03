@@ -7,6 +7,35 @@
     position: relative;
     border: 1px solid black;
     cursor: pointer;
+
+    margin: 2vh 2vw 2vh 2vw;
+}
+
+@media (max-height: 500px) {
+    .room-thumbnail {
+        margin: 10px 2vw 10px 2vw;
+    }
+}
+
+@media (max-width: 950px) {
+    .room-thumbnail {
+        width: 125px;
+        height: 50px;
+        font-size: 75%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border: 1px solid black;
+        cursor: pointer;
+
+        margin: 2vh 12px 2vh 12px;
+    }
+
+    span.availability {
+        bottom: 3px;
+        right: 5px;
+    }
 }
 
 .room-title {
