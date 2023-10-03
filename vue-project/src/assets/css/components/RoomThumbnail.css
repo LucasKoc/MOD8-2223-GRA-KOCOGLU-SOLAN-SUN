@@ -27,9 +27,11 @@
     transition: box-shadow 0.3s ease;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 585px) {
     .room-thumbnail {
         margin: 10px 2vw 10px 2vw;
+
+        height: 50px;
     }
 }
 

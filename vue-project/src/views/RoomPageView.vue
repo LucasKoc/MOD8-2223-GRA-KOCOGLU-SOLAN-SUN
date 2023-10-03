@@ -2,7 +2,7 @@
   <main id="rooms-status-main">
     <div id="rooms-status-div">
       <div v-for="(rooms, type) in typeOfRooms" :key="type" class="rooms-row-container">
-        <h1 class="roomTypeTitle">{{ type.split('-')[0].charAt(0).toUpperCase() + type.split('-')[0].slice(1) }} Rooms:</h1>
+        <h2 class="roomTypeTitle">{{ type.split('-')[0].charAt(0).toUpperCase() + type.split('-')[0].slice(1) }} Rooms:</h2>
         <div class="room-box-container">
           <div v-for="room in rooms" :key="room.id">
             <RoomThumbnail :room="room"/>
