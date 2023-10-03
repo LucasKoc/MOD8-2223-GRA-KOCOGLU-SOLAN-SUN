@@ -10,6 +10,10 @@ function getEquipments () {
   return equipments
 }
 
+function getEquipmentsByCategory (category) {
+  return equipments.filter(equipment => equipment.category === category)
+}
+
 function getEquipment (id) {
   return equipments.find(equipment => equipment.id === id)
 }
@@ -21,11 +25,12 @@ function modifyEquipment (equipment) {
 
 addEquipment({name: "Washing Machine 1", category: "washing", status: "Available"});
 addEquipment({name: "Washing Machine 2", category: "washing", status: "Available"});
-addEquipment({name: "Washing Machine 3", category: "washing", status: "Available"});
+addEquipment({name: "Playstation 4", category: "game", status: "Available"});
 
 export default function equipmentData() {
     return {
         addEquipment,
+        getEquipmentsByCategory,
         getEquipments,
         modifyEquipment,
         getEquipment

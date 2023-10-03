@@ -3,12 +3,14 @@
     import Equipment from '../components/Equipment.vue';
     import EquipRes from '../components/EquipRes.vue';
     import equipmentData from '../services/equipment.js';
+    import { useRoute } from 'vue-router';
 
+    const route = useRoute();
+    const equipmentCategory = route.params.id;
     const equipmentManage = ref(false);
     const equipment = equipmentData()
     
-    const equipmentReservation = ref(equipment.getEquipments());
-    console.log(equipmentReservation.value);
+    const equipmentReservation = ref(equipment.getEquipmentsByCategory(equipmentCategory));
 
     function saveData(data){
         if (data){
@@ -22,7 +24,7 @@
 <template>
     <div class="reservation-view">
         <div class="flexdivtop">
-            <h2>Multimedia</h2>
+            <h2>{{equipmentCategory}}</h2>
             <button class="reservebutton" @click="equipmentManage = true">Reserve</button>
         </div>
         <div class="flexdiv">
@@ -39,7 +41,7 @@
         </div>
     </div>
     <div class="backdrop" v-if="equipmentManage"></div>
-    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)" :equipmentData="equipment.getEquipments()"/>
+    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)" :equipmentData="equipmentReservation"/>
 </template>
   
 <style scoped>
