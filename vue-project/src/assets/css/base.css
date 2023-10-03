@@ -8,6 +8,7 @@
 
   --palette-divider-light-1: rgb(227, 227, 227);
   --palette-divider-light-2: rgba(231, 231, 231, 0.71);
+  --palette-divider-light-3: rgba(231, 231, 231, 0.5);
 
   --palette-text-dark-1: #95dcff;
   --palette-text-dark-2: #438eb2;
@@ -18,6 +19,10 @@
 
   --palette-required-dark: #e35c7b;
 
+  --palette-lightgreen: lightgreen;
+  --palette-lightred: #ff3b3b;
+  --palette-lightorange: #eeb143;
+
   /* Light mode palette */
   --palette-white: #ffffff;
   --palette-white-soft: #f8f8f8;
@@ -25,6 +30,8 @@
 
   --palette-divider-dark-1: rgba(84, 84, 84, 0.65);
   --palette-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --palette-divider-dark-3: rgba(84, 84, 84, 0.18);
+
 
   --palette-text-light-1: #EAE0D5;
   --palette-text-light-2: #C6AC8F;
@@ -34,6 +41,10 @@
   --palette-link-light-visited: #551a8b;
 
   --palette-required-light: #d50000;
+
+  --palette-darkgreen: darkgreen;
+  --palette-darkred: #c21313;
+  --palette-darkorange: #f5ab25;
 }
 
 /* Semantic color variables. */
@@ -45,6 +56,7 @@
 
     --color-border: var(--palette-divider-dark-2);
     --color-border-hover: var(--palette-divider-dark-1);
+    --color-border-opacity-reduced: var(--palette-divider-light-3);
 
     --color-heading: var(--palette-text-light-3);
     --color-text: var(--palette-text-light-2);
@@ -56,9 +68,13 @@
     --color-button: var(--palette-link-light);
     --color-button-hover: var(--palette-link-light-visited);
 
-    /* --color-shadow: var(--palette-shadow-dark); */
+    --color-shadow: var(--palette-dark-soft);
 
     --color-required: var(--palette-required-light);
+
+    --color-available: var(--palette-darkgreen);
+    --color-unavailable: var(--palette-darkred);
+    --color-available-in: var(--palette-darkorange);
   }
 }
 
@@ -70,6 +86,7 @@
 
     --color-border: var(--palette-divider-light-2);
     --color-border-hover: var(--palette-divider-light-1);
+    --color-border-opacity-reduced: var(--palette-divider-light-3);
 
     --color-heading: var(--palette-text-dark-3);
     --color-text: var(--palette-text-dark-1);
@@ -82,9 +99,13 @@
     --color-button: var(--palette-link-dark);
     --color-button-hover: var(--palette-link-light);
 
-    /* --color-shadow: var(--palette-shadow-light); */
+    --color-shadow: var(--palette-white);
 
     --color-required: var(--palette-required-dark);
+
+    --color-available: var(--palette-lightgreen);
+    --color-unavailable: var(--palette-lightred);
+    --color-available-in: var(--palette-lightorange);
   }
 }
 

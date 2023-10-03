@@ -14,6 +14,8 @@ div.room-box-container {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    border: var(--color-border-opacity-reduced) solid 1px;
 }
 h1.roomTypeTitle {
     margin: 0 0 0 0;
