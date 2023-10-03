@@ -17,7 +17,7 @@ export default {
   methods: {
     availabilityClass() {
       if (!this.room.availability) return 'ERROR';
-      if (this.room.availability.toLowerCase() === 'Available'.toLowerCase()) {
+      else if (this.room.availability.toLowerCase() === 'Available'.toLowerCase()) {
         return 'Available';
       } else if (this.room.availability.toLowerCase() === 'Unavailable'.toLowerCase()) {
         return 'Unavailable';
