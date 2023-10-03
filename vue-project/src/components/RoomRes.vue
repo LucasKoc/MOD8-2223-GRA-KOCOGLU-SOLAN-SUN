@@ -6,10 +6,12 @@
     const emits = defineEmits(['sendData']);
     
     const submitForm = () => {
-        // Handle reservation submission logic here
         console.log("Date:", reservationDate.value);
         console.log("Hours of Reservation:", reservationHours.value);
-        emits('sendData');
+        emits('sendData', {
+            date: reservationDate.value,
+            time: reservationHours.value
+        });
     };
 </script>
 
