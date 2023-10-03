@@ -11,7 +11,6 @@
     const roomReservations = ref(room.reservation);
 
     function saveData(data) {
-        console.log(data);
         if (data){
             room.reservation.push(data);
         }

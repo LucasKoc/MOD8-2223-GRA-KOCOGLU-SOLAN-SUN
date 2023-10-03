@@ -19,7 +19,8 @@
 
     const submitForm = () => {
         const reservation = {
-            time: reservationHours.value
+            time: reservationHours.value,
+            user: userfunc.getConnectedUser().id || 0
         };
         const equip = equipment.filter((e) => e.id === selectedEquipmentId.value)[0]
         equip.reservations = reservation;
