@@ -1,18 +1,26 @@
 <script setup>
     import { ref } from 'vue';
+    import RoomRes from '../components/RoomRes.vue';
+
+    const roomManage = ref(false);
     const roomReservations = ref([
         { id: 1, room: 'Room 101', date: '2023-10-01', hours: '10:00 AM - 12:00 PM' },
         { id: 2, room: 'Room 202', date: '2023-10-03', hours: '02:00 PM - 04:00 PM' },
     ]);
     
     const equipmentReservation = ref('Equipment A');
+
+    function saveData(data) {
+        console.log("test")
+        roomManage.value = false
+    }
 </script>
 
 <template>
     <div class="reservation-view">
         <div class="flexdivtop">
             <h2>Multimedia</h2>
-            <button class="reservebutton">Reserve</button>
+            <button class="reservebutton" @click="roomManage = true">Reserve</button>
         </div>
         <div class="flexdiv">
             <div>
@@ -29,6 +37,8 @@
             </div>
         </div>
     </div>
+    <div class="backdrop" v-if="roomManage"></div>
+    <RoomRes class="user-modal" v-if="roomManage" @sendData="(data) => saveData(data)"/>
 </template>
   
 <style scoped>
@@ -108,4 +118,24 @@
         background-color: #007BFF;
         color: white;
     }
+</style>
+
+<style scoped>
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; 
+  }
+
+  .user-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001
+  }
 </style>
