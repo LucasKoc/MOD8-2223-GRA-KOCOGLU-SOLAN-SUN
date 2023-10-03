@@ -1,19 +1,18 @@
 <script setup>
 const props = defineProps({
-    admin: {
+    user: {
         type: Object,
         required: true
     },
 });
-const admin = props.admin;
 
 </script>
 
 <template>
   <div class="admin-item">
     <div class="admin-info">
-      <p>{{ admin.name }}</p>
-      <p>Room: {{ admin.Room }}</p>
+      <p>{{ user.name }}</p>
+      <p>Room: {{ user.room }}</p>
     </div>
   </div>
 </template>

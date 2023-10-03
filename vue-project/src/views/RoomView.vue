@@ -11,7 +11,6 @@
     const equipmentReservation = ref('Equipment A');
 
     function saveData(data) {
-        console.log("test")
         roomManage.value = false
     }
 </script>

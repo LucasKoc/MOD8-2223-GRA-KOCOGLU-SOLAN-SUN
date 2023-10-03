@@ -14,6 +14,10 @@ function getEquipment (id) {
   return equipments.find(equipment => equipment.id === id)
 }
 
+addEquipment({name: "Washing Machine 1", category: "washing", status: "Available"});
+addEquipment({name: "Washing Machine 2", category: "washing", status: "Available"});
+addEquipment({name: "Washing Machine 3", category: "washing", status: "Available"});
+
 export default function equipmentData() {
     return {
         addEquipment,
