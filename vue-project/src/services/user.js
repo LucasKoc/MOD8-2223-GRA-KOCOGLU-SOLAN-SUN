@@ -36,7 +36,7 @@ function verifyUser (key, room, name) {
 
 function login(key, room, name){
     if(verifyUser(key, room, name)){
-        connectedUser = users.filter(user => user.key === key);
+        connectedUser = users.filter(user => user.key === key)[0];
         return true;
     }
     return false;
@@ -51,6 +51,7 @@ function getConnectedUser(){
 }
 
 addUser({room: 202, key: "1234", name: "John"});
+addUser({room: 0, key: "0", name: "0"});
 addUser({room: 206, key: "8627", name: "John2"});
 addUser({room: 195, key: "1268", name: "John3"});
 

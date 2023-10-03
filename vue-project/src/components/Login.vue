@@ -16,7 +16,7 @@
             alert("Invalid credentials")
         }else{
             console.log(userfunc.getConnectedUser())
-            emit('exit');
+            emit('exit', true);
         }
         
     };

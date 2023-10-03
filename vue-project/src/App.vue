@@ -1,11 +1,17 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import { RouterLink, RouterView } from 'vue-router';
   import Login from './components/Login.vue';
+  import userData from './services/user';
 
   const isUserModalOpen = ref(false);
+  const user = ref(userData().getConnectedUser());
+  const loginval = ref("Login");
 
-  function exit(){
+  function exit(s){
+    if (s){
+      loginval.value = "Logged";
+    }
     isUserModalOpen.value = false;
   }
 </script>
@@ -25,16 +31,16 @@
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/rooms/5">Room(debug)</RouterLink>
+          <RouterLink class="redirect" to="/rooms/1">Room(debug)</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/equipments/5">Equipment(debug)</RouterLink>
+          <RouterLink class="redirect" to="/equipments/washing">Equipment(debug)</RouterLink>
         </li>
         <li>
           <RouterLink class="redirect" to="/panel">adminPanel</RouterLink>
         </li>
         <li>
-          <div class="redirect login" @click="isUserModalOpen=true">Login</div>
+          <div class="redirect login" @click="isUserModalOpen=true">{{loginval}}</div>
         </li>
       </ul>
 
@@ -55,7 +61,7 @@
   <div class="backdrop" v-if="isUserModalOpen"></div>
 
 
-  <Login class="user-modal" @exit="exit()" v-if="isUserModalOpen"/>
+  <Login class="user-modal" @exit="(s) => exit(s)" v-if="isUserModalOpen"/>
 </template>
 
 <style scoped>
