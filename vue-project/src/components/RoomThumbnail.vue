@@ -34,40 +34,5 @@ export default {
 </script>
 
 <style scoped>
-.room-thumbnail {
-  width: 200px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border: 1px solid black;
-  cursor: pointer;
-}
-
-.room-title {
-  z-index: 1;
-}
-
-.availability {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-
-  text-align: right;
-  font-size: 75%;
-}
-
-/* Different color coding based on availability. Adjust colors as you see fit. */
-.availability.available {
-  color: green;
-}
-
-.availability.unavailable {
-  color: red;
-}
-
-.availability.available-in {
-  color: orange;
-}
+@import "../assets/css/components/RoomThumbnail.css";
 </style>

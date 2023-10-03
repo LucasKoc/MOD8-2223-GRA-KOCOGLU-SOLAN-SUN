@@ -123,52 +123,5 @@ export default {
 };
 </script>
 <style scoped>
-main {
-  max-width: 80vw;
-  width: 80vw;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-div.search-component {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-h1 {
-  text-align: center;
-}
-
-input.search-bar {
-  width: 100%;
-  padding: 1em;
-  margin-bottom: 0;
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  outline: none;
-}
-
-ul {
-  list-style-type: none;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-
-ul li {
-}
-
-ul li:last-child {
-  border-bottom: none;
-}
-
-@media (max-width: 844px) {
-  main {
-    font-size: 18px;
-  }
-}
+@import '../assets/css/views/HomeView.css';
 </style>
