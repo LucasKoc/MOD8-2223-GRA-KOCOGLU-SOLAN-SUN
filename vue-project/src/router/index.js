@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ReservationVue from '../views/ReservationView.vue'
 import RoomView from '../views/RoomView.vue'
 import EquipmentView from '../views/EquipmentView.vue'
+import panel from '../views/AdminPanelView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,9 +29,16 @@ const router = createRouter({
       component: EquipmentView
     },
     {
+
+      path: '/panel',
+      name: 'panel',
+      component: panel
+    },
+    {
       path: '/rooms',
       name: 'rooms-page',
       component: () => import('../views/RoomPageView.vue')
+
     },
     {
       path: '/about',
