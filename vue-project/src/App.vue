@@ -30,6 +30,9 @@
         <li>
           <RouterLink class="redirect" to="/equipments/5">Equipment(debug)</RouterLink>
         </li>
+        <li>
+          <RouterLink class="redirect" to="/panel">adminPanel</RouterLink>
+        </li>
       </ul>
 
     </div>
