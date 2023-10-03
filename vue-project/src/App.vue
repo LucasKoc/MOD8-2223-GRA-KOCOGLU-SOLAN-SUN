@@ -143,11 +143,10 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-    z-index: 1000; /* Ensure it appears above other content */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; 
   }
 
-  /* Center the modal */
   .user-modal {
     position: fixed;
     top: 50%;

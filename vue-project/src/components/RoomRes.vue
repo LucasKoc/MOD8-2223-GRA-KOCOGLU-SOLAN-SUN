@@ -2,11 +2,14 @@
     import {ref} from 'vue';
     const reservationDate = ref('');
     const reservationHours = ref('');
+
+    const emits = defineEmits(['sendData']);
     
     const submitForm = () => {
         // Handle reservation submission logic here
         console.log("Date:", reservationDate.value);
         console.log("Hours of Reservation:", reservationHours.value);
+        emits('sendData');
     };
 </script>
 
