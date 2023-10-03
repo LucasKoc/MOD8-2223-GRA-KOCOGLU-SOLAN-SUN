@@ -134,3 +134,7 @@ dist
 
 # Webstorm
 .idea
+
+#Other
+.vscode/*
+vue-project/.vscode/extensions.json
