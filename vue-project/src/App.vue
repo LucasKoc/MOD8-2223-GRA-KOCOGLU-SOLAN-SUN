@@ -25,9 +25,6 @@
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
-          <div class="redirect" @click="isUserModalOpen=true">Login</div>
-        </li>
-        <li>
           <RouterLink class="redirect" to="/rooms/5">Room(debug)</RouterLink>
         </li>
         <li>
@@ -35,6 +32,9 @@
         </li>
         <li>
           <RouterLink class="redirect" to="/panel">adminPanel</RouterLink>
+        </li>
+        <li>
+          <div class="redirect login" @click="isUserModalOpen=true">Login</div>
         </li>
       </ul>
 
@@ -119,6 +119,10 @@ nav {
 .redirect:hover {
   color: red;
   background-color: black;
+}
+
+.login {
+  border-radius: 100px;
 }
 </style>
 

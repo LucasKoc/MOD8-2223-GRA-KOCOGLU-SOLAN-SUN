@@ -22,6 +22,7 @@
 
 <template>
     <div class="user-container">
+        <button class="close" @click="emits('getInfo')">X</button>
         <div class="user-panel">
             <div class="user-details">
                 <h2>User Details</h2>
@@ -122,5 +123,21 @@
     button:hover {
         background-color: #0056b3;
     }
+
+    .close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        padding: 0;
+        background-color: #ccc;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .close:hover {
+        background-color: red;
+      }
 </style>
   

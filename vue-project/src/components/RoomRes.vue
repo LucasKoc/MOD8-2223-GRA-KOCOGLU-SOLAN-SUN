@@ -15,6 +15,7 @@
 
 <template>
     <div class="reservation-form">
+        <button class="close" @click="emits('sendData')">X</button>
         <h2>Reservation</h2>
         <form @submit.prevent="submitForm">
             <div class="form-group">
@@ -87,4 +88,20 @@ font-size: 16px;
 button:hover {
 background-color: #0056b3;
 }
+
+.close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    padding: 0;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .close:hover {
+    background-color: red;
+  }
 </style>
