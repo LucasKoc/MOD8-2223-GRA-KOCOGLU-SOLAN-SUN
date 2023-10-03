@@ -1,7 +1,7 @@
 <template>
   <div class="room-thumbnail" @click="hrefToRoom">
     <span class="room-title">{{ room["roomname"] }}</span>
-    <span :class="'availability ' + availabilityClass()">{{ room.availability }}</span>
+    <span :class="'availability ' + availabilityClass()">{{ availabilityClass() }}</span>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
       } else if (this.room.availability.includes('Available in')) {
         return 'available-in';
       }
-      return '';
+      return 'available';
     },
     hrefToRoom() {
       this.$router.push(`/rooms/${this.room.id}`);

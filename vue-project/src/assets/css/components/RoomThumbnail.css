@@ -62,3 +62,7 @@
 .availability.available-in {
     color: orange;
 }
+
+.availability.ERROR {
+    color: var(--color-text-mute)
+}
