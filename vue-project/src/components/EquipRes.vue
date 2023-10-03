@@ -25,6 +25,7 @@
 
 <template>
     <div class="equipment-reservation">
+        <button class="close" @click="emits('sendData')">X</button>
         <h2>Equipment Reservation</h2>
         <form @submit.prevent="submitForm">
             <div class="form-group">
@@ -108,5 +109,21 @@
     button:hover {
         background-color: #0056b3;
     }
+
+    .close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        padding: 0;
+        background-color: #ccc;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .close:hover {
+        background-color: red;
+      }
 </style>
   
