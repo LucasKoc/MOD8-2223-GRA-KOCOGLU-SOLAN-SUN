@@ -13,7 +13,7 @@
 <template>
   <header>
     <RouterLink to="/">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
+      <img alt="Vue logo" class="logo" src="@/assets/pictures/logo.svg" width="50" height="50" />
     </RouterLink>
     <div class="wrapper">
 

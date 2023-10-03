@@ -87,12 +87,12 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+  src: url("@/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Helvetica Neue";
-  src: url("fonts/HelveticaNeue.ttc") format("truetype");
+  src: url("@/assets/fonts/HelveticaNeue.ttc") format("truetype");
 }
 
 body {
