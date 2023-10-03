@@ -133,7 +133,7 @@ dist
 .DS_Store
 
 # Webstorm
-
+.idea
 
 #Other
 .vscode/*
