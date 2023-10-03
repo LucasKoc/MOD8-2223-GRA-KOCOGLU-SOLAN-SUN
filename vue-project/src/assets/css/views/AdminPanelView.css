@@ -49,6 +49,7 @@ p {
     display: flex;
     justify-content: flex-end;
     margin: 0% 5%;
+    padding: 1%;
 }
 .add{
     padding: 10px;
@@ -103,3 +104,4 @@ p {
     transform: translate(-50%, -50%);
     z-index: 1001
 }
+
