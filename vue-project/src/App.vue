@@ -25,7 +25,7 @@
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/">Login</RouterLink>
+          <RouterLink class="redirect" @click="isUserModalOpen=true" to="/">Login</RouterLink>
         </li>
         <li>
           <RouterLink class="redirect" to="/rooms/5">Room(debug)</RouterLink>
@@ -67,6 +67,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 99;
 }
 
 main {
