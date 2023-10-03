@@ -1,86 +1,192 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* Color palette based on Vue theme from <https://github.com/vuejs/theme>. */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  --palette-white: #ffffff;
+  --palette-white-soft: #f8f8f8;
+  --palette-white-mute: #f2f2f2;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  --palette-black: #181818;
+  --palette-black-soft: #282828;
+  --palette-black-mute: #383838;
 
-  --vt-c-indigo: #2c3e50;
+  --palette-indigo: #2c3e50;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --palette-divider-light-1: rgb(227, 227, 227);
+  --palette-divider-light-2: rgba(231, 231, 231, 0.71);
+  --palette-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --palette-divider-dark-2: rgba(84, 84, 84, 0.48);
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --palette-text-light-1: var(--palette-indigo);
+  --palette-text-light-2: rgba(60, 60, 60, 0.9);
+  --palette-text-light-3: rgba(60, 60, 60, 0.65);
+  --palette-text-dark-1: var(--palette-white);
+  --palette-text-dark-2: rgba(235, 235, 235, 0.9);
+  --palette-text-dark-3: rgba(235, 235, 235, 0.65);
+
+  --palette-link-light: #0066cc;
+  --palette-link-visited-light: #551a8b;
+  --palette-link-dark: #3495f5;
+  --palette-link-visited-dark: #b97cf3;
+
+  --palette-shadow-dark: rgba(0, 0, 0, 0.2);
+  --palette-shadow-light: rgba(255, 255, 255);
+
+  --palette-red-dark: #d50000;
+  --palette-red-light: #e35c7b;
 }
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+/* Semantic color variables. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-background: var(--palette-white);
+    --color-background-soft: var(--palette-white-soft);
+    --color-background-mute: var(--palette-white-mute);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+    --color-border: var(--palette-divider-dark-2);
+    --color-border-hover: var(--palette-divider-dark-1);
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+    --color-heading: var(--palette-text-light-1);
+    --color-text: var(--palette-text-light-2);
+    --color-text-soft: var(--palette-text-light-3);
 
-  --section-gap: 160px;
+    --color-link: var(--palette-link-visited-dark);
+    --color-link-visited: var(--palette-link-visited-light);
+
+    --color-button: var(--palette-link-visited-dark);
+    --color-button-hover: var(--palette-link-visited-light);
+
+    --color-shadow: var(--palette-shadow-dark);
+
+    --color-required: var(--palette-red-dark);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --color-background: var(--palette-black);
+    --color-background-soft: var(--palette-black-soft);
+    --color-background-mute: var(--palette-black-mute);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-border: var(--palette-divider-light-2);
+    --color-border-hover: var(--palette-divider-light-1);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-heading: var(--palette-text-dark-1);
+    --color-text: var(--palette-text-dark-2);
+    --color-text-soft: var(--palette-text-dark-3);
+
+    --color-link: var(--palette-link-dark);
+    --color-link-visited: var(--palette-link-light);
+
+    --color-button: var(--palette-link-dark);
+    --color-button-hover: var(--palette-link-light);
+
+    --color-shadow: var(--palette-shadow-light);
+
+    --color-required: var(--palette-red-light);
   }
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("fonts/HelveticaNeue.ttc") format("truetype");
 }
 
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
+  background: var(--color-background-soft);
+  transition: color 0.5s;
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p, span {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+nav,
+li,
+ul,
+ol {
+  font-family: "Montserrat", sans-serif;
+}
+
+:link,
+:visited {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+legend {
+  font-family: "Montserrat", sans-serif;
+  color: var(--color-heading);
+}
+
+label,
+::placeholder {
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  color: var(--color-text-soft);
+}
+
+td {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  color: var(--color-heading);
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+button {
+  background-color: var(--color-button);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+
+  border-radius: 12px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-button-hover);
+  color: var(--color-text-soft);
 }
