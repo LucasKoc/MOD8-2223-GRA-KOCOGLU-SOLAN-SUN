@@ -2,16 +2,19 @@
     import { ref } from 'vue';
     import Equipment from '../components/Equipment.vue';
     import EquipRes from '../components/EquipRes.vue';
+    import equipmentData from '../services/equipment.js';
 
     const equipmentManage = ref(false);
+    const equipment = equipmentData()
     
-    const equipmentReservation = ref([]);
-    equipmentReservation.value.push({ id: 1, name: 'Equipment A' });
-    equipmentReservation.value.push({ id: 2, name: 'Equipment B' });
-    equipmentReservation.value.push({ id: 3, name: 'Equipment C' });
-    equipmentReservation.value.push({ id: 4, name: 'Equipment D' });
+    const equipmentReservation = ref(equipment.getEquipments());
+    console.log(equipmentReservation.value);
 
-    function saveData(){
+    function saveData(data){
+        if (data){
+            console.log(data);
+            equipment.modifyEquipment(data);
+        }
         equipmentManage.value = false;
     }
 </script>
@@ -36,7 +39,7 @@
         </div>
     </div>
     <div class="backdrop" v-if="equipmentManage"></div>
-    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)"/>
+    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)" :equipmentData="equipment.getEquipments()"/>
 </template>
   
 <style scoped>

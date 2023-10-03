@@ -1,18 +1,23 @@
 <script setup>
     import { ref } from 'vue';
     import RoomRes from '../components/RoomRes.vue';
+    import roomData from '../services/room.js';
+    import {useRoute} from 'vue-router';
 
     const roomManage = ref(false);
-    const roomReservations = ref([
-        { id: 1, room: 'Room 101', date: '2023-10-01', hours: '10:00 AM - 12:00 PM' },
-        { id: 2, room: 'Room 202', date: '2023-10-03', hours: '02:00 PM - 04:00 PM' },
-    ]);
-    
-    const equipmentReservation = ref('Equipment A');
+    const route = useRoute();
+    const roomId = route.params.id;
+    const room = roomData().getRoom(roomId);
+    const roomReservations = ref(room.reservation);
 
     function saveData(data) {
-        roomManage.value = false
+        console.log(data);
+        if (data){
+            room.reservation.push(data);
+        }
+        roomManage.value = false;
     }
+
 </script>
 
 <template>
@@ -27,9 +32,8 @@
                 <div class="reservation">
                     <ul>
                         <li v-for="roomReservation in roomReservations" :key="roomReservation.id">
-                            <span>Room: {{ roomReservation.room }}</span>
                             <span>Date: {{ roomReservation.date }}</span>
-                            <span>Hours: {{ roomReservation.hours }}</span>
+                            <span>Hours: {{ roomReservation.time }}</span>
                         </li>
                     </ul>
                 </div>

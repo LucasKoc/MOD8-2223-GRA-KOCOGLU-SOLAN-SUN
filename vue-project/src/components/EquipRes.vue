@@ -2,16 +2,28 @@
     import {ref} from 'vue';
     import Equipment from './Equipment.vue';
     const reservationHours = ref('');
-    const equipmentData = [
-        { id: 1, name: 'Equipment 1' },
-        { id: 2, name: 'Equipment 2' },
-        { id: 3, name: 'Equipment 3' },
-    ];
+
+    const props = defineProps({
+        equipmentData: {
+            type: Object,
+            default: () => {}
+        }
+    });
+
+    const equipment = props.equipmentData;
+
+    console.log(equipment);
+
     const selectedEquipmentId = ref();
     const emits = defineEmits(['sendData']);
 
     const submitForm = () => {
-        emits('sendData');
+        const reservation = {
+            time: reservationHours.value
+        };
+        const equip = equipment.filter((e) => e.id === selectedEquipmentId.value)[0]
+        equip.reservations = reservation;
+        emits('sendData', equip);
 
     };
 

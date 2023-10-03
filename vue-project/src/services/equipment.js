@@ -14,6 +14,11 @@ function getEquipment (id) {
   return equipments.find(equipment => equipment.id === id)
 }
 
+function modifyEquipment (equipment) {
+  const index = equipments.findIndex(e => e.id === equipment.id)
+  equipments.splice(index, 1, equipment)
+}
+
 addEquipment({name: "Washing Machine 1", category: "washing", status: "Available"});
 addEquipment({name: "Washing Machine 2", category: "washing", status: "Available"});
 addEquipment({name: "Washing Machine 3", category: "washing", status: "Available"});
@@ -22,6 +27,7 @@ export default function equipmentData() {
     return {
         addEquipment,
         getEquipments,
+        modifyEquipment,
         getEquipment
     }
 }
