@@ -1,15 +1,24 @@
 <script setup>
     import {ref} from 'vue';
+    import userData from '../services/user';
+
+    const userfunc = userData();
     const roomNumber = ref('');
     const key = ref('');
     const lastName = ref('');
     const emit = defineEmits(['exit']);
     
     const submitForm = () => {
-        console.log("Room Number:", roomNumber.value);
-        console.log("Key:", key.value);
-        console.log("Last Name:", lastName.value);
-        emit('exit');
+        let loop = true;
+
+        loop = !userfunc.login(key.value, roomNumber.value, lastName.value)
+        if (loop){
+            alert("Invalid credentials")
+        }else{
+            console.log(userfunc.getConnectedUser())
+            emit('exit', true);
+        }
+        
     };
 </script>
 
