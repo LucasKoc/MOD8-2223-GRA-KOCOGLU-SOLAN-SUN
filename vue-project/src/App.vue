@@ -25,7 +25,7 @@
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" @click="isUserModalOpen=true" to="/">Login</RouterLink>
+          <div class="redirect" @click="isUserModalOpen=true">Login</div>
         </li>
         <li>
           <RouterLink class="redirect" to="/rooms/5">Room(debug)</RouterLink>

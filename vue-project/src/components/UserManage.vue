@@ -4,9 +4,11 @@
     const userKey = ref('');
     const userLastName = ref('');
     const banDuration = ref('');
+
+    const emits = defineEmits(['getInfo']);
     
     const saveChanges = () => {
-        // Handle saving changes logic here
+        emits('getInfo');
     };
     
     const deleteUser = () => {
@@ -90,7 +92,7 @@
     input[type="text"],
     input[type="password"],
     input[type="number"] {
-        width: 100%;
+        width: 80%;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;

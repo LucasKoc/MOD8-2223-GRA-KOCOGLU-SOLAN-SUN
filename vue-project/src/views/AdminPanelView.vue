@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import AdminComponent from '../components/AdminPanel.vue';
+import UserManage from '../components/UserManage.vue';
+
+const userManage =  ref(false);
 
 const userInformation = ref([]);
 userInformation.value.push({ id: 1, name: 'User A' , Room: '001'});
@@ -14,12 +17,16 @@ userInformation.value.push({ id: 8, name: 'User H' , Room: '008'});
 userInformation.value.push({ id: 9, name: 'User I' , Room: '009'});
 userInformation.value.push({ id: 10, name: 'User J' , Room: '010'});
 
+function saveData(){
+  userManage.value = false;
+}
+
 </script>
 
 <template>
   <div class="admin-view">
     <div class="div-adduser">
-      <button class="add">Add User</button>
+      <button class="add" @click="userManage = true">Add User</button>
     </div>
     <div class="flexdivtop">
       <h2>Admin Panel</h2>
@@ -37,17 +44,11 @@ userInformation.value.push({ id: 10, name: 'User J' , Room: '010'});
       </div>
     </div>
   </div>
+  <div class="backdrop" v-if="userManage"></div>
+  <UserManage class="user-modal" v-if="userManage" @getInfo="(data) => saveData(data)"/>
 </template>
 
 <style scoped>
-.reservation-view {
-  padding: 20px 0px;
-  background-color: white;
-  color: black;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 .reservation-list{
   margin-top: 10px;
@@ -136,4 +137,25 @@ p {
   text-align: center;
 }
 
+</style>
+
+<style scoped>
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+
+  /* Center the modal */
+  .user-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001
+  }
 </style>
