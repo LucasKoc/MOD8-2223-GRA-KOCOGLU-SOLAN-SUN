@@ -104,13 +104,5 @@ export default {
 </script>
 
 <style scoped>
-
-div.book-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-
-  margin: 4vh 0 4vh 0;
-}
+@import '../assets/css/views/RoomPageView.css';
 </style>

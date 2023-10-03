@@ -19,19 +19,5 @@ const admin = props.admin;
 </template>
 
 <style scoped>
-.admin-item {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.admin-info {
-  text-align: center;
-}
-
-.equipment-info p {
-  margin: 5px 0;
-}
+@import "../assets/css/components/AdminPanel.css";
 </style>
