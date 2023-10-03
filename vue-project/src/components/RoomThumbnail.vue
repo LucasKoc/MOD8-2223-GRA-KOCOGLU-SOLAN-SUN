@@ -31,8 +31,8 @@ export default {
 
 <style scoped>
 .room-thumbnail {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
