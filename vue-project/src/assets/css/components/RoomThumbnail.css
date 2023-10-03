@@ -1,14 +1,20 @@
 .room-thumbnail {
     width: 200px;
     height: 100px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     position: relative;
-    border: 1px solid black;
+
+    border: 1px solid var(--color-border);  
+    border-radius: 12px;
     cursor: pointer;
 
     margin: 2vh 2vw 2vh 2vw;
+
+    background-color: var(--color-background-soft);
 }
 
 @media (max-height: 500px) {
