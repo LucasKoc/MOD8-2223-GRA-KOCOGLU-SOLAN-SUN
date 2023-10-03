@@ -1,0 +1,139 @@
+<script setup>
+import { ref } from 'vue';
+import AdminComponent from '../components/AdminPanel.vue';
+
+const userInformation = ref([]);
+userInformation.value.push({ id: 1, name: 'User A' , Room: '001'});
+userInformation.value.push({ id: 2, name: 'User B' , Room: '002'});
+userInformation.value.push({ id: 3, name: 'User C' , Room: '003'});
+userInformation.value.push({ id: 4, name: 'User D' , Room: '004'});
+userInformation.value.push({ id: 5, name: 'User E' , Room: '005'});
+userInformation.value.push({ id: 6, name: 'User F' , Room: '006'});
+userInformation.value.push({ id: 7, name: 'User G' , Room: '007'});
+userInformation.value.push({ id: 8, name: 'User H' , Room: '008'});
+userInformation.value.push({ id: 9, name: 'User I' , Room: '009'});
+userInformation.value.push({ id: 10, name: 'User J' , Room: '010'});
+
+</script>
+
+<template>
+  <div class="admin-view">
+    <div class="div-adduser">
+      <button class="add">Add User</button>
+    </div>
+    <div class="flexdivtop">
+      <h2>Admin Panel</h2>
+  </div>
+    <div class="flexdiv">
+      <div>
+        <h3>Room reservation</h3>
+        <div class="reservation">
+          <ul class="reservation-list">
+            <li v-for="admin in userInformation" :key="admin.id">
+              <AdminComponent :admin="admin" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.reservation-view {
+  padding: 20px 0px;
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-list{
+  margin-top: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.flexdiv {
+  margin: 0% 5%;
+}
+
+.flexdivtop {
+  display: flex;
+  margin: 0% 5%;
+  align-items: baseline;
+  justify-content: space-around;
+}
+
+.reservation {
+  padding: 1%;
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
+}
+
+
+h2 {
+  margin: 2% 5%;
+}
+
+h3 {
+  margin-top: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+p {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.div-adduser {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0% 5%;
+}
+.add{
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.add:hover {
+  background-color: #0056b3;
+}
+
+h2 {
+  margin: 2% 5%;
+}
+
+h3 {
+  margin-top: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+p {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+</style>
