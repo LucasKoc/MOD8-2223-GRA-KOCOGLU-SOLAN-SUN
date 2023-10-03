@@ -1,5 +1,5 @@
 <template>
-  <div class="room-thumbnail" @click="$emit('click')">
+  <div class="room-thumbnail" @click="hrefToRoom">
     <span class="room-title">{{ room["room-name"] }}</span>
     <span :class="'availability ' + availabilityClass()">{{ room.availability }}</span>
   </div>
@@ -25,6 +25,9 @@ export default {
       }
       return '';
     },
+    hrefToRoom() {
+      this.$router.push(`/rooms/${this.room.id}`);
+    }
   }
 }
 </script>

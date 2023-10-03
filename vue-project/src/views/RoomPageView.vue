@@ -4,7 +4,7 @@
       <h1 class="roomTypeTitle">{{ type.split('-')[0].charAt(0).toUpperCase() + type.split('-')[0].slice(1) }} Rooms:</h1>
       <div class="book-container">
         <div v-for="room in rooms" :key="room.id">
-          <RoomThumbnail :room="room" @click="hrefToRoom(room.id)"/>
+          <RoomThumbnail :room="room"/>
         </div>
       </div>
     </div>
@@ -14,7 +14,6 @@
 <script>
 import { ref, computed } from "vue";
 import RoomThumbnail from "@/components/RoomThumbnail.vue";
-import { useRouter } from "vue-router";
 
 export default {
   components: {RoomThumbnail},
@@ -81,7 +80,6 @@ export default {
         "availability": "Available"
       }
     ]);
-    const router = useRouter();
 
     const typeOfRooms = computed(() => {
       let roomTypes = {};
@@ -100,12 +98,7 @@ export default {
       return roomTypes;
     });
 
-
-    const hrefToRoom = (id) => {
-      router.push(`/rooms/${id}`);
-    }
-
-    return { typeOfRooms, hrefToRoom };
+    return { typeOfRooms };
   }
 }
 </script>
