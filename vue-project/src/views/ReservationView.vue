@@ -1,9 +1,33 @@
 <script setup>
     import { ref } from 'vue';
-    const roomReservations = ref([
-        { id: 1, room: 'Room 101', date: '2023-10-01', hours: '10:00 AM - 12:00 PM' },
-        { id: 2, room: 'Room 202', date: '2023-10-03', hours: '02:00 PM - 04:00 PM' },
-    ]);
+    import roomData from '../services/room';
+    import equipmentData from '../services/equipment';
+    import userData from '../services/user';
+
+    const user = ref(userData().getConnectedUser());
+    const room = ref(roomData().getRooms());
+    const equip = ref(equipmentData().getEquipments());
+
+    console.log(getRoombyId())
+    console.log(room.value);
+    console.log(equip.value);
+    console.log(user.value.id)
+
+    function getRoombyId(){
+        let roombyid = []
+        for (let i = 0; i < room.value.length; i++){
+            for (let j =0; j < room.value[i].reservation.length; j++){
+                if (room.value[i].reservation[j].userid === user.value.id){
+                    let data = room.value[i].reservation[j]
+                    data.roomname = room.value[i].roomname
+                    roombyid.push(data)
+                }
+            }
+        }
+        return roombyid
+    }
+
+    const roomReservations = ref(getRoombyId());
     
     const equipmentReservation = ref('Equipment A');
 </script>
@@ -17,7 +41,7 @@
                 <div class="reservation">
                     <ul>
                         <li v-for="roomReservation in roomReservations" :key="roomReservation.id">
-                            <span>Room: {{ roomReservation.room }}</span>
+                            <span>Room: {{ roomReservation.roomname }}</span>
                             <span>Date: {{ roomReservation.date }}</span>
                             <span>Hours: {{ roomReservation.hours }}</span>
                         </li>
