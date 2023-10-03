@@ -28,6 +28,11 @@ const router = createRouter({
       component: EquipmentView
     },
     {
+      path: '/rooms',
+      name: 'rooms-page',
+      component: () => import('../views/RoomPageView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

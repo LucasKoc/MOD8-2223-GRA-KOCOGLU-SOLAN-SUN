@@ -19,6 +19,9 @@
 
       <ul class="menuclick">
         <li>
+          <RouterLink class="redirect" to="/rooms">Rooms status</RouterLink>
+        </li>
+        <li>
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
