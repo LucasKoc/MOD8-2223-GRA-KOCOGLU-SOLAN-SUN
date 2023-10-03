@@ -29,9 +29,16 @@ const router = createRouter({
       component: EquipmentView
     },
     {
+
       path: '/panel',
       name: 'panel',
       component: panel
+    },
+    {
+      path: '/rooms',
+      name: 'rooms-page',
+      component: () => import('../views/RoomPageView.vue')
+
     },
     {
       path: '/about',

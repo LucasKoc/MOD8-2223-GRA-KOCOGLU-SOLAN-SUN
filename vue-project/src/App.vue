@@ -19,10 +19,13 @@
 
       <ul class="menuclick">
         <li>
+          <RouterLink class="redirect" to="/rooms">Rooms status</RouterLink>
+        </li>
+        <li>
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/">Login</RouterLink>
+          <RouterLink class="redirect" @click="isUserModalOpen=true" to="/">Login</RouterLink>
         </li>
         <li>
           <RouterLink class="redirect" to="/rooms/5">Room(debug)</RouterLink>
@@ -62,11 +65,12 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 99;
 }
 
 main {
