@@ -1,8 +1,31 @@
-div.book-container {
-    display: flex;
+main#rooms-status-main{
+    margin: 5vh 10vw 5vh 10vw;
+    max-width: 80vw;
+    min-width: 304px;
+}
+div#rooms-status-div {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+}
+div.room-box-container {
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-
-    margin: 4vh 0 4vh 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+h1.roomTypeTitle {
+    margin: 0 0 0 0;
+}
+div#rooms-status-div div.rooms-row-container:is(:first-child) h1.roomTypeTitle {
+    margin: 1vw 0 0 0;
+}
+div#rooms-status-div div.rooms-row-container:is(:last-child) {
+    margin: 0 0 5vh 0;
+}
+@media (max-width: 950px) {
+    h1.roomTypeTitle {
+        font-size: 1.5rem;
+    }
 }
