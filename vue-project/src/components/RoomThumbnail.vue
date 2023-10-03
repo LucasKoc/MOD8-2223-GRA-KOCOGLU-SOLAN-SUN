@@ -1,7 +1,7 @@
 <template>
   <div class="room-thumbnail" @click="hrefToRoom">
     <span class="room-title">{{ room["roomname"] }}</span>
-    <span :class="'availability ' + availabilityClass()">{{ availabilityClass() }}</span>
+    <span :class="'availability ' + availabilityClass()">{{ room.availability ? room.availability : "N/A" }}</span>
   </div>
 </template>
 
@@ -17,14 +17,14 @@ export default {
   methods: {
     availabilityClass() {
       if (!this.room.availability) return 'ERROR';
-      if (this.room.availability === 'Available') {
-        return 'available';
-      } else if (this.room.availability === 'Unavailable') {
-        return 'unavailable';
-      } else if (this.room.availability.includes('Available in')) {
-        return 'available-in';
+      if (this.room.availability.toLowerCase() === 'Available'.toLowerCase()) {
+        return 'Available';
+      } else if (this.room.availability.toLowerCase() === 'Unavailable'.toLowerCase()) {
+        return 'Unavailable';
+      } else if (this.room.availability.toLowerCase().includes('Available in'.toLowerCase())) {
+        return 'Available-in';
       }
-      return 'available';
+      return 'Available';
     },
     hrefToRoom() {
       this.$router.push(`/rooms/${this.room.id}`);
