@@ -24,7 +24,7 @@ const router = createRouter({
       component: RoomView
     },
     {
-      path: '/equipments/:id',
+      path: '/equipments',
       name: 'equipments',
       component: EquipmentView
     },
