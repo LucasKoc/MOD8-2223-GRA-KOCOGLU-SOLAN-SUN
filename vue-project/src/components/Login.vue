@@ -15,7 +15,6 @@
         if (loop){
             alert("Invalid credentials")
         }else{
-            console.log(userfunc.getConnectedUser())
             emit('exit', true);
         }
         
