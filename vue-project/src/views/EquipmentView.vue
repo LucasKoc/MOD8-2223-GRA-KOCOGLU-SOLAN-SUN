@@ -5,7 +5,7 @@
         <h2 class="equipmentTypeTitle">{{ type && type.length > 0 ? (type[0].toUpperCase() + type.slice(1)) : "N/A"}} Equipment:</h2>
         <div class="equipment-box-container">
           <div v-for="equipment in equipments" :key="equipment.id">
-            <Equipment :equipment="equipment" @click="equipmentforTypeDataSelected = typeOfEquipment[equipment['category']]; equipmentSelected = equipment; equipmentManage = true; "/>
+            <Equipment :equipment="equipment" @click="equipmentforTypeDataSelected = activateModal()"/>
           </div>
         </div>
       </div>
@@ -21,16 +21,20 @@ import {computed, ref} from 'vue';
 import Equipment from '../components/Equipment.vue';
 import EquipRes from '../components/EquipRes.vue';
 import equipmentData from '../services/equipment.js';
-// import { useRoute } from 'vue-router';
+import userData from '../services/user';
+import { useRouter } from 'vue-router';
 
-// const route = useRoute();
-// const equipmentCategory = route.params.id;
 const equipmentManage = ref(false);
 const equipment = equipmentData()
 const equipmentforTypeDataSelected = ref();
 const equipmentSelected = ref();
+const user = ref(userData().getConnectedUser());
+const router = useRouter();
 
-// const equipmentReservation = ref(equipment.getEquipmentsByCategory(equipmentCategory));
+if (!user.value.id || user.value.role != 'admin') {
+  alert('You must be logged as an admin in to access this page')
+  router.push({ name: 'home' });
+}
 
 const equipmentReservation = ref(equipment.getEquipments())
 
@@ -51,9 +55,18 @@ const typeOfEquipment = computed(() => {
   return equipmentTypes;
 });
 
+function activateModal(){
+  if(!user.value.id) {
+    alert('You must be logged in to be able to make a reservation')
+  }else{
+    typeOfEquipment[equipment['category']];
+    equipmentSelected.value = equipment;
+    equipmentManage.value = true;
+  }
+}
+
 function saveData(data){
   if (data){
-    console.log(data);
     equipment.modifyEquipment(data);
   }
   equipmentManage.value = false;

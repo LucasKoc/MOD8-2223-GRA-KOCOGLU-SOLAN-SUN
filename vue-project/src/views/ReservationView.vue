@@ -22,7 +22,6 @@
                 if (room.value[i].reservation[j].userid === user.value.id){
                     let data = room.value[i].reservation[j]
                     data.roomname = room.value[i].roomname
-                    console.log(data)
                     roombyid.push(data)
                 }
             }

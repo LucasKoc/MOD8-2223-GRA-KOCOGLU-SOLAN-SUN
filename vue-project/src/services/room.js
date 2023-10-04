@@ -11,7 +11,6 @@ function getRooms () {
 }
 
 function getRoom (id) {
-  console.log(id)
   return rooms.find(room => room.id == id)
 }
 

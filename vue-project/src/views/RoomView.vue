@@ -15,7 +15,6 @@
     function saveData(data) {
         if (data){
             data.userid = user.value.id;
-            console.log(data);
             room.reservation.push(data);
         }
         roomManage.value = false;
@@ -23,7 +22,7 @@
 
     function openModal() {
         if(!user.value.id) {
-            alert('You must be logged in to access this page')
+            alert('You must be logged in order to make a reservation')
         }else{
             roomManage.value = true;
         }
