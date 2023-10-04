@@ -5,14 +5,14 @@
         <h2 class="equipmentTypeTitle">{{ type && type.length > 0 ? (type[0].toUpperCase() + type.slice(1)) : "N/A"}} Equipment:</h2>
         <div class="equipment-box-container">
           <div v-for="equipment in equipments" :key="equipment.id">
-            <Equipment :equipment="equipment" @click="equipmentDataSelected = typeOfEquipment[equipment['category']]; equipmentManage = true; "/>
+            <Equipment :equipment="equipment" @click="equipmentforTypeDataSelected = typeOfEquipment[equipment['category']]; equipmentSelected = equipment; equipmentManage = true; "/>
           </div>
         </div>
       </div>
     </div>
 
     <div class="backdrop" v-if="equipmentManage"></div>
-    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)" :equipmentData="equipmentDataSelected"/>
+    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)" :equipmentData="equipmentforTypeDataSelected" :equipment-selected="equipmentSelected"/>
   </main>
 </template>
 
@@ -27,7 +27,8 @@ import equipmentData from '../services/equipment.js';
 // const equipmentCategory = route.params.id;
 const equipmentManage = ref(false);
 const equipment = equipmentData()
-const equipmentDataSelected = ref();
+const equipmentforTypeDataSelected = ref();
+const equipmentSelected = ref();
 
 // const equipmentReservation = ref(equipment.getEquipmentsByCategory(equipmentCategory));
 
