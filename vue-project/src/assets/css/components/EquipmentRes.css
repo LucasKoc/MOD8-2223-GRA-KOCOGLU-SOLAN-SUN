@@ -33,12 +33,6 @@ input[type="time"] {
     gap: 10px;
 }
 
-.selected{
-    background-color: #007BFF;
-    border: solid 1px blue;
-    border-radius: 5px;
-}
-
 button {
     width: 100%;
     padding: 10px;
