@@ -1,17 +1,11 @@
 <template>
   <main id="equipments-status-main">
-    <div class="reservation-view">
-      <div class="flexdivtop">
-        <button class="reservebutton" @click="equipmentManage = true">Reserve</button>
-      </div>
-    </div>
-
-    <div id="equipment-status-div">
-      <div v-for="(equipments, type) in typeOfEquipment" :key="type" class="equipment-row-container">
+    <div id="equipments-status-div">
+      <div v-for="(equipments, type) in typeOfEquipment" :key="type" class="equipments-row-container">
         <h2 class="equipmentTypeTitle">{{ type && type.length > 0 ? (type[0].toUpperCase() + type.slice(1)) : "N/A"}} Equipment:</h2>
         <div class="equipment-box-container">
           <div v-for="equipment in equipments" :key="equipment.id">
-            <Equipment :equipment="equipment"/>
+            <Equipment :equipment="equipment" @click="equipmentManage = true"/>
           </div>
         </div>
       </div>
