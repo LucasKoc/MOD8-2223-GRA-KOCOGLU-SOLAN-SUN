@@ -5,7 +5,7 @@
         <h2 class="equipmentTypeTitle">{{ type && type.length > 0 ? (type[0].toUpperCase() + type.slice(1)) : "N/A"}} Equipment:</h2>
         <div class="equipment-box-container">
           <div v-for="equipment in equipments" :key="equipment.id">
-            <Equipment :equipment="equipment" @click="equipmentforTypeDataSelected = activateModal()"/>
+            <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
           </div>
         </div>
       </div>
@@ -22,19 +22,12 @@ import Equipment from '../components/Equipment.vue';
 import EquipRes from '../components/EquipRes.vue';
 import equipmentData from '../services/equipment.js';
 import userData from '../services/user';
-import { useRouter } from 'vue-router';
 
 const equipmentManage = ref(false);
 const equipment = equipmentData()
 const equipmentforTypeDataSelected = ref();
 const equipmentSelected = ref();
 const user = ref(userData().getConnectedUser());
-const router = useRouter();
-
-if (!user.value.id || user.value.role != 'admin') {
-  alert('You must be logged as an admin in to access this page')
-  router.push({ name: 'home' });
-}
 
 const equipmentReservation = ref(equipment.getEquipments())
 
@@ -48,19 +41,19 @@ const typeOfEquipment = computed(() => {
     if (!equipmentTypes[equipmentType]) {
       equipmentTypes[equipmentType] = [];
     }
-
+    console.log(equipmentType)
     equipmentTypes[equipmentType].push(equipment);
   }
-
+  console.log(equipmentTypes)
   return equipmentTypes;
 });
 
-function activateModal(){
+function activateModal(data){
   if(!user.value.id) {
     alert('You must be logged in to be able to make a reservation')
   }else{
-    typeOfEquipment[equipment['category']];
-    equipmentSelected.value = equipment;
+    equipmentSelected.value = data;
+    equipmentforTypeDataSelected.value = typeOfEquipment.value[data['category']]
     equipmentManage.value = true;
   }
 }

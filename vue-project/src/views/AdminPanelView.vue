@@ -1,8 +1,16 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import AdminComponent from '../components/AdminPanel.vue';
 import UserManage from '../components/UserManage.vue';
 import userData from '../services/user.js';
+const user = ref(userData().getConnectedUser());
+const router = useRouter();
+
+if (!user.value.id || user.value.role != 'admin') {
+  alert('You must be logged as an admin to access this page')
+  router.push({ name: 'home' });
+}
 
 const userManage =  ref(false);
 
