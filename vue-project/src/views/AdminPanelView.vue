@@ -3,11 +3,18 @@ import { ref } from 'vue';
 import AdminComponent from '../components/AdminPanel.vue';
 import UserManage from '../components/UserManage.vue';
 import userData from '../services/user.js';
+import { useRouter } from 'vue-router';
 
 const userManage =  ref(false);
 
 const userInformation = ref(userData().getUsers());
 const singleUser = ref({});
+const router = useRouter();
+
+if (!(userData().getConnectedUser().role == "admin")) {
+  alert('You must be an administrator to access this page');
+  router.push('/');
+}
 
 function modifyUser(user){
   singleUser.value = user;
