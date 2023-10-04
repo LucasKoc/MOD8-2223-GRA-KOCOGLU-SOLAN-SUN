@@ -23,7 +23,7 @@ function modifyEquipment (equipment) {
   equipments.splice(index, 1, equipment)
 }
 
-addEquipment({name: "Washing Machine 1", category: "", status: "Available"});
+addEquipment({name: "Washing Machine 1", category: "washing", status: "Available"});
 addEquipment({name: "Washing Machine 2", category: "washing", status: "Available"});
 addEquipment({name: "Washing Machine 3", category: "washing", status: "Available"});
 addEquipment({name: "Playstation 4", category: "game", status: "Available"});

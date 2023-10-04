@@ -84,3 +84,14 @@
 .availability.ERROR {
     color: var(--color-text-mute)
 }
+
+/* From Equipment Washing */
+
+.selected div.equipment-thumbnail{
+    background-color: var(--color-button);
+    border: dashed 1px var(--color-button-hover);
+}
+
+div.equipment.selected > div > span.equipment-title {
+    color: var(--color-text-soft)
+}
