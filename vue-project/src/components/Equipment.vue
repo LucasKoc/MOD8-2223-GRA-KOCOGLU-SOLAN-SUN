@@ -1,5 +1,5 @@
 <template>
-  <div class="equipment-thumbnail">
+  <div class="equipment-thumbnail" @click="equipmentManage = true">
     <span class="equipment-title">{{ equipment.name }}</span>
     <span :class="'availability ' + availabilityClass()">{{ equipment.availability ? equipment.availability : "N/A" }}</span>
   </div>
