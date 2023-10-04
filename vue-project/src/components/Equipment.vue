@@ -1,3 +1,10 @@
+<template>
+  <div class="equipment-thumbnail" @click="equipmentManage = true">
+    <span class="equipment-title">{{ equipment.name }}</span>
+    <span :class="'availability ' + availabilityClass()">{{ equipment.availability ? equipment.availability : "N/A" }}</span>
+  </div>
+</template>
+
 <script setup>
     const props = defineProps({
         equipment: {
@@ -7,16 +14,19 @@
     });
     const equipment = props.equipment;
 
-</script>
+    function availabilityClass() {
+      if (!this.equipment.availability) return 'ERROR';
+      else if (this.equipment.availability.toLowerCase() === 'Available'.toLowerCase()) {
+        return 'Available';
+      } else if (this.equipment.availability.toLowerCase() === 'Unavailable'.toLowerCase()) {
+        return 'Unavailable';
+      } else if (this.equipment.availability.toLowerCase().includes('Available in'.toLowerCase())) {
+        return 'Available-in';
+      }
+      return 'Available';
+    }
 
-<template>
-    <div class="equipment-item">
-        <div class="equipment-info">
-            <p>{{ equipment.name }}</p>
-            <p>ID: {{ equipment.id }}</p>
-        </div>
-    </div>
-</template>
+</script>
   
 <style scoped>
 @import "../assets/css/components/Equipment.css";
