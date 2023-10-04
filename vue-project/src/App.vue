@@ -35,7 +35,7 @@
           <RouterLink class="redirect" to="/rooms/1">Room(debug)</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/equipments/washing">Equipment(debug)</RouterLink>
+          <RouterLink class="redirect" to="/equipments">Equipment(debug)</RouterLink>
         </li>
         <li>
           <RouterLink class="redirect" to="/panel">adminPanel</RouterLink>

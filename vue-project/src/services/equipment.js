@@ -24,7 +24,7 @@ function modifyEquipment (equipment) {
 }
 
 addEquipment({name: "Washing Machine 1", category: "washing", status: "Available"});
-addEquipment({name: "Washing Machine 2", category: "washing", status: "Available"});
+addEquipment({name: "Washing Machine 2", category: "washing", status: "Available", reservation: {id: 2, time: "12:00"}});
 addEquipment({name: "Washing Machine 3", category: "washing", status: "Available"});
 addEquipment({name: "Playstation 4", category: "game", status: "Available"});
 

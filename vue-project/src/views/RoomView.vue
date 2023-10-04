@@ -3,18 +3,30 @@
     import RoomRes from '../components/RoomRes.vue';
     import roomData from '../services/room.js';
     import {useRoute} from 'vue-router';
+    import userData from '../services/user.js';
 
     const roomManage = ref(false);
     const route = useRoute();
     const roomId = route.params.id;
     const room = roomData().getRoom(roomId);
     const roomReservations = ref(room.reservation);
+    const user = ref(userData().getConnectedUser());
 
     function saveData(data) {
         if (data){
+            data.userid = user.value.id;
+            console.log(data);
             room.reservation.push(data);
         }
         roomManage.value = false;
+    }
+
+    function openModal() {
+        if(!user.value.id) {
+            alert('You must be logged in to access this page')
+        }else{
+            roomManage.value = true;
+        }
     }
 
 </script>
@@ -23,7 +35,7 @@
     <div class="reservation-view">
         <div class="flexdivtop">
             <h2>Multimedia</h2>
-            <button class="reservebutton" @click="roomManage = true">Reserve</button>
+            <button class="reservebutton" @click="openModal()">Reserve</button>
         </div>
         <div class="flexdiv">
             <div>
