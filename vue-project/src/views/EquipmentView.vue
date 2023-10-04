@@ -1,21 +1,3 @@
-<template>
-  <main id="equipments-status-main">
-    <div id="equipments-status-div">
-      <div v-for="(equipments, type) in typeOfEquipment" :key="type" class="equipments-row-container">
-        <h2 class="equipmentTypeTitle">{{ type && type.length > 0 ? (type[0].toUpperCase() + type.slice(1)) : "N/A"}} Equipment:</h2>
-        <div class="equipment-box-container">
-          <div v-for="equipment in equipments" :key="equipment.id">
-            <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="backdrop" v-if="equipmentManage"></div>
-    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)" :equipmentData="equipmentforTypeDataSelected" :equipment-selected="equipmentSelected"/>
-  </main>
-</template>
-
 <script setup>
 import {computed, ref} from 'vue';
 import Equipment from '../components/Equipment.vue';
@@ -30,6 +12,8 @@ const equipmentSelected = ref();
 const user = ref(userData().getConnectedUser());
 
 const equipmentReservation = ref(equipment.getEquipments())
+
+const test = equipment.isEquipmentAvailable(equipmentReservation.value[1])
 
 const typeOfEquipment = computed(() => {
   let equipmentTypes = {};
@@ -58,11 +42,30 @@ function activateModal(data){
 
 function saveData(data){
   if (data){
+    console.log(data);
     equipment.modifyEquipment(data);
   }
   equipmentManage.value = false;
 }
 </script>
+
+<template>
+  <main id="equipments-status-main">
+    <div id="equipments-status-div">
+      <div v-for="(equipments, type) in typeOfEquipment" :key="type" class="equipments-row-container">
+        <h2 class="equipmentTypeTitle">{{ type && type.length > 0 ? (type[0].toUpperCase() + type.slice(1)) : "N/A"}} Equipment:</h2>
+        <div class="equipment-box-container">
+          <div v-for="equipment in equipments" :key="equipment.id">
+            <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="backdrop" v-if="equipmentManage"></div>
+    <EquipRes class="user-modal" v-if="equipmentManage" @sendData="(data) => saveData(data)" :equipmentData="equipmentforTypeDataSelected" :equipment-selected="equipmentSelected"/>
+  </main>
+</template>
 
 <style scoped>
 @import '../assets/css/views/EquipmentView.css';

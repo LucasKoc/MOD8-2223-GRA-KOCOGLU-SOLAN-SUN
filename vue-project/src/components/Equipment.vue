@@ -1,30 +1,31 @@
 <template>
   <div class="equipment-thumbnail">
     <span class="equipment-title">{{ equipment.name }}</span>
-    <span :class="'availability ' + availabilityClass()">{{ equipment.availability ? equipment.availability : "N/A" }}</span>
+    <span :class="'availability '">status: {{ availability ? availability : "Available" }}</span>
   </div>
 </template>
 
 <script setup>
-    const props = defineProps({
-        equipment: {
-            type: Object,
-            required: true
-        },
-    });
-    const equipment = props.equipment;
+  import equipmentData from '../services/equipment';
+  import { ref } from 'vue';
+  const props = defineProps({
+      equipment: {
+          type: Object,
+          required: true
+      },
+  });
+  const equipment = props.equipment;
+  const availability = ref();
 
-    function availabilityClass() {
-      if (!this.equipment.availability) return 'ERROR';
-      else if (this.equipment.availability.toLowerCase() === 'Available'.toLowerCase()) {
-        return 'Available';
-      } else if (this.equipment.availability.toLowerCase() === 'Unavailable'.toLowerCase()) {
-        return 'Unavailable';
-      } else if (this.equipment.availability.toLowerCase().includes('Available in'.toLowerCase())) {
-        return 'Available-in';
-      }
-      return 'Available';
-    }
+  const getavailabilitydictionnary = equipmentData().isEquipmentAvailable(equipment);
+  console.log(getavailabilitydictionnary.valid)
+  if (!getavailabilitydictionnary.valid){
+    console.log(getavailabilitydictionnary.minutes)
+    availability.value = getavailabilitydictionnary.minutes;
+  }else{
+    availability.value = "Available";
+  }
+
 
 </script>
   
