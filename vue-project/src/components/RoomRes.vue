@@ -2,15 +2,27 @@
     import {ref} from 'vue';
     const reservationDate = ref('');
     const reservationHours = ref('');
+    const currentTimeMillis = Date.now();
 
     const emits = defineEmits(['sendData']);
     
     const submitForm = () => {
+        
+        const selectedDateTime = `${reservationDate.value}T${reservationHours.value}:00`;
+
+        const selectedTimeMillis = new Date(selectedDateTime).getTime();
+        
+        if (selectedTimeMillis < currentTimeMillis) {
+            alert('Please select a date and time later than the current time.');
+            return;
+        }
+
         emits('sendData', {
             date: reservationDate.value,
             time: reservationHours.value
         });
     };
+
 </script>
 
 <template>

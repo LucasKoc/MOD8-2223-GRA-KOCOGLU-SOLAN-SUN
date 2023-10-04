@@ -1,7 +1,11 @@
 <script setup>
     import {ref} from 'vue';
     import Equipment from './Equipment.vue';
+    import userData from '../services/user';
     const reservationHours = ref('');
+
+    const d = new Date();
+    let currentTime = d.getHours();
 
     const props = defineProps({
         equipmentData: {
@@ -15,16 +19,27 @@
     });
 
     const equipment = props.equipmentData;
+    const userfunc = userData();
     
     const selectedEquipmentId = ref();
     const emits = defineEmits(['sendData']);
 
     const submitForm = () => {
+
+        const selectedTime = new Date(`2000-01-01T${reservationHours.value}`).toLocaleTimeString('en-CA', { timeZone: 'Canada/Eastern', hour: 'numeric', minute: 'numeric', second: 'numeric' });
+        const selectedHour = parseInt(selectedTime.split(':')[0]);
+
+        if (selectedHour < currentTime) {
+            alert('Please select a time later than the current time.');
+            return;
+        }
+
         const reservation = {
             time: reservationHours.value,
             user: userfunc.getConnectedUser().id || 0
         };
-        const equip = equipment.filter((e) => e.id === selectedEquipmentId.value)[0]
+
+        const equip = equipment.filter((e) => e.id === selectedEquipmentId.value)[0];
         equip.reservations = reservation;
         emits('sendData', equip);
 
