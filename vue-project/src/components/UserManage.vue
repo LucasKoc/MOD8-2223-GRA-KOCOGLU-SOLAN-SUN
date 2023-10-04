@@ -34,8 +34,9 @@
 
 <template>
     <div class="user-container">
-        <button class="close" @click="emits('getInfo')">X</button>
+
         <div class="user-panel">
+          <button class="close" @click="emits('getInfo')">X</button>
             <div class="user-details">
                 <h2>User Details</h2>
                 <div class="form-group">

@@ -1,35 +1,20 @@
-.reservation-list{
-    margin-top: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
+
 
 .flexdiv {
-    margin: 0% 5%;
+    margin: 0 5%;
 }
 
-.flexdivtop {
-    display: flex;
-    margin: 0% 5%;
-    align-items: baseline;
-    justify-content: space-around;
-}
 
-.reservation {
-    padding: 1%;
-    box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
-}
+
 
 
 h2 {
     margin: 2% 5%;
+    font-size: 200%;
 }
 
 h3 {
-    margin-top: 10px;
+    margin: 0;
 }
 
 ul {
@@ -45,20 +30,31 @@ p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-.div-adduser {
-    display: flex;
-    justify-content: flex-end;
-    margin: 0% 5%;
-    padding: 1%;
+
+.title-res {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
+
+.title-res *:first-child {
+    margin-right: 0.5vw;
+}
+
+.title-res *:last-child {
+    margin-left: 0.5vw;
+}
+
 .add{
     padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background-color: var(--color-button);
+    color: var(--color-text-soft);
+    border: solid 1px var(--color-border);
+    border-radius: 12px;
     cursor: pointer;
     font-size: 16px;
+    height:36px;
 }
 .add:hover {
     background-color: #0056b3;
@@ -66,11 +62,10 @@ p {
 
 h2 {
     margin: 2% 5%;
+    margin-top: 10%;
 }
 
-h3 {
-    margin-top: 10px;
-}
+
 
 ul {
     list-style: none;
@@ -92,11 +87,11 @@ p {
      left: 0;
      width: 100%;
      height: 100%;
-     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-     z-index: 1000; /* Ensure it appears above other content */
+     background-color: rgba(0, 0, 0, 0.5);
+     z-index: 1000;
  }
 
-/* Center the modal */
+
 .user-modal {
     position: fixed;
     top: 50%;
@@ -105,3 +100,17 @@ p {
     z-index: 1001
 }
 
+@media screen and (min-width: 700px) {
+
+
+    .reservation-list {
+        border: 1px solid var(--color-border);
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+}

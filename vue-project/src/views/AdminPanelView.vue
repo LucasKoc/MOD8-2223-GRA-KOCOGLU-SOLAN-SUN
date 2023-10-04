@@ -1,16 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import AdminComponent from '../components/AdminPanel.vue';
 import UserManage from '../components/UserManage.vue';
 import userData from '../services/user.js';
-const user = ref(userData().getConnectedUser());
-const router = useRouter();
-
-if (!user.value.id || user.value.role != 'admin') {
-  alert('You must be logged as an admin to access this page')
-  router.push({ name: 'home' });
-}
 
 const userManage =  ref(false);
 
@@ -34,15 +26,15 @@ function saveData(data){
 
 <template>
   <div class="admin-view">
-    <div class="div-adduser">
-      <button class="add" @click="userManage = true">Add User</button>
-    </div>
     <div class="flexdivtop">
       <h2>Admin Panel</h2>
   </div>
     <div class="flexdiv">
       <div>
+        <div class="title-res">
         <h3>Room reservation</h3>
+          <button class="add" @click="userManage = true">Add User</button>
+        </div>
         <div class="reservation">
           <ul class="reservation-list">
             <li v-for="user in userInformation" @click="modifyUser(user)">
