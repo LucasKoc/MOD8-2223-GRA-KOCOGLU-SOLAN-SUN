@@ -41,10 +41,8 @@ const typeOfEquipment = computed(() => {
     if (!equipmentTypes[equipmentType]) {
       equipmentTypes[equipmentType] = [];
     }
-    console.log(equipmentType)
     equipmentTypes[equipmentType].push(equipment);
   }
-  console.log(equipmentTypes)
   return equipmentTypes;
 });
 
