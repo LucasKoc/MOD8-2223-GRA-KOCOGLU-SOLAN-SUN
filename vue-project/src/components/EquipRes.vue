@@ -7,13 +7,15 @@
         equipmentData: {
             type: Object,
             default: () => {}
+        },
+        equipmentSelected: {
+          type: Object,
+          default: () => {}
         }
     });
 
     const equipment = props.equipmentData;
-
-    console.log(equipment);
-
+    
     const selectedEquipmentId = ref();
     const emits = defineEmits(['sendData']);
 
@@ -30,6 +32,11 @@
 
     function selectedEquipment(equipment){
         selectedEquipmentId.value = equipment.id;
+    }
+
+    try {
+      selectedEquipment(props.equipmentSelected);
+    } catch (error) {
     }
 </script>
 
