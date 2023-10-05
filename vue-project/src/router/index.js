@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePageView from '../views/HomePageView.vue'
-import ReservationPageView from '../views/ReservationPageView.vue'
-import RoomItemPageView from "@/views/RoomItemPageView.vue";
-import EquipmentPageView from '../views/EquipmentPageView.vue'
-import AdminPanelView from '../views/AdminPanelView.vue'
+// import ReservationPageView from '../views/ReservationPageView.vue'
+// import RoomItemPageView from "@/views/RoomItemPageView.vue";
+// import EquipmentPageView from '../views/EquipmentPageView.vue'
+// import AdminPanelView from '../views/AdminPanelView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,22 +16,26 @@ const router = createRouter({
     {
       path: '/reservation',
       name: 'reservation',
-      component: ReservationPageView
+      // component: ReservationPageView
+      component: () => import('../views/ReservationPageView.vue')
     },
     {
       path: '/rooms/:id',
       name: 'rooms',
-      component: RoomItemPageView
+      // component: RoomItemPageView
+      component: () => import('../views/RoomItemPageView.vue')
     },
     {
       path: '/equipments',
       name: 'equipments',
-      component: EquipmentPageView
+      // component: EquipmentPageView
+      component: () => import('../views/EquipmentPageView.vue')
     },
     {
       path: '/panel',
       name: 'panel',
-      component: AdminPanelView
+      // component: AdminPanelView
+      component: () => import('../views/AdminPanelView.vue')
     },
     {
       path: '/rooms',
