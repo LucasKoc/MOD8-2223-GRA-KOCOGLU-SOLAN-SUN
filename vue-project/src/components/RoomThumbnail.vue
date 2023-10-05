@@ -16,7 +16,6 @@
     }
   })
 
-  console.log(props.room)
   const availability = ref(roomData().isRoomAvailable(props.room));
 
   function hrefToRoom() {

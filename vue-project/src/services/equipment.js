@@ -33,9 +33,6 @@ function isEquipmentAvailable (equipment) {
   const equipmentTime = equipment.reservation.time.split(":")
   const addedTime=  (equipmentTime[0]) * 60 + parseInt(equipmentTime[1])
 
-  
-  console.log(addedTime, currentTime);
-
   if (addedTime > currentTime) {
     return {valid: false, minutes: addedTime - currentTime}
   }

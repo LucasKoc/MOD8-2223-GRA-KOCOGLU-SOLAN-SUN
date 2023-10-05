@@ -28,7 +28,6 @@
 
         const selectedHour = reservationHours.value.split(':')[0];
 
-        console.log(selectedHour, currentTime)
         if (selectedHour < currentTime) {
             alert('Please select a time later than the current time.');
             return;
