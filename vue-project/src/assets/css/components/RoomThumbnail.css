@@ -75,7 +75,7 @@
     color: var(--color-unavailable);
 }
 
-.availability.Available-in {
+.availability.in {
     color: var(--color-available-in);
 }
 

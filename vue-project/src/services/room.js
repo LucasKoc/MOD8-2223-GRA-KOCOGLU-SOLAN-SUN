@@ -28,7 +28,8 @@ function isRoomAvailable (room) {
     const addedTime = (roomTime[0]) * 60 + parseInt(roomTime[1]) + (roomDate[0] * 365 * 24 * 60) + (roomDate[1] * 30 * 24 * 60) + (roomDate[2] * 24 * 60);
 
     if (((addedTime - currentTime) < 0)  && (0 < (addedTime + 60 - currentTime))) {
-      available = "Unavailable"
+        if ((0 < (addedTime + 60 - currentTime))) available = "Available in " + (addedTime + 60 - currentTime) + " minutes";
+        else available = "Unavailable";
     }
     
   }
@@ -36,7 +37,7 @@ function isRoomAvailable (room) {
   return available
 }
 
-addRoom({roomname: "Gaming Room #1", roomtype: "gaming", reservation: [{date: "2021-05-01", time: "12:00", userid: 1}, {date: "2021-05-02", time: "18:00", userid: 1}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}]});
+addRoom({roomname: "Gaming Room #1", roomtype: "gaming", reservation: [{date: "2023-10-04", time: "23:00", userid: 1}, {date: "2021-05-02", time: "18:00", userid: 1}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}]});
 addRoom({roomname: "Gaming Room #2", roomtype: "gaming", reservation: [{date: "2021-08-01", time: "18:00", userid: 2}]});
 addRoom({roomname: "Gaming Room #3", roomtype: "gaming", reservation: []});
 addRoom({roomname: "Gaming Room #4", roomtype: "gaming", reservation: []});
