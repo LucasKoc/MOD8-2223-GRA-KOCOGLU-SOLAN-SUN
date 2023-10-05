@@ -42,5 +42,5 @@ const submitForm = () => {
 </template>
 
 <style scoped>
-@import '../assets/css/components/RoomRes.css';
+@import '../assets/css/components/RoomReservation.css';
 </style>
