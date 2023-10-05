@@ -26,9 +26,9 @@
 
     const submitForm = () => {
 
-        const selectedTime = new Date(`2000-01-01T${reservationHours.value}`).toLocaleTimeString('en-CA', { timeZone: 'Canada/Eastern', hour: 'numeric', minute: 'numeric', second: 'numeric' });
-        const selectedHour = parseInt(selectedTime.split(':')[0]);
+        const selectedHour = reservationHours.value.split(':')[0];
 
+        console.log(selectedHour, currentTime)
         if (selectedHour < currentTime) {
             alert('Please select a time later than the current time.');
             return;
