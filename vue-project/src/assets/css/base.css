@@ -133,7 +133,7 @@
 }
 
 body {
-  min-height: 100vh;
+  min-height: 80vh;
   color: var(--color-text-soft);
   background: var(--color-background-mute);
   transition: color 0.5s;
