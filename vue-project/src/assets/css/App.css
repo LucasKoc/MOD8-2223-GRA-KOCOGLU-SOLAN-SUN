@@ -45,7 +45,7 @@ nav {
 }
 
 .menuclick li:last-child {
-    margin-right: 0; /* Remove margin from the last item to prevent extra space */
+    margin-right: 0;
 }
 
 .redirect {
