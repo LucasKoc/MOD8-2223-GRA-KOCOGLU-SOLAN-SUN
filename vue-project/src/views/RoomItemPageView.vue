@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import RoomRes from '../components/RoomReservation.vue'
+import RoomReservation from '../components/RoomReservation.vue'
 import roomData from '../services/room.js'
 import { useRoute } from 'vue-router'
 import userData from '../services/user.js'
@@ -53,7 +53,7 @@ function openModal() {
     </div>
   </div>
   <div class="backdrop" v-if="roomManage"></div>
-  <RoomRes class="user-modal" v-if="roomManage" @sendData="(data) => saveData(data)" />
+  <RoomReservation class="user-modal" v-if="roomManage" @sendData="(data) => saveData(data)" />
 </template>
 
 <style scoped>

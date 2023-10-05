@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePageView from '../views/HomePageView.vue'
-import ReservationVue from '../views/ReservationPageView.vue'
+import ReservationPageView from '../views/ReservationPageView.vue'
 import RoomItemPageView from "@/views/RoomItemPageView.vue";
 import EquipmentPageView from '../views/EquipmentPageView.vue'
-import AdminPanelPageView from '../views/AdminPanelView.vue'
+import AdminPanelView from '../views/AdminPanelView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,7 +16,7 @@ const router = createRouter({
     {
       path: '/reservation',
       name: 'reservation',
-      component: ReservationVue
+      component: ReservationPageView
     },
     {
       path: '/rooms/:id',
@@ -31,7 +31,7 @@ const router = createRouter({
     {
       path: '/panel',
       name: 'panel',
-      component: AdminPanelPageView
+      component: AdminPanelView
     },
     {
       path: '/rooms',

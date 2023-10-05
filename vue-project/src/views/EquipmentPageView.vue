@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import Equipment from '../components/Equipment.vue'
-import EquipRes from '../components/EquipmentReservation.vue'
+import EquipmentReservation from '../components/EquipmentReservation.vue'
 import equipmentData from '../services/equipment.js'
 import userData from '../services/user'
 
@@ -68,7 +68,7 @@ function saveData(data) {
     </div>
 
     <div class="backdrop" v-if="equipmentManage"></div>
-    <EquipRes
+    <EquipmentReservation
       class="user-modal"
       v-if="equipmentManage"
       @sendData="(data) => saveData(data)"
