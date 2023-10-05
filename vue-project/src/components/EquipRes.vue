@@ -60,7 +60,7 @@
         <h2>Equipment Reservation</h2>
         <form @submit.prevent="submitForm">
             <div class="form-group">
-            <label for="reservationHours">Hour of Reservation</label>
+            <label for="reservationHours">Reserve until</label>
             <input
                 type="time"
                 id="equipmentreservationHours"

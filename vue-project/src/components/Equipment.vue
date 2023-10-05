@@ -1,32 +1,35 @@
 <template>
   <div class="equipment-thumbnail">
     <span class="equipment-title">{{ equipment.name }}</span>
-    <span :class="'availability '">status: {{ availability ? availability : "Available" }}</span>
+    <span :class="'availability ' + availability">{{ availability }}</span>
   </div>
 </template>
 
 <script setup>
-  import equipmentData from '../services/equipment';
-  import { ref } from 'vue';
-  const props = defineProps({
-      equipment: {
-          type: Object,
-          required: true
-      },
-  });
-  const equipment = props.equipment;
-  const availability = ref();
+import equipmentData from '../services/equipment';
+import {ref} from 'vue';
 
-  const getavailabilitydictionnary = equipmentData().isEquipmentAvailable(equipment);
-  if (!getavailabilitydictionnary.valid){
-    availability.value = getavailabilitydictionnary.minutes;
-  }else{
-    availability.value = "Available";
-  }
+const props = defineProps({
+  equipment: {
+    type: Object,
+    required: true
+  },
+});
+const equipment = props.equipment;
+const availability = ref();
 
+const getavailabilitydictionnary = equipmentData().isEquipmentAvailable(equipment);
+
+if (getavailabilitydictionnary.valid === false) {
+  availability.value = "Available in " + getavailabilitydictionnary.minutes + " minutes";
+} else {
+  availability.value = "Available";
+}
+
+console.log(availability.value);
 
 </script>
-  
+
 <style scoped>
 @import "../assets/css/components/Equipment.css";
 </style>

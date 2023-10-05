@@ -58,6 +58,7 @@
 
 .equipment-title {
     z-index: 1;
+    text-align: center;
 }
 
 .availability {
@@ -77,7 +78,7 @@
     color: var(--color-unavailable);
 }
 
-.availability.Available-in {
+.availability.in {
     color: var(--color-available-in);
 }
 
