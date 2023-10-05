@@ -7,10 +7,11 @@
   const isUserModalOpen = ref(false);
   const user = ref(userData().getConnectedUser());
   const loginval = ref("Login");
+  console.log();
 
   function exit(s){
     if (s){
-      loginval.value = "Logged";
+      loginval.value = "Log out";
     }
     isUserModalOpen.value = false;
   }
@@ -18,34 +19,36 @@
 
 <template>
   <header>
-    <RouterLink to="/">
-      <img alt="Vue logo" class="logo" src="@/assets/pictures/LogoMOD8.png" width="164" />
-
-    </RouterLink>
     <div class="wrapper">
+      <RouterLink to="/">
+        <img alt="Vue logo" class="logo" src="@/assets/pictures/LogoMOD8.png" width="164" />
+      </RouterLink>
 
       <ul class="menuclick">
+        <li>
+          <RouterLink class="redirect" to="/">Home</RouterLink>
+        </li>
         <li>
           <RouterLink class="redirect" to="/rooms">Rooms status</RouterLink>
         </li>
         <li>
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <ul class="login-button">
         <li>
-          <RouterLink class="redirect" to="/rooms/1">Room(debug)</RouterLink>
-        </li>
-        <li>
-          <RouterLink class="redirect" to="/equipments">Equipment(debug)</RouterLink>
-        </li>
-        <li>
+          <!-- v-if temp because ultra not secure : v-if="user.value ? (user.value.role === 'admin') : false" -->
           <RouterLink class="redirect" to="/panel">adminPanel</RouterLink>
         </li>
         <li>
-          <div class="redirect login" @click="isUserModalOpen=true">{{loginval}}</div>
+          <div class="redirect login" @click="loginval === 'Login' ? isUserModalOpen = true : null ;">{{loginval}}</div>
         </li>
       </ul>
-
     </div>
+
   </header>
 
   <main>
