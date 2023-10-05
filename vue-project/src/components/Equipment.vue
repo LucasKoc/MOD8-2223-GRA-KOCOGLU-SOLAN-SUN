@@ -18,9 +18,7 @@
   const availability = ref();
 
   const getavailabilitydictionnary = equipmentData().isEquipmentAvailable(equipment);
-  console.log(getavailabilitydictionnary.valid)
   if (!getavailabilitydictionnary.valid){
-    console.log(getavailabilitydictionnary.minutes)
     availability.value = getavailabilitydictionnary.minutes;
   }else{
     availability.value = "Available";

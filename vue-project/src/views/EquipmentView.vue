@@ -42,7 +42,6 @@ function activateModal(data){
 
 function saveData(data){
   if (data){
-    console.log(data);
     equipment.modifyEquipment(data);
   }
   equipmentManage.value = false;
