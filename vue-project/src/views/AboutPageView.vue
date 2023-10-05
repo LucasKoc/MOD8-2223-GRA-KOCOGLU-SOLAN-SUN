@@ -23,5 +23,5 @@
 </template>
 
 <style scoped>
-@import '../assets/css/views/AboutView.css';
+@import '../assets/css/views/AboutPageView.css';
 </style>
