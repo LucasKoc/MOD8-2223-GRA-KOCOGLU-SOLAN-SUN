@@ -1,10 +1,12 @@
 .login-form {
-    max-width: 400px;
+    max-width: 30vw;
+    min-width: 350px;
+    width: 30vw;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: var(--color-background-soft);
 }
 
 h2 {
@@ -23,16 +25,17 @@ label {
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
+    width: 95%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
+    background-color: var(--color-background);
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: var(--color-button);
     color: white;
     border: none;
     border-radius: 5px;
@@ -41,17 +44,15 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: var(--color-button-hover);
 }
 
 .close {
     width: 20px;
     height: 20px;
     position: absolute;
-    top: 1px;
-    right: 1px;
     padding: 0;
-    background-color: #ccc;
+    background-color: var(--color-button);
     border: none;
     border-radius: 5px;
     cursor: pointer;
