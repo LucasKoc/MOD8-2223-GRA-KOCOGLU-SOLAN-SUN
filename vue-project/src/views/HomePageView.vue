@@ -112,5 +112,5 @@ export default {
 }
 </script>
 <style scoped>
-@import '../assets/css/views/HomeView.css';
+@import '../assets/css/views/HomePageView.css';
 </style>
