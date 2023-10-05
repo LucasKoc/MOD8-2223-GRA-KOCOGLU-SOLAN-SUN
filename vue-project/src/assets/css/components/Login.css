@@ -30,6 +30,7 @@ input[type="password"] {
     border: 1px solid var(--color-border);
     border-radius: 5px;
     background-color: var(--color-background);
+    color: var(--color-text);
 }
 
 button {
@@ -59,4 +60,18 @@ button:hover {
 }
 .close:hover {
     background-color: red;
+}
+
+@media (max-height: 600px) {
+    .login-form h2 {
+        margin: 0;
+        font-size: 1.5em;
+    }
+    .login-form label {
+        margin: 0;
+        font-size: 1.0em;
+    }
+    .login-form input[type="text"], .login-form input[type="password"] {
+        padding: 5px 10px 5px 10px;
+    }
 }
