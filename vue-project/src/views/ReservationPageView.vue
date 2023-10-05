@@ -72,5 +72,5 @@ const equipmentReservation = ref(
 </template>
 
 <style scoped>
-@import '../assets/css/views/ReservationView.css';
+@import '../assets/css/views/ReservationPageView.css';
 </style>

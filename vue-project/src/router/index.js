@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePageView from '../views/HomePageView.vue'
-import ReservationVue from '../views/ReservationView.vue'
+import ReservationVue from '../views/ReservationPageView.vue'
 import RoomItemPageView from "@/views/RoomItemPageView.vue";
 import EquipmentPageView from '../views/EquipmentPageView.vue'
 import AdminPanelPageView from '../views/AdminPanelView.vue'
