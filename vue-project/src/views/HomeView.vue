@@ -1,17 +1,20 @@
 <template>
   <main>
     <div class="search-component">
-      <h1>Search for your book !</h1>
+      <h1>Search for your room/equipment !</h1>
       <input
           v-model="searchQuery"
-          placeholder="Search for books"
+          placeholder="ex: Gaming room #4 / Washing Machine #1"
           class="search-bar"
       />
     </div>
     <div id="result-search" v-show="searchQuery">
-      <ul v-if="filteredRooms.length">
+      <ul v-if="filteredRooms.length || filteredEquipment.length">
         <li v-for="rooms in filteredRooms" :key="rooms.id">
           <RoomThumbnail :room="rooms"/>
+        </li>
+        <li v-for="equipment in filteredEquipment" :key="equipment.id">
+          <Equipment :equipment="equipment" />
         </li>
       </ul>
     </div>
@@ -53,7 +56,15 @@ export default {
           room["roomname"].toLowerCase().includes(searchQuery.value.toLowerCase()),
       );
 
-      return results.slice(0, 5);
+      return results.slice(0, 2);
+    });
+
+    const filteredEquipment = computed(() => {
+      const results = equipmentReservations.value.filter((equipment) =>
+          equipment["name"].toLowerCase().includes(searchQuery.value.toLowerCase()),
+      );
+
+      return results.slice(0, 2);
     });
 
     let recommandedRooms = []
@@ -82,7 +93,7 @@ export default {
       } catch (e) {console.error(e)}
     }
 
-    return { searchQuery, filteredRooms, roomReservations, recommandedRooms, recommandedEquipment };
+    return { searchQuery, filteredRooms, filteredEquipment, roomReservations, recommandedRooms, recommandedEquipment };
   },
 };
 </script>
