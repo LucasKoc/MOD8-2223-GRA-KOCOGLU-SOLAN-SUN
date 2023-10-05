@@ -92,11 +92,6 @@ p {
 
 }
 
-p.v-if {
-    background-color: #007BFF;
-    color: white;
-}
-
 
 @media (max-width: 700px) {
     h3{
