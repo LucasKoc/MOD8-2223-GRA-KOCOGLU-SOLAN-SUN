@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import Equipment from '../components/Equipment.vue'
-import EquipRes from '../components/EquipReservation.vue'
+import EquipRes from '../components/EquipmentReservation.vue'
 import equipmentData from '../services/equipment.js'
 import userData from '../services/user'
 
