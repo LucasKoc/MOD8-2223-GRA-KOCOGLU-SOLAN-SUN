@@ -57,5 +57,5 @@ function openModal() {
 </template>
 
 <style scoped>
-@import '../assets/css/views/RoomView.css';
+@import '../assets/css/views/RoomItemPageView.css';
 </style>
