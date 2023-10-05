@@ -19,8 +19,10 @@ div.room-box-container {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
+
+    width: 100%;
 
     border: var(--color-border-opacity-reduced) solid 1px;
 }
