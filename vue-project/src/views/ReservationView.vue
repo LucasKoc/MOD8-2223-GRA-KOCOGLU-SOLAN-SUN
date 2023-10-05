@@ -39,8 +39,11 @@
         <h2>My Reservations</h2>
         <div class="flexdiv">
             <div>
-                <h3>Room Reservations</h3>
+              <div class="block-room">
+                <h3 class="title">Room Reservations</h3>
                 <div class="reservation">
+
+                  <div class="reservation-room">
                     <ul>
                         <li v-for="roomReservation in roomReservations" :key="roomReservation.id">
                             <span>Room: {{ roomReservation.roomname }}</span>
@@ -48,14 +51,19 @@
                             <span>Hours: {{ roomReservation.time }}</span>
                         </li>
                     </ul>
+                  </div>
+                </div>
                 </div>
             </div>
             <div>
-                <h3>Equipment Reservation</h3>
+              <div class="block-equipement">
+                <h3 class ="title">Equipment Reservation</h3>
                 <div class="reservation">
-                    
+                  <div class="reservation-equipment">
                     <p v-if="equipmentReservation">Equipment: {{ equipmentReservation.name }}</p>
                     <p v-else>No equipment reservation</p>
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>

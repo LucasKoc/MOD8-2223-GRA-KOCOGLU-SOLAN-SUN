@@ -11,12 +11,27 @@
 .flexdiv {
     display: flex;
     justify-content: space-around;
-    align-items: baseline;
 }
+
+.block-room h3{
+    text-align: center;
+
+}
+
 
 .reservation {
     padding: 1%;
-    box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+.reservation-room{
+    overflow-y: scroll;
+    height:400px;
+    width: auto;
+
+}
+::-webkit-scrollbar {
+    width: 5px;
 }
 
 h2 {
@@ -34,7 +49,7 @@ ul {
 }
 
 li {
-    margin-top: 10px;
+
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -42,6 +57,10 @@ li {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
+    text-align: center;
+    min-width: 12vw;
+    margin-left: 10px;
+    margin-right: 5px;
 }
 
 p {
@@ -51,9 +70,21 @@ p {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+
+
 }
 
 p.v-if {
     background-color: #007BFF;
     color: white;
+}
+
+@media(max-width: 772px) {
+    .block-room h3{
+        max-width: 60%;
+    }
+}
+.title {
+    display: flex;
+    margin-bottom: 20px;
 }
