@@ -5,12 +5,14 @@
     import {useRoute} from 'vue-router';
     import userData from '../services/user.js';
 
+    
     const roomManage = ref(false);
     const route = useRoute();
     const roomId = route.params.id;
     const room = roomData().getRoom(roomId);
     const roomReservations = ref(room.reservation);
     const user = ref(userData().getConnectedUser());
+    const roomname = ref(room.roomname);
 
     function saveData(data) {
         if (data){
@@ -33,7 +35,7 @@
 <template>
     <div class="reservation-view">
         <div class="flexdivtop">
-            <h2>Multimedia</h2>
+            <h2>{{roomname}}</h2>
             <button class="reservebutton" @click="openModal()">Reserve</button>
         </div>
         <div class="flexdiv">

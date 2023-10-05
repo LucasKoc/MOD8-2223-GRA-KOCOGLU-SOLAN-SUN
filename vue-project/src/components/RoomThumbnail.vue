@@ -8,7 +8,9 @@
 <script setup>
   import roomData from '../services/room';
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
 
+  const router = useRouter();
   const props = defineProps( {
     room: {
       type: Object,
@@ -19,7 +21,7 @@
   const availability = ref(roomData().isRoomAvailable(props.room));
 
   function hrefToRoom() {
-    this.$router.push(`/rooms/${this.room.id}`);
+    router.push(`/rooms/${props.room.id}`);
   }
 
 </script>
