@@ -5,9 +5,6 @@
 }
 
 
-
-
-
 h2 {
     margin: 2% 5%;
     font-size: 200%;
@@ -100,7 +97,7 @@ p {
     z-index: 1001
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 700px) {
 
 
     .reservation-list {

@@ -35,13 +35,13 @@
 </script>
 
 <template>
+  <main>
     <div class="reservation-view">
         <h2>My Reservations</h2>
         <div class="flexdiv">
             <div>
               <div class="block-room">
                 <h3 class="title">Room Reservations</h3>
-                <div class="reservation">
 
                   <div class="reservation-room">
                     <ul>
@@ -51,23 +51,23 @@
                             <span>Hours: {{ roomReservation.time }}</span>
                         </li>
                     </ul>
-                  </div>
+
                 </div>
                 </div>
             </div>
             <div>
               <div class="block-equipement">
-                <h3 class ="title">Equipment Reservation</h3>
-                <div class="reservation">
+                <h3 class="title">Equipment Reservation</h3>
+
                   <div class="reservation-equipment">
                     <p v-if="equipmentReservation">Equipment: {{ equipmentReservation.name }}</p>
                     <p v-else>No equipment reservation</p>
                     </div>
                   </div>
-                </div>
             </div>
         </div>
     </div>
+  </main>
 </template>
   
 <style scoped>
