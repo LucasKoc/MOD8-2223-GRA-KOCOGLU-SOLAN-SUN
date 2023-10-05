@@ -1,11 +1,10 @@
 <script setup>
 const props = defineProps({
-    user: {
-        type: Object,
-        required: true
-    },
-});
-
+  user: {
+    type: Object,
+    required: true
+  }
+})
 </script>
 
 <template>
@@ -18,5 +17,5 @@ const props = defineProps({
 </template>
 
 <style scoped>
-@import "../assets/css/components/AdminPanel.css";
+@import '../assets/css/components/AdminPanel.css';
 </style>

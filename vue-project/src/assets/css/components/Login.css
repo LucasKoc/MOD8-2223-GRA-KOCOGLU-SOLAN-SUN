@@ -1,25 +1,26 @@
-@import "ModalBasic.css";
+@import 'ModalBasic.css';
 
-input[type="text"],
-input[type="password"] {
-    width: 95%;
-    padding: 10px;
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    background-color: var(--color-background);
-    color: var(--color-text);
+input[type='text'],
+input[type='password'] {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 @media (max-height: 600px) {
-    .login-form h2 {
-        margin: 0;
-        font-size: 1.5em;
-    }
-    .login-form label {
-        margin: 0;
-        font-size: 1.0em;
-    }
-    .login-form input[type="text"], .login-form input[type="password"] {
-        padding: 5px 10px 5px 10px;
-    }
+  .login-form h2 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  .login-form label {
+    margin: 0;
+    font-size: 1em;
+  }
+  .login-form input[type='text'],
+  .login-form input[type='password'] {
+    padding: 5px 10px 5px 10px;
+  }
 }
