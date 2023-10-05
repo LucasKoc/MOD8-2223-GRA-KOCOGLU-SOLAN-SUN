@@ -1,36 +1,28 @@
 <template>
   <div class="room-thumbnail" @click="hrefToRoom">
     <span class="room-title">{{ room["roomname"] }}</span>
-    <span :class="'availability ' + availabilityClass()">{{ room.availability ? room.availability : "N/A" }}</span>
+    <span :class="'availability '">{{ availability ? availability : "N/A" }}</span>
   </div>
 </template>
 
-<script>
-export default {
-  name: "RoomThumbnail",
-  props: {
+<script setup>
+  import roomData from '../services/room';
+  import { ref } from 'vue';
+
+  const props = defineProps( {
     room: {
       type: Object,
       required: true
     }
-  },
-  methods: {
-    availabilityClass() {
-      if (!this.room.availability) return 'ERROR';
-      else if (this.room.availability.toLowerCase() === 'Available'.toLowerCase()) {
-        return 'Available';
-      } else if (this.room.availability.toLowerCase() === 'Unavailable'.toLowerCase()) {
-        return 'Unavailable';
-      } else if (this.room.availability.toLowerCase().includes('Available in'.toLowerCase())) {
-        return 'Available-in';
-      }
-      return 'Available';
-    },
-    hrefToRoom() {
-      this.$router.push(`/rooms/${this.room.id}`);
-    }
+  })
+
+  console.log(props.room)
+  const availability = ref(roomData().isRoomAvailable(props.room));
+
+  function hrefToRoom() {
+    this.$router.push(`/rooms/${this.room.id}`);
   }
-}
+
 </script>
 
 <style scoped>
