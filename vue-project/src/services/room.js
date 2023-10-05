@@ -17,7 +17,7 @@ function getRoom (id) {
 
 function isRoomAvailable (room) {
   let available = "Available";
-  if (!room.reservation) {
+  if (room.reservation === undefined || room.reservation.length === 0) {
     return "Available"
   }
 
@@ -37,7 +37,7 @@ function isRoomAvailable (room) {
   return available
 }
 
-addRoom({roomname: "Gaming Room #1", roomtype: "gaming", reservation: [{date: "2023-10-04", time: "23:00", userid: 1}, {date: "2021-05-02", time: "18:00", userid: 1}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}]});
+addRoom({roomname: "Gaming Room #1", roomtype: "gaming", reservation: [{date: "2023-10-04", time: "23:00", userid: 1}, {date: "2023-10-05", time: "00:00", userid: 1}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}, {date: "2021-06-01", time: "18:00", userid: 2}]});
 addRoom({roomname: "Gaming Room #2", roomtype: "gaming", reservation: [{date: "2021-08-01", time: "18:00", userid: 2}]});
 addRoom({roomname: "Gaming Room #3", roomtype: "gaming", reservation: []});
 addRoom({roomname: "Gaming Room #4", roomtype: "gaming", reservation: []});

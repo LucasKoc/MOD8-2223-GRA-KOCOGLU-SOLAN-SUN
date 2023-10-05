@@ -26,8 +26,6 @@ if (getavailabilitydictionnary.valid === false) {
   availability.value = "Available";
 }
 
-console.log(availability.value);
-
 </script>
 
 <style scoped>
