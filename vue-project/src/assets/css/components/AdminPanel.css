@@ -1,25 +1,27 @@
 .admin-item {
-    border: 2px solid var(--color-border);
-    border-radius: 20px;
-    padding: 15px;
-    background-color: var(--color-background);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    cursor: pointer;
-    margin: 10px;
+  border: 2px solid var(--color-border);
+  border-radius: 20px;
+  padding: 15px;
+  background-color: var(--color-background);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+  cursor: pointer;
+  margin: 10px;
 }
 
 .admin-info {
-    text-align: center;
+  text-align: center;
 }
 
-
 .equipment-info p {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 .admin-item:hover {
-    background-color: var(--color-background-soft);
-    border-color: var(--color-border);
-    transform: scale(1.02);
+  background-color: var(--color-background-soft);
+  border-color: var(--color-border);
+  transform: scale(1.02);
 }

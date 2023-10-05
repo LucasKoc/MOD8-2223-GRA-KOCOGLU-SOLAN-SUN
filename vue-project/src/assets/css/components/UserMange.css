@@ -1,113 +1,112 @@
 .user-panel {
-    display: flex;
-    justify-content: space-between;
-    max-width: 800px;
-    padding: 20px;
-    margin: 2%;
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px;
+  padding: 20px;
+  margin: 2%;
 
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    background-color: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background-color: var(--color-background-soft);
 }
 
 .user-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
 }
 
-
 h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 label {
-    display: block;
-    font-weight: bold;
-    color: var(--color-heading);
+  display: block;
+  font-weight: bold;
+  color: var(--color-heading);
 }
 
-input[type="text"],
-input[type="password"],
-input[type="number"] {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    background-color: var(--color-background);
-    color: var(--color-text);
+input[type='text'],
+input[type='password'],
+input[type='number'] {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
-input[type="number"] {
-    width: 85%;
+input[type='number'] {
+  width: 85%;
 }
 
 .button-group {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 button {
-    flex: 1;
-    padding: 10px;
-    background-color: var(--color-button);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 10px;
+  flex: 1;
+  padding: 10px;
+  background-color: var(--color-button);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
 
-    width: 100%;
+  width: 100%;
 }
 
 button:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 button:hover {
-    background-color: var(--color-button-hover);
+  background-color: var(--color-button-hover);
 }
 
 .close {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    padding: 0;
-    background-color: var(--color-button);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  padding: 0;
+  background-color: var(--color-button);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .close:hover {
-    background-color: red;
+  background-color: red;
 }
 
 @media (max-height: 600px) {
-    h2 {
-        margin: 0;
-        font-size: 1.5em;
-    }
+  h2 {
+    margin: 0;
+    font-size: 1.5em;
+  }
 
-    label {
-        margin: 0;
-        font-size: 1.0em;
-    }
+  label {
+    margin: 0;
+    font-size: 1em;
+  }
 
-    input[type="text"],
-    input[type="password"],
-    input[type="number"] {
-        padding: 5px 10px 5px 10px;
-    }
+  input[type='text'],
+  input[type='password'],
+  input[type='number'] {
+    padding: 5px 10px 5px 10px;
+  }
 
-    .user-container {
-        align-items: center;
-    }
+  .user-container {
+    align-items: center;
+  }
 }

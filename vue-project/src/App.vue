@@ -1,20 +1,20 @@
 <script setup>
-  import { ref, watch } from 'vue';
-  import { RouterLink, RouterView } from 'vue-router';
-  import Login from './components/Login.vue';
-  import userData from './services/user';
+import { ref, watch } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+import Login from './components/Login.vue'
+import userData from './services/user'
 
-  const isUserModalOpen = ref(false);
-  const user = ref(userData().getConnectedUser());
-  const loginval = ref("Login");
-  console.log();
+const isUserModalOpen = ref(false)
+const user = ref(userData().getConnectedUser())
+const loginval = ref('Login')
+console.log()
 
-  function exit(s){
-    if (s){
-      loginval.value = "Log out";
-    }
-    isUserModalOpen.value = false;
+function exit(s) {
+  if (s) {
+    loginval.value = 'Log out'
   }
+  isUserModalOpen.value = false
+}
 </script>
 
 <template>
@@ -47,11 +47,15 @@
           <RouterLink class="redirect" to="/panel">adminPanel</RouterLink>
         </li>
         <li>
-          <div class="redirect login" @click="loginval === 'Login' ? isUserModalOpen = true : null ;">{{loginval}}</div>
+          <div
+            class="redirect login"
+            @click="loginval === 'Login' ? (isUserModalOpen = true) : null"
+          >
+            {{ loginval }}
+          </div>
         </li>
       </ul>
     </div>
-
   </header>
 
   <main>
@@ -60,12 +64,13 @@
 
   <footer>
     <p>
-      &copy; OVE - Vieux Montreal - Since 2023 | <RouterLink to="/about">Learn more about OVE</RouterLink>
+      &copy; OVE - Vieux Montreal - Since 2023 |
+      <RouterLink to="/about">Learn more about OVE</RouterLink>
     </p>
   </footer>
 
   <!-- Backdrop for the modal -->
   <div class="backdrop" v-if="isUserModalOpen"></div>
 
-  <Login class="user-modal" @exit="(s) => exit(s)" v-if="isUserModalOpen"/>
+  <Login class="user-modal" @exit="(s) => exit(s)" v-if="isUserModalOpen" />
 </template>

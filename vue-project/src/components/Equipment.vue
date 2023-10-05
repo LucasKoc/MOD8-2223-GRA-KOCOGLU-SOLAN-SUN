@@ -6,29 +6,27 @@
 </template>
 
 <script setup>
-import equipmentData from '../services/equipment';
-import {ref} from 'vue';
+import equipmentData from '../services/equipment'
+import { ref } from 'vue'
 
 const props = defineProps({
   equipment: {
     type: Object,
     required: true
-  },
-});
-const equipment = props.equipment;
-const availability = ref();
+  }
+})
+const equipment = props.equipment
+const availability = ref()
 
-const getavailabilitydictionnary = equipmentData().isEquipmentAvailable(equipment);
+const getavailabilitydictionnary = equipmentData().isEquipmentAvailable(equipment)
 
 if (getavailabilitydictionnary.valid === false) {
-  availability.value = "Available in " + getavailabilitydictionnary.minutes + " minutes";
+  availability.value = 'Available in ' + getavailabilitydictionnary.minutes + ' minutes'
 } else {
-  availability.value = "Available";
+  availability.value = 'Available'
 }
-
 </script>
 
 <style scoped>
-@import "../assets/css/components/Equipment.css";
+@import '../assets/css/components/Equipment.css';
 </style>
-  

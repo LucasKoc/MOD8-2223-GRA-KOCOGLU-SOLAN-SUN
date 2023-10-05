@@ -1,43 +1,43 @@
 main#equipments-status-main {
-    margin: 15vh 10vw 5vh 10vw;
-    max-width: 80vw;
-    min-width: 304px;
+  margin: 15vh 10vw 5vh 10vw;
+  max-width: 80vw;
+  min-width: 304px;
 
-    background-color: var(--color-background);
-    border-radius: 12px;
-    box-shadow: 0 0 3px 0 var(--color-shadow);
+  background-color: var(--color-background);
+  border-radius: 12px;
+  box-shadow: 0 0 3px 0 var(--color-shadow);
 }
 div#equipments-status-div {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
 
-    width: 90%;
-    margin: 0 5vw 0 5vw;
+  width: 90%;
+  margin: 0 5vw 0 5vw;
 }
 div.equipment-box-container {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
 
-    width: 100%;
+  width: 100%;
 
-    border: var(--color-border-opacity-reduced) solid 1px;
+  border: var(--color-border-opacity-reduced) solid 1px;
 }
 h2.equipmentTypeTitle {
-    margin: 0 0 0 0;
+  margin: 0 0 0 0;
 }
 
 div#equipments-status-div div.equipments-row-container:is(:first-child) h2.equipmentTypeTitle {
-    margin: 1vh 0 0 0;
+  margin: 1vh 0 0 0;
 }
 div#equipments-status-div div.equipments-row-container:is(:last-child) {
-    margin: 0 0 1vh 0;
+  margin: 0 0 1vh 0;
 }
 @media (max-width: 950px) {
-    h2.equipmentTypeTitle {
-        font-size: 1.5rem;
-    }
+  h2.equipmentTypeTitle {
+    font-size: 1.5rem;
+  }
 }

@@ -2,9 +2,9 @@
 
 :root {
   /* Dark mode palette */
-  --palette-dark: #0A0908;
-  --palette-dark-soft: #1A1918;
-  --palette-dark-mute: #2A2928;
+  --palette-dark: #0a0908;
+  --palette-dark-soft: #1a1918;
+  --palette-dark-mute: #2a2928;
 
   --palette-divider-light-1: rgb(227, 227, 227);
   --palette-divider-light-2: rgba(231, 231, 231, 0.71);
@@ -40,8 +40,8 @@
 
   --palette-link-light-button-hover: #7d4ea8;
 
-  --palette-text-light-1: #EAE0D5;
-  --palette-text-light-2: #C6AC8F;
+  --palette-text-light-1: #eae0d5;
+  --palette-text-light-2: #c6ac8f;
   --palette-text-light-3: #a28159;
 
   --palette-link-light: #b97cf3;
@@ -123,13 +123,13 @@
 }
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("@/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-family: 'Montserrat';
+  src: url('@/assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "Helvetica Neue";
-  src: url("@/assets/fonts/HelveticaNeue.ttc") format("truetype");
+  font-family: 'Helvetica Neue';
+  src: url('@/assets/fonts/HelveticaNeue.ttc') format('truetype');
 }
 
 body {
@@ -144,8 +144,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p, span {
-  font-family: "Helvetica Neue", sans-serif;
+p,
+span {
+  font-family: 'Helvetica Neue', sans-serif;
   color: var(--color-text);
 }
 
@@ -153,7 +154,7 @@ nav,
 li,
 ul,
 ol {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 :link,
@@ -169,13 +170,13 @@ h4,
 h5,
 h6,
 legend {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: var(--color-heading);
 }
 
 label,
 ::placeholder {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-style: italic;
 }
 
@@ -188,7 +189,7 @@ label {
 }
 
 td {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   color: var(--color-heading);
 }
