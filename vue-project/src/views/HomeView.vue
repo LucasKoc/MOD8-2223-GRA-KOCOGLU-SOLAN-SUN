@@ -23,6 +23,14 @@
         </li>
       </ul>
     </div>
+    <div id="recommanded-equipments" v-if="recommandedEquipment.length">
+      <h1>Recommanded equipment :</h1>
+      <ul v-if="recommandedEquipment.length">
+        <li v-for="equipment in recommandedEquipment" :key="equipment.id">
+          <Equipment :equipment="equipment" />
+        </li>
+      </ul>
+    </div>
   </main>
 </template>
 
@@ -30,12 +38,15 @@
 import { ref, computed } from "vue";
 import RoomThumbnail from "@/components/RoomThumbnail.vue";
 import roomData from "@/services/room.js";
+import equipmentData from "@/services/equipment.js";
+import Equipment from "@/components/Equipment.vue";
 
 export default {
-  components: { RoomThumbnail },
+  components: {Equipment, RoomThumbnail },
   setup() {
     const searchQuery = ref("");
     const roomReservations = ref( roomData().getRooms());
+    const equipmentReservations = ref(equipmentData().getEquipments())
 
     const filteredRooms = computed(() => {
       const results = roomReservations.value.filter((room) =>
@@ -52,13 +63,26 @@ export default {
         i++
     ) {
       try {
-        if (Math.round(Math.random()) === 1) {
+        if (Math.round(Math.random()) === 1 && (!roomData().isRoomAvailable(roomReservations.value[i]).includes("in")) && (!roomData().isRoomAvailable(roomReservations.value[i]).includes("in"))) {
           recommandedRooms.push(roomReservations.value[i]);
         }
       } catch (e) {console.error(e)}
     }
 
-    return { searchQuery, filteredRooms, roomReservations, recommandedRooms };
+    let recommandedEquipment = []
+    for (
+        let i = 0;
+        i < equipmentReservations.value.length && recommandedEquipment.length < 3;
+        i++
+    ) {
+      try {
+        if (Math.round(Math.random()) === 1 && (!equipmentData().isEquipmentAvailable(equipmentReservations.value[i]).valid === false)) {
+          recommandedEquipment.push(equipmentReservations.value[i]);
+        }
+      } catch (e) {console.error(e)}
+    }
+
+    return { searchQuery, filteredRooms, roomReservations, recommandedRooms, recommandedEquipment };
   },
 };
 </script>

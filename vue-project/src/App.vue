@@ -32,6 +32,9 @@
           <RouterLink class="redirect" to="/rooms">Rooms status</RouterLink>
         </li>
         <li>
+          <RouterLink class="redirect" to="/equipments">Equipment status</RouterLink>
+        </li>
+        <li>
           <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
         </li>
       </ul>

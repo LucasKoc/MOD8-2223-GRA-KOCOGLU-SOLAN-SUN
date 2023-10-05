@@ -26,7 +26,7 @@ function modifyEquipment (equipment) {
 
 function isEquipmentAvailable (equipment) {
   if (!equipment.reservation) {
-    return true
+    return {valid: true}
   }
 
   const currentTime = new Date().getMinutes() + new Date().getHours() * 60;
@@ -40,7 +40,7 @@ function isEquipmentAvailable (equipment) {
 }
 
 addEquipment({name: "Washing Machine #1", category: "washing"});
-addEquipment({name: "Washing Machine #2", category: "washing", reservation: {id: 2, time: "12:00"}});
+addEquipment({name: "Washing Machine #2", category: "washing", reservation: {id: 2, time: "23:45"}});
 addEquipment({name: "Washing Machine #3", category: "washing"});
 addEquipment({name: "Washing Machine #4", category: "washing"});
 addEquipment({name: "Washing Machine #5", category: "washing"});
