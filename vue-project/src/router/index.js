@@ -31,7 +31,7 @@ const router = createRouter({
     {
       path: '/panel',
       name: 'panel',
-      component: panel
+      component: AdminPanelPageView
     },
     {
       path: '/rooms',
