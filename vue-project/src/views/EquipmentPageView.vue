@@ -79,5 +79,5 @@ function saveData(data) {
 </template>
 
 <style scoped>
-@import '../assets/css/views/EquipmentView.css';
+@import '../assets/css/views/EquipmentPageView.css';
 </style>

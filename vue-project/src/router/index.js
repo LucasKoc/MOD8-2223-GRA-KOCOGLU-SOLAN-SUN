@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ReservationVue from '../views/ReservationView.vue'
 import RoomView from '../views/RoomView.vue'
-import EquipmentView from '../views/EquipmentView.vue'
+import EquipmentPageView from '../views/EquipmentPageView.vue'
 import panel from '../views/AdminPanelView.vue'
 
 const router = createRouter({
@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: '/equipments',
       name: 'equipments',
-      component: EquipmentView
+      component: EquipmentPageView
     },
     {
       path: '/panel',
