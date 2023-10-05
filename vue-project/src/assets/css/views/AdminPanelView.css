@@ -20,19 +20,19 @@ ul {
 }
 
 p {
-    background-color: #fff;
+    background-color: var(--color-background);
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--color-shadow);
     text-align: center;
 }
 
 .title-res {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
+    justify-content: space-between;
+    width: 99%;
 }
 
 .title-res *:first-child {
@@ -54,7 +54,7 @@ p {
     height:36px;
 }
 .add:hover {
-    background-color: #0056b3;
+    background-color: var(--color-button-hover);
 }
 
 h2 {
@@ -70,11 +70,11 @@ ul {
 }
 
 p {
-    background-color: #fff;
+    background-color: var(--color-background);
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--color-shadow);
     text-align: center;
 }
 
@@ -104,7 +104,7 @@ p {
         border: 1px solid var(--color-border);
         border-radius: 5px;
         padding: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px var(--color-shadow);
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
