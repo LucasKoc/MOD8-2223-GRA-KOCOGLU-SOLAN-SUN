@@ -82,5 +82,5 @@ try {
 </template>
 
 <style scoped>
-@import '../assets/css/components/EquipmentRes.css';
+@import '../assets/css/components/EquipmentReservation.css';
 </style>
