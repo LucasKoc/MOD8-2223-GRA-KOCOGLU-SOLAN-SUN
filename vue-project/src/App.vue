@@ -57,7 +57,7 @@
 
   <footer>
     <p>
-      <RouterLink to="/about">About</RouterLink>
+      &copy; OVE - Vieux Montreal - Since 2023 | <RouterLink to="/about">Learn more about OVE</RouterLink>
     </p>
   </footer>
 
