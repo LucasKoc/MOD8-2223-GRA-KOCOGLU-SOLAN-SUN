@@ -93,5 +93,5 @@
 }
 
 div.equipment.selected > div > span.equipment-title {
-    color: var(--color-text-soft)
+    color: var(--color-button-text-selected);
 }

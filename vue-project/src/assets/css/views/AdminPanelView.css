@@ -49,7 +49,7 @@ p {
 .add{
     padding: 10px;
     background-color: var(--color-button);
-    color: var(--color-text-soft);
+    color: white;
     border: solid 1px var(--color-border);
     border-radius: 12px;
     cursor: pointer;

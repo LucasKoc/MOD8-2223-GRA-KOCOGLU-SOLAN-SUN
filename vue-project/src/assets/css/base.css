@@ -9,6 +9,9 @@
   --palette-divider-light-1: rgb(227, 227, 227);
   --palette-divider-light-2: rgba(231, 231, 231, 0.71);
   --palette-divider-light-3: rgba(231, 231, 231, 0.05);
+  --color-placeholder-input-field-light: rgba(231, 231, 231, 0.73);
+
+  --palette-link-dark-button-hover: #0052cc;
 
   --palette-text-dark-1: #95dcff;
   --palette-text-dark-2: #438eb2;
@@ -16,6 +19,8 @@
 
   --palette-link-dark: #0066cc;
   --palette-link-dark-visited: #3495f5;
+
+  --palette-text-selected-button-dark: #ffffff;
 
   --palette-required-dark: #e35c7b;
 
@@ -31,7 +36,9 @@
   --palette-divider-dark-1: rgba(84, 84, 84, 0.65);
   --palette-divider-dark-2: rgba(84, 84, 84, 0.48);
   --palette-divider-dark-3: rgba(84, 84, 84, 0.05);
+  --color-placeholder-input-field-dark: rgba(117, 117, 117, 0.73);
 
+  --palette-link-light-button-hover: #7d4ea8;
 
   --palette-text-light-1: #EAE0D5;
   --palette-text-light-2: #C6AC8F;
@@ -39,6 +46,8 @@
 
   --palette-link-light: #b97cf3;
   --palette-link-light-visited: #551a8b;
+
+  --palette-text-selected-button-light: #ffffff;
 
   --palette-required-light: #d50000;
 
@@ -57,6 +66,7 @@
     --color-border: var(--palette-divider-dark-2);
     --color-border-hover: var(--palette-divider-dark-1);
     --color-border-opacity-reduced: var(--palette-divider-dark-3);
+    --color-placeholder-input-field: var(--color-placeholder-input-field-dark);
 
     --color-heading: var(--palette-text-light-3);
     --color-text: var(--palette-text-light-2);
@@ -66,7 +76,8 @@
     --color-link-visited: var(--palette-link-light-visited);
 
     --color-button: var(--palette-link-light);
-    --color-button-hover: var(--palette-link-light-visited);
+    --color-button-hover: var(--palette-link-light-button-hover);
+    --color-button-text-selected: var(--palette-text-selected-button-light);
 
     --color-shadow: var(--palette-dark-soft);
 
@@ -87,6 +98,7 @@
     --color-border: var(--palette-divider-light-2);
     --color-border-hover: var(--palette-divider-light-1);
     --color-border-opacity-reduced: var(--palette-divider-light-3);
+    --color-placeholder-input-field: var(--color-placeholder-input-field-light);
 
     --color-heading: var(--palette-text-dark-3);
     --color-text: var(--palette-text-dark-1);
@@ -97,7 +109,8 @@
     --color-link-visited: var(--palette-link-light);
 
     --color-button: var(--palette-link-dark);
-    --color-button-hover: var(--palette-link-light);
+    --color-button-hover: var(--palette-link-dark-button-hover);
+    --color-button-text-selected: var(--palette-text-selected-button-dark);
 
     --color-shadow: var(--palette-white);
 
@@ -164,7 +177,14 @@ label,
 ::placeholder {
   font-family: "Montserrat", sans-serif;
   font-style: italic;
-  color: var(--color-text-soft);
+}
+
+::placeholder {
+  color: var(--color-placeholder-input-field);
+}
+
+label {
+  color: var(--color-text);
 }
 
 td {

@@ -1,60 +1,20 @@
-.reservation-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-h2 {
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-}
+@import "ModalBasic.css";
 
 input[type="date"],
 input[type="time"] {
-    width: 100%;
+    width: 95%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
+    background-color: var(--color-background);
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+input[type="time"]::-webkit-datetime-edit-fields-wrapper, input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    color: var(--color-text);
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-.close {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    padding: 0;
-    background-color: #ccc;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.close:hover {
-    background-color: red;
+@media (prefers-color-scheme: dark) {
+    input[type="time"]::-webkit-calendar-picker-indicator, input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
 }
