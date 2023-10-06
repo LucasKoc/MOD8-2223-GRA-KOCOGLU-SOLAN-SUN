@@ -1,6 +1,6 @@
 let id = 1
 const users = []
-let connectedUser = {}
+let connectedUser = false
 
 function addUser(user) {
   user.id = id++
@@ -49,6 +49,12 @@ function getConnectedUser() {
   return false
 }
 
+function resetConnectedUser() {
+  if (connectedUser) {
+    connectedUser = false
+  }
+}
+
 addUser({ room: 202, key: '1234', name: 'John' })
 addUser({ room: 0, key: '0', name: '0', role: 'admin' })
 addUser({ room: 206, key: '8627', name: 'John2' })
@@ -60,6 +66,7 @@ export default function userData() {
     getUsers,
     login,
     getConnectedUser,
+    resetConnectedUser,
     modifyUser,
     getUser
   }

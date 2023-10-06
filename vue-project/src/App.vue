@@ -1,17 +1,22 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { computed, ref, watch } from 'vue'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import Login from './components/Login.vue'
 import userData from './services/user'
 
 const isUserModalOpen = ref(false)
 const user = ref(userData().getConnectedUser())
 const loginval = ref('Login')
-console.log()
+const router = useRouter()
+
+if (user.value) {
+  loginval.value = 'Log out'
+}
 
 function exit(s) {
   if (s) {
     loginval.value = 'Log out'
+    user.value = userData().getConnectedUser()
   }
   isUserModalOpen.value = false
 }
@@ -29,13 +34,13 @@ function exit(s) {
           <RouterLink class="redirect" to="/">Home</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/rooms">Rooms status</RouterLink>
+          <RouterLink class="redirect" to="/rooms">Rooms List</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/equipments">Equipment status</RouterLink>
+          <RouterLink class="redirect" to="/equipments">Equipment List</RouterLink>
         </li>
         <li>
-          <RouterLink class="redirect" to="/reservation">See Reservation</RouterLink>
+          <RouterLink class="redirect" v-if="user" to="/reservation">See Reservation</RouterLink>
         </li>
       </ul>
     </div>
@@ -43,13 +48,12 @@ function exit(s) {
     <div class="wrapper">
       <ul class="login-button">
         <li>
-          <!-- v-if temp because ultra not secure : v-if="user.value ? (user.value.role === 'admin') : false" -->
-          <RouterLink class="redirect" to="/panel">adminPanel</RouterLink>
+          <RouterLink class="redirect" v-if="user && user.role == 'admin'" to="/panel">adminPanel</RouterLink>
         </li>
         <li>
           <div
             class="redirect login"
-            @click="loginval === 'Login' ? (isUserModalOpen = true) : null"
+            @click="loginval === 'Login' ? (isUserModalOpen = true) : user = false, userData().resetConnectedUser(), loginval = 'Login', router.push('/')"
           >
             {{ loginval }}
           </div>
