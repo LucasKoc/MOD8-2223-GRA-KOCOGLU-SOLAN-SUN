@@ -14,7 +14,7 @@
           <RoomThumbnail :room="rooms" />
         </li>
         <li v-for="equipment in filteredEquipment" :key="equipment.id">
-          <Equipment :equipment="equipment" />
+          <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
         </li>
       </ul>
     </div>
@@ -30,10 +30,19 @@
       <h1>Recommanded equipment :</h1>
       <ul v-if="recommandedEquipment.length">
         <li v-for="equipment in recommandedEquipment" :key="equipment.id">
-          <Equipment :equipment="equipment" />
+          <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
         </li>
       </ul>
     </div>
+
+    <div class="backdrop" v-if="equipmentManage === true"></div>
+    <EquipmentReservation
+        class="user-modal"
+        v-if="equipmentManage"
+        @sendData="(data) => saveData(data)"
+        :equipmentData="equipmentforTypeDataSelected"
+        :equipment-selected="equipmentSelected"
+    />
   </main>
 </template>
 
@@ -43,9 +52,11 @@ import RoomThumbnail from '@/components/RoomThumbnail.vue'
 import roomData from '@/services/room.js'
 import equipmentData from '@/services/equipment.js'
 import Equipment from '@/components/Equipment.vue'
+import EquipmentReservation from '@/components/EquipmentReservation.vue'
+import userData from "@/services/user";
 
 export default {
-  components: { Equipment, RoomThumbnail },
+  components: {EquipmentReservation, Equipment, RoomThumbnail },
   setup() {
     const searchQuery = ref('')
     const roomReservations = ref(roomData().getRooms())
@@ -100,13 +111,58 @@ export default {
       }
     }
 
+    const equipmentManage = ref(false)
+    const equipmentforTypeDataSelected = ref()
+    const user = ref(userData().getConnectedUser())
+    console.log(user.value.id);
+    const equipment = equipmentData()
+    const equipmentSelected = ref()
+
+
+    function activateModal(data) {
+      if (user.value.id === undefined) {
+        alert('You must be logged in to be able to make a reservation')
+      } else {
+        equipmentSelected.value = data
+        equipmentforTypeDataSelected.value = typeOfEquipment.value[data['category']]
+        equipmentManage.value = true
+      }
+    }
+
+    function saveData(data) {
+      if (data) {
+        equipment.modifyEquipment(data)
+      }
+      equipmentManage.value = false
+    }
+
+    const typeOfEquipment = computed(() => {
+      let equipmentTypes = {}
+
+      for (let i = 0; i < equipmentReservations.value.length; i++) {
+        let equipment = equipmentReservations.value[i]
+        let equipmentType = equipment['category']
+
+        if (!equipmentTypes[equipmentType]) {
+          equipmentTypes[equipmentType] = []
+        }
+        equipmentTypes[equipmentType].push(equipment)
+      }
+      return equipmentTypes
+    })
+
     return {
       searchQuery,
       filteredRooms,
       filteredEquipment,
       roomReservations,
       recommandedRooms,
-      recommandedEquipment
+      recommandedEquipment,
+      activateModal,
+      saveData,
+      equipmentforTypeDataSelected,
+      equipmentManage,
+      equipmentSelected,
     }
   }
 }
