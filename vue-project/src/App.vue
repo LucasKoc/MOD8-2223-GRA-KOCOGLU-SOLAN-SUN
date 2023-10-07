@@ -20,46 +20,89 @@ function exit(s) {
   }
   isUserModalOpen.value = false
 }
+
+function navbarButton() {
+  let x = document.getElementById('header-router')
+  if (x.classList.value === 'router-list') {
+    x.classList.add('displayed');
+  } else {
+    x.classList.remove('displayed');
+  }
+}
 </script>
 
 <template>
   <header>
-    <div class="wrapper">
-      <RouterLink to="/">
-        <img alt="Vue logo" class="logo" src="@/assets/pictures/LogoMOD8.png" width="164" />
-      </RouterLink>
+    <div id="header">
+      <div class="wrapper">
+        <RouterLink to="/">
+          <img alt="Vue logo" class="logo" src="@/assets/pictures/LogoMOD8.png" width="164" />
+        </RouterLink>
 
-      <ul class="menuclick">
-        <li>
-          <RouterLink class="redirect" to="/">Home</RouterLink>
-        </li>
-        <li>
-          <RouterLink class="redirect" to="/rooms">Rooms List</RouterLink>
-        </li>
-        <li>
-          <RouterLink class="redirect" to="/equipments">Equipment List</RouterLink>
-        </li>
-        <li>
-          <RouterLink class="redirect" v-if="user" to="/reservation">See Reservation</RouterLink>
-        </li>
-      </ul>
+        <ul class="menuclick header-router">
+          <li>
+            <RouterLink class="redirect" to="/">Home</RouterLink>
+          </li>
+          <li>
+            <RouterLink class="redirect" to="/rooms">Rooms List</RouterLink>
+          </li>
+          <li>
+            <RouterLink class="redirect" to="/equipments">Equipment List</RouterLink>
+          </li>
+          <li>
+            <RouterLink class="redirect" v-if="user" to="/reservation">See Reservation</RouterLink>
+          </li>
+        </ul>
+      </div>
+
+      <div class="wrapper header-router">
+        <ul class="login-button">
+          <li>
+            <RouterLink class="redirect" v-if="user && user.role == 'admin'" to="/panel"
+            >adminPanel</RouterLink
+            >
+          </li>
+          <li>
+            <div
+                class="redirect login"
+                @click="
+              loginval === 'Login' ? (isUserModalOpen = true) : (user = false),
+                userData().resetConnectedUser(),
+                (loginval = 'Login'),
+                router.push('/')
+            "
+            >
+              {{ loginval }}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <a href="javascript:void(0);" class="icon" @click="navbarButton()">
+        <i class="fa fa-bars"></i>
+      </a>
     </div>
 
-    <div class="wrapper">
-      <ul class="login-button">
-        <li>
-          <RouterLink class="redirect" v-if="user && user.role == 'admin'" to="/panel">adminPanel</RouterLink>
-        </li>
-        <li>
-          <div
-            class="redirect login"
-            @click="loginval === 'Login' ? (isUserModalOpen = true) : user = false, userData().resetConnectedUser(), loginval = 'Login', router.push('/')"
-          >
-            {{ loginval }}
-          </div>
-        </li>
-      </ul>
-    </div>
+    <nav class="router-list" id="header-router">
+      <RouterLink class="redirect" to="/">Home</RouterLink>
+      <RouterLink class="redirect" to="/rooms">Rooms List</RouterLink>
+      <RouterLink class="redirect" to="/equipments">Equipment List</RouterLink>
+      <RouterLink class="redirect" v-if="user" to="/reservation">See Reservation</RouterLink>
+      <RouterLink class="redirect" v-if="user && user.role == 'admin'" to="/panel"
+      >adminPanel</RouterLink
+      >
+      <div
+          class="redirect login"
+          @click="
+          loginval === 'Login' ? (isUserModalOpen = true) : (user = false),
+            userData().resetConnectedUser(),
+            (loginval = 'Login'),
+            router.push('/')
+        "
+      >
+        {{ loginval }}
+      </div>
+    </nav>
   </header>
 
   <main>

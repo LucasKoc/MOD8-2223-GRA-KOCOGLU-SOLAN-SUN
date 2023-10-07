@@ -1,6 +1,6 @@
 @import './base.css';
 
-header {
+#header {
   background-color: black;
   display: flex;
   justify-content: space-between;
@@ -23,13 +23,6 @@ main {
 .logo {
   display: block;
   margin: 0 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
 }
 
 .menuclick,
@@ -105,7 +98,52 @@ footer {
   margin-right: 2vw;
 }
 
-@media (max-width: 900px) {
-  header {
+nav {
+  font-size: 12px;
+  text-align: center;
+}
+
+nav.header-router, .icon {
+  display: none;
+  margin: 0;
+}
+
+@media (max-width: 1020px) {
+  div.header-router,
+  ul.header-router {
+    display: none;
+  }
+
+  .icon {
+    float: right;
+    display: block;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: white;
+    color: black;
+  }
+
+  nav.router-list {
+    display: none;
+    position: fixed;
+    top: 85px;
+    right: 42px;
+  }
+
+  nav.router-list.displayed {
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  nav.router-list * {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .icon {
+    position: absolute;
+    right: 42px;
   }
 }
