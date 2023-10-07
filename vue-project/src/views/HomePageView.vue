@@ -14,7 +14,7 @@
           <RoomThumbnail :room="rooms" />
         </li>
         <li v-for="equipment in filteredEquipment" :key="equipment.id">
-          <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
+          <Equipment :equipment="equipment" @click="activateModal(equipment)" />
         </li>
       </ul>
     </div>
@@ -30,18 +30,18 @@
       <h1>Recommanded equipment :</h1>
       <ul v-if="recommandedEquipment.length">
         <li v-for="equipment in recommandedEquipment" :key="equipment.id">
-          <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
+          <Equipment :equipment="equipment" @click="activateModal(equipment)" />
         </li>
       </ul>
     </div>
 
     <div class="backdrop" v-if="equipmentManage === true"></div>
     <EquipmentReservation
-        class="user-modal"
-        v-if="equipmentManage"
-        @sendData="(data) => saveData(data)"
-        :equipmentData="equipmentforTypeDataSelected"
-        :equipment-selected="equipmentSelected"
+      class="user-modal"
+      v-if="equipmentManage"
+      @sendData="(data) => saveData(data)"
+      :equipmentData="equipmentforTypeDataSelected"
+      :equipment-selected="equipmentSelected"
     />
   </main>
 </template>
@@ -53,10 +53,10 @@ import roomData from '@/services/room.js'
 import equipmentData from '@/services/equipment.js'
 import Equipment from '@/components/Equipment.vue'
 import EquipmentReservation from '@/components/EquipmentReservation.vue'
-import userData from "@/services/user";
+import userData from '@/services/user'
 
 export default {
-  components: {EquipmentReservation, Equipment, RoomThumbnail },
+  components: { EquipmentReservation, Equipment, RoomThumbnail },
   setup() {
     const searchQuery = ref('')
     const roomReservations = ref(roomData().getRooms())
@@ -114,10 +114,9 @@ export default {
     const equipmentManage = ref(false)
     const equipmentforTypeDataSelected = ref()
     const user = ref(userData().getConnectedUser())
-    console.log(user.value.id);
+    console.log(user.value.id)
     const equipment = equipmentData()
     const equipmentSelected = ref()
-
 
     function activateModal(data) {
       if (user.value.id === undefined) {
@@ -162,7 +161,7 @@ export default {
       saveData,
       equipmentforTypeDataSelected,
       equipmentManage,
-      equipmentSelected,
+      equipmentSelected
     }
   }
 }
