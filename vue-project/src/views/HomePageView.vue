@@ -114,7 +114,6 @@ export default {
     const equipmentManage = ref(false)
     const equipmentforTypeDataSelected = ref()
     const user = ref(userData().getConnectedUser())
-    console.log(user.value.id)
     const equipment = equipmentData()
     const equipmentSelected = ref()
 

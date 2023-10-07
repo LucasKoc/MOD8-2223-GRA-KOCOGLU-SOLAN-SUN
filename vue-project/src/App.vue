@@ -23,7 +23,6 @@ function exit(s) {
 
 function navbarButton() {
   let x = document.getElementById('header-router')
-  console.log(x.classList)
   if (x.classList.value === 'router-list') {
     x.classList.add('displayed');
   } else {
