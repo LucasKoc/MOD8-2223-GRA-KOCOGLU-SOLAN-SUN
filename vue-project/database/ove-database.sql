@@ -12,6 +12,9 @@ CREATE TABLE equipments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL
+    time TIME,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 
@@ -22,6 +25,17 @@ CREATE TABLE users (
     keyp VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     role VARCHAR(255) DEFAULT NULL
+);
+
+-- Create the "sessions" table
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE `sessions` (
+  `id` char(36) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `start_time` datetime(6) NOT NULL,
+  `extended_time` datetime(6) DEFAULT NULL,
+  `expiry_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
 
