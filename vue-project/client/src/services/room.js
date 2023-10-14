@@ -91,6 +91,7 @@ export default function roomData() {
   return {
     isRoomAvailable,
     addRoom,
+    deleteRoom,
     getRooms,
     getRoom
   }
