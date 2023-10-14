@@ -57,6 +57,15 @@ const addReservation = async (roomId, date, time, userId) => {
     }
 }
 
+const deleteReservation = async (roomId, id) => {
+    try {
+        const response = await axios.delete(`/rooms/${roomId}/reservations`, { params: { id } })
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
 function isRoomAvailable(room) {
     // ON HOLD: Implement
   let available = 'Available'
@@ -113,6 +122,7 @@ export default function roomData() {
     getRooms,
     getRoom,
     getReservations,
-    addReservation
+    addReservation,
+    deleteReservation
   }
 }
