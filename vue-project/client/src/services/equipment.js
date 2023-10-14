@@ -1,5 +1,58 @@
+import axios from "axios";
+
 let id = 1
 const equipments = []
+
+/*
+const addEquipment = async (equipmentname, equipmentcategory) => {
+    try {
+      // TODO: Assert Validator
+        const response = await axios.post('/equipments', { equipmentname, equipmentcategory })
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
+const deleteEquipment = async (id) => {
+    try {
+      // TODO: Assert Validator
+      const response = await axios.delete(`/equipments/${id}`)
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
+const getEquipments = async (query) => {
+    try {
+        const response = await axios.get('/equipments', { params: query })
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
+const getEquipment = async (id) => {
+    try {
+        const response = await axios.get(`/equipments/${id}`)
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
+const reserveEquipment = async (id, time) => {
+    try {
+      // TODO: Assert Validator isEquipmentAvailable
+        const response = await axios.patch(`/equipments/${id}`, { time })
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
+ */
 
 function addEquipment(equipment) {
   equipment.id = id++
@@ -11,7 +64,7 @@ function getEquipments() {
 }
 
 function getEquipmentsByCategory(category) {
-  return equipments.filter((equipment) => equipment.category === category)
+  return getEquipments().filter((equipment) => equipment.category === category)
 }
 
 function getEquipment(id) {
@@ -78,6 +131,21 @@ addEquipment({ name: 'Vacuum Cleaner #3', category: 'vacuum' })
 addEquipment({ name: 'Playstation 4', category: 'game' })
 addEquipment({ name: 'XBOX Series X', category: 'game' })
 addEquipment({ name: 'Nintendo Switch + Pro Controller', category: 'game' })
+
+function handleError(error) {
+  if (error.response) {
+    console.log(error.response.data)
+    return error.response.data
+  }
+
+  if (error.request) {
+    console.error(error)
+    return { error: { message: 'Failed to connect to server.' } }
+  }
+
+  console.error(error)
+  return { error: { message: 'Something went wrong.' } }
+}
 
 export default function equipmentData() {
   return {

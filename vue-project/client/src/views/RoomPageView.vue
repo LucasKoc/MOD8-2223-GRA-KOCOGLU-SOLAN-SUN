@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import {ref, computed, onMounted} from 'vue'
 import RoomThumbnail from '@/components/RoomThumbnail.vue'
 import roomData from '../services/room.js'
 
@@ -29,7 +29,17 @@ export default {
   components: { RoomThumbnail },
 
   setup() {
-    const roomReservations = ref(roomData().getRooms())
+    const roomReservations = ref([])
+
+    const fetchData = async () => {
+      try {
+        roomReservations.value = await roomData().getRooms()
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    onMounted(fetchData)
 
     const typeOfRooms = computed(() => {
       let roomTypes = {}

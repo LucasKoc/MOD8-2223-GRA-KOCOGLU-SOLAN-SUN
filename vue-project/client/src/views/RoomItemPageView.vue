@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import RoomReservation from '../components/RoomReservation.vue'
-import roomData from '../services/room.js'
+import roomData  from '../services/room.js'
 import { useRoute } from 'vue-router'
 import userData from '../services/user.js'
 
@@ -9,14 +9,24 @@ const roomManage = ref(false)
 const route = useRoute()
 const roomId = route.params.id
 const room = roomData().getRoom(roomId)
-const roomReservations = ref(room.reservation)
 const user = ref(userData().getConnectedUser())
 const roomname = ref(room.roomname)
+const roomReservations = ref([])
+
+const fetchData = async () => {
+  try {
+    roomReservations.value = await roomData().getReservations(roomId);
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
+}
+
+onMounted(fetchData);
 
 function saveData(data) {
   if (data) {
-    data.userid = user.value.id
-    room.reservation.push(data)
+    data.userId = user.value.id
+    roomData().addReservation(roomId, data.date, data.time, data.userId)
   }
   roomManage.value = false
 }
