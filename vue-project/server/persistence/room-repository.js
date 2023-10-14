@@ -31,9 +31,12 @@ const addRoom = async (room) => {
 }
 
 const deleteRoom = async (id) => {
+
+    const query2 = 'DELETE FROM reservations WHERE room_id = ?'
+    await database.execute(query2, [id]);
     const query = 'DELETE FROM rooms WHERE id = ?;'
-    const [result] = await database.execute(query, [id])
-    return result.affectedRows > 0
+    const [result] = await database.execute(query, [id]);
+    return result.affectedRows > 0;
 }
 
 function mapReservation(row) {
