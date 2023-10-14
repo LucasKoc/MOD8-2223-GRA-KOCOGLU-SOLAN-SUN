@@ -1,17 +1,17 @@
 import database from './database.js'
 
-const findRooms = async () => {
-  const query = 'SELECT id, roomname, roomtype FROM rooms;'
-  const [rows] = await database.execute(query)
-  return rows.map(mapRoom)
-}
-
 function mapRoom(row) {
   return {
     id: row.id,
     roomname: row.roomname,
     roomtype: row.roomtype
   }
+}
+
+const findRooms = async () => {
+  const query = 'SELECT id, roomname, roomtype FROM rooms;'
+  const [rows] = await database.execute(query)
+  return rows.map(mapRoom)
 }
 
 const findRoom = async (id) => {
@@ -36,12 +36,6 @@ const deleteRoom = async (id) => {
     return result.affectedRows > 0
 }
 
-const findReservations = async (id) => {
-  const query = 'SELECT id, room_id, date, time, user_id FROM reservations WHERE room_id = ?;'
-  const [rows] = await database.execute(query, [id])
-  return rows.map(mapReservation)
-}
-
 function mapReservation(row) {
   return {
     id: row.id,
@@ -50,6 +44,12 @@ function mapReservation(row) {
     time: row.time,
     userId: row.user_id
   }
+}
+
+const findReservations = async (id) => {
+  const query = 'SELECT id, room_id, date, time, user_id FROM reservations WHERE room_id = ?;'
+  const [rows] = await database.execute(query, [id])
+  return rows.map(mapReservation)
 }
 
 const createReservation = async (reservation) => {

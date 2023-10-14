@@ -31,6 +31,7 @@ app.use(helmet())
 const clientBuildPath = join(dirname(fileURLToPath(import.meta.url)), '../client/dist')
 app.use(express.static(clientBuildPath))
 
+
 // Cross-origin resource sharing middleware
 app.use(
   cors({

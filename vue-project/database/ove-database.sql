@@ -7,24 +7,23 @@ DROP TABLE IF EXISTS `equipments`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `rooms`;
 
--- Create the "equipments" table
-CREATE TABLE equipments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    category VARCHAR(255) NOT NULL
-    time TIME,
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
-
 -- Create the "users" table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     room INT NOT NULL,
     keyp VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    role VARCHAR(255) DEFAULT NULL,
+    role VARCHAR(255) DEFAULT NULL
+);
+
+-- Create the "equipments" table
+CREATE TABLE equipments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    time TIME DEFAULT NULL,
+    user_id INT DEFAULT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- Create the "sessions" table
