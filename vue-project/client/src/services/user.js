@@ -1,10 +1,17 @@
+import axios from "axios";
+
 let id = 1
 const users = []
 let connectedUser = false
 
-function addUser(user) {
-  user.id = id++
-  users.push(user)
+
+const addUser = async (user) => {
+  try {
+    const response = await axios.post('/users', { user })
+    return response.data
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
 function getUsers() {
@@ -59,6 +66,21 @@ addUser({ room: 202, key: '1234', name: 'John' })
 addUser({ room: 0, key: '0', name: '0', role: 'admin' })
 addUser({ room: 206, key: '8627', name: 'John2' })
 addUser({ room: 195, key: '1268', name: 'John3' })
+
+function handleError(error) {
+  if (error.response) {
+    console.log(error.response.data)
+    return error.response.data
+  }
+
+  if (error.request) {
+    console.error(error)
+    return { error: { message: 'Failed to connect to server.' } }
+  }
+
+  console.error(error)
+  return { error: { message: 'Something went wrong.' } }
+}
 
 export default function userData() {
   return {

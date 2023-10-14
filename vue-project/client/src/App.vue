@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import Login from './components/Login.vue'
 import userData from './services/user'
+import ConnectionStatus from "@/components/ConnectionStatus.vue";
 
 const isUserModalOpen = ref(false)
 const user = ref(userData().getConnectedUser())
@@ -113,6 +114,7 @@ function navbarButton() {
     <p>
       &copy; OVE - Vieux Montreal - Since 2023 |
       <RouterLink to="/about">Learn more about OVE</RouterLink>
+      <ConnectionStatus />
     </p>
   </footer>
 
