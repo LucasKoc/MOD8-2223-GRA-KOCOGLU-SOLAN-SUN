@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import middleware from './middleware/index.js'
 import routes from './routes/v1/index.js'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 // Get environment defined by cross-env in package.json
 const environment = process.env.NODE_ENV
@@ -24,6 +26,10 @@ app.use(middleware.requestLogger(environment))
 
 // Helmet security middleware
 app.use(helmet())
+
+// Express static file middleware that serves files from Vue single-page application build path
+const clientBuildPath = join(dirname(fileURLToPath(import.meta.url)), '../client/dist')
+app.use(express.static(clientBuildPath))
 
 // Cross-origin resource sharing middleware
 app.use(
