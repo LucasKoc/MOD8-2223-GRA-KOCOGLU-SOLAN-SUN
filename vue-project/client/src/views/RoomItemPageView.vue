@@ -25,9 +25,8 @@ onMounted(fetchData);
 
 function saveData(data) {
   if (data) {
-    // TODO: Save data in Reservation table
-    data.userid = user.value.id
-    room.reservation.push(data)
+    data.userId = user.value.id
+    roomData().addReservation(roomId, data.date, data.time, data.userId)
   }
   roomManage.value = false
 }

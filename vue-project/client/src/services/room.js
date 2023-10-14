@@ -1,5 +1,4 @@
 import axios from "axios";
-import {onMounted} from "vue";
 
 const addRoom = async (roomname, roomtype) => {
     try {
@@ -46,6 +45,15 @@ const getReservations = async (id) => {
         return response.data
     } catch (error) {
       return handleError(error)
+    }
+}
+
+const addReservation = async (roomId, date, time, userId) => {
+    try {
+        const response = await axios.post(`/rooms/${roomId}/reservations`, { roomId, date, time, userId })
+        return response.data
+    } catch (error) {
+        return handleError(error)
     }
 }
 
@@ -104,6 +112,7 @@ export default function roomData() {
     deleteRoom,
     getRooms,
     getRoom,
-    getReservations
+    getReservations,
+    addReservation
   }
 }
