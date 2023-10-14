@@ -1,20 +1,46 @@
-let id = 1
-const rooms = []
+import axios from "axios";
 
-function addRoom(room) {
-  room.id = id++
-  rooms.push(room)
+const addRoom = async (roomname, roomtype) => {
+    try {
+        // TODO: Assert Validator
+        const response = await axios.post('/rooms', { roomname, roomtype })
+        return response.data
+    } catch (error) {
+      return handleError(error)
+    }
 }
 
-function getRooms() {
-  return rooms
+const deleteRoom = async (id) => {
+    try {
+        // TODO: Assert Validator
+        const response = await axios.delete(`/rooms/${id}`)
+        return response.data
+    } catch (error) {
+      return handleError(error)
+    }
 }
 
-function getRoom(id) {
-  return rooms.find((room) => room.id == id)
+const getRooms = async (query) => {
+    try {
+        const response = await axios.get('/rooms', { params: query })
+        // console.log(response.data)
+        return response.data
+    } catch (error) {
+      return handleError(error)
+    }
+}
+
+const getRoom = async (id) => {
+    try {
+        const response = await axios.get(`/rooms/${id}`)
+        return response.data
+    } catch (error) {
+      return handleError(error)
+    }
 }
 
 function isRoomAvailable(room) {
+    // ON HOLD: Implement
   let available = 'Available'
   if (room.reservation === undefined || room.reservation.length === 0) {
     return 'Available'
@@ -46,58 +72,20 @@ function isRoomAvailable(room) {
   return available
 }
 
-addRoom({
-  roomname: 'Gaming Room #1',
-  roomtype: 'gaming',
-  reservation: [
-    { date: '2023-10-04', time: '23:00', userid: 1 },
-    { date: '2023-10-05', time: '00:00', userid: 1 },
-    { date: '2021-06-01', time: '18:00', userid: 2 },
-    { date: '2021-06-01', time: '18:00', userid: 2 },
-    { date: '2021-06-01', time: '18:00', userid: 2 },
-    { date: '2021-06-01', time: '18:00', userid: 2 },
-    { date: '2021-06-01', time: '18:00', userid: 2 }
-  ]
-})
-addRoom({
-  roomname: 'Gaming Room #2',
-  roomtype: 'gaming',
-  reservation: [{ date: '2021-08-01', time: '18:00', userid: 2 }]
-})
-addRoom({ roomname: 'Gaming Room #3', roomtype: 'gaming', reservation: [] })
-addRoom({ roomname: 'Gaming Room #4', roomtype: 'gaming', reservation: [] })
-addRoom({ roomname: 'Gaming Room #5', roomtype: 'gaming', reservation: [] })
-addRoom({ roomname: 'Gaming Room #6', roomtype: 'gaming', reservation: [] })
-addRoom({ roomname: 'Gaming Room #7', roomtype: 'gaming', reservation: [] })
-addRoom({ roomname: 'Gaming Room #8', roomtype: 'gaming', reservation: [] })
-addRoom({
-  roomname: 'Theater Room #1',
-  roomtype: 'multimedia',
-  reservation: [
-    { date: '2021-06-01', time: '18:00', userid: 2 },
-    { date: '2021-06-01', time: '18:00', userid: 2 }
-  ]
-})
-addRoom({
-  roomname: 'Theater Room #2',
-  roomtype: 'multimedia',
-  reservation: [{ date: '2021-09-01', time: '16:00', userid: 2 }]
-})
-addRoom({ roomname: 'Gym Access #1', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Gym Access #2', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Gym Access #3', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Gym Access #4', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Gym Access #5', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Gym Access #6', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Gym Access #7', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Gym Access #8', roomtype: 'gym', reservation: [] })
-addRoom({ roomname: 'Billard Table #1', roomtype: 'billard', reservation: [] })
-addRoom({ roomname: 'Billard Table #2', roomtype: 'billard', reservation: [] })
-addRoom({ roomname: 'Billard Table #3', roomtype: 'billard', reservation: [] })
-addRoom({ roomname: 'Billard Table #4', roomtype: 'billard', reservation: [] })
-addRoom({ roomname: 'Billard Table #5', roomtype: 'billard', reservation: [] })
-addRoom({ roomname: 'Billard Table #6', roomtype: 'billard', reservation: [] })
-addRoom({ roomname: 'Billard Table #7', roomtype: 'billard', reservation: [] })
+function handleError(error) {
+  if (error.response) {
+    console.log(error.response.data)
+    return error.response.data
+  }
+
+  if (error.request) {
+    console.error(error)
+    return { error: { message: 'Failed to connect to server.' } }
+  }
+
+  console.error(error)
+  return { error: { message: 'Something went wrong.' } }
+}
 
 export default function roomData() {
   return {

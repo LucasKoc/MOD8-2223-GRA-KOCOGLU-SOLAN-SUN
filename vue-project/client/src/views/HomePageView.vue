@@ -3,18 +3,18 @@
     <div class="search-component">
       <h1>Search for your room/equipment !</h1>
       <input
-        v-model="searchQuery"
-        placeholder="ex: Gaming room #4 / Washing Machine #1"
-        class="search-bar"
+          v-model="searchQuery"
+          placeholder="ex: Gaming room #4 / Washing Machine #1"
+          class="search-bar"
       />
     </div>
     <div id="result-search" v-show="searchQuery">
       <ul v-if="filteredRooms.length || filteredEquipment.length">
         <li v-for="rooms in filteredRooms" :key="rooms.id">
-          <RoomThumbnail :room="rooms" />
+          <RoomThumbnail :room="rooms"/>
         </li>
         <li v-for="equipment in filteredEquipment" :key="equipment.id">
-          <Equipment :equipment="equipment" @click="activateModal(equipment)" />
+          <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
         </li>
       </ul>
     </div>
@@ -22,7 +22,7 @@
       <h1>Recommanded rooms :</h1>
       <ul v-if="recommandedRooms.length">
         <li v-for="rooms in recommandedRooms" :key="rooms.id">
-          <RoomThumbnail :room="rooms" />
+          <RoomThumbnail :room="rooms"/>
         </li>
       </ul>
     </div>
@@ -30,24 +30,24 @@
       <h1>Recommanded equipment :</h1>
       <ul v-if="recommandedEquipment.length">
         <li v-for="equipment in recommandedEquipment" :key="equipment.id">
-          <Equipment :equipment="equipment" @click="activateModal(equipment)" />
+          <Equipment :equipment="equipment" @click="activateModal(equipment)"/>
         </li>
       </ul>
     </div>
 
     <div class="backdrop" v-if="equipmentManage === true"></div>
     <EquipmentReservation
-      class="user-modal"
-      v-if="equipmentManage"
-      @sendData="(data) => saveData(data)"
-      :equipmentData="equipmentforTypeDataSelected"
-      :equipment-selected="equipmentSelected"
+        class="user-modal"
+        v-if="equipmentManage"
+        @sendData="(data) => saveData(data)"
+        :equipmentData="equipmentforTypeDataSelected"
+        :equipment-selected="equipmentSelected"
     />
   </main>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import RoomThumbnail from '@/components/RoomThumbnail.vue'
 import roomData from '@/services/room.js'
 import equipmentData from '@/services/equipment.js'
@@ -56,15 +56,67 @@ import EquipmentReservation from '@/components/EquipmentReservation.vue'
 import userData from '@/services/user'
 
 export default {
-  components: { EquipmentReservation, Equipment, RoomThumbnail },
+  components: {EquipmentReservation, Equipment, RoomThumbnail},
   setup() {
     const searchQuery = ref('')
-    const roomReservations = ref(roomData().getRooms())
+    const roomReservations = ref([])
     const equipmentReservations = ref(equipmentData().getEquipments())
+    let recommandedRooms = []
+    let recommandedEquipment = []
+
+    const fetchData = async () => {
+      try {
+        roomReservations.value = await roomData().getRooms();
+        await recommandations();
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    const recommandations = async () => {
+      try {
+        // Recommanded rooms
+        for (let i = 0; i < roomReservations.value.length && recommandedRooms.length < 3; i++) {
+          try {
+            if (
+                Math.round(Math.random()) === 1 &&
+                !roomData().isRoomAvailable(roomReservations.value[i]).includes('in') &&
+                !roomData().isRoomAvailable(roomReservations.value[i]).includes('in')
+            ) {
+              recommandedRooms.push(roomReservations.value[i])
+            }
+          } catch (e) {
+            console.error(e)
+          }
+        }
+
+        // Recommanded equipment
+        for (
+            let i = 0;
+            i < equipmentReservations.value.length && recommandedEquipment.length < 3;
+            i++
+        ) {
+          try {
+            if (
+                Math.round(Math.random()) === 1 &&
+                !equipmentData().isEquipmentAvailable(equipmentReservations.value[i]).valid === false
+            ) {
+              recommandedEquipment.push(equipmentReservations.value[i])
+            }
+          } catch (e) {
+            console.error(e)
+          }
+        }
+      } catch (error) {
+        console.error("Error generating recommandation:", error);
+      }
+    }
+
+    onMounted(fetchData)
 
     const filteredRooms = computed(() => {
       const results = roomReservations.value.filter((room) =>
-        room['roomname'].toLowerCase().includes(searchQuery.value.toLowerCase())
+          room['roomname'].toLowerCase().includes(searchQuery.value.toLowerCase())
       )
 
       return results.slice(0, 2)
@@ -72,44 +124,12 @@ export default {
 
     const filteredEquipment = computed(() => {
       const results = equipmentReservations.value.filter((equipment) =>
-        equipment['name'].toLowerCase().includes(searchQuery.value.toLowerCase())
+          equipment['name'].toLowerCase().includes(searchQuery.value.toLowerCase())
       )
 
       return results.slice(0, 2)
     })
 
-    let recommandedRooms = []
-    for (let i = 0; i < roomReservations.value.length && recommandedRooms.length < 3; i++) {
-      try {
-        if (
-          Math.round(Math.random()) === 1 &&
-          !roomData().isRoomAvailable(roomReservations.value[i]).includes('in') &&
-          !roomData().isRoomAvailable(roomReservations.value[i]).includes('in')
-        ) {
-          recommandedRooms.push(roomReservations.value[i])
-        }
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
-    let recommandedEquipment = []
-    for (
-      let i = 0;
-      i < equipmentReservations.value.length && recommandedEquipment.length < 3;
-      i++
-    ) {
-      try {
-        if (
-          Math.round(Math.random()) === 1 &&
-          !equipmentData().isEquipmentAvailable(equipmentReservations.value[i]).valid === false
-        ) {
-          recommandedEquipment.push(equipmentReservations.value[i])
-        }
-      } catch (e) {
-        console.error(e)
-      }
-    }
 
     const equipmentManage = ref(false)
     const equipmentforTypeDataSelected = ref()
