@@ -49,6 +49,15 @@ const getReservations = async (id) => {
     }
 }
 
+const getReservationsByUserId = async (id) => {
+    try {
+        const response = await axios.get(`/rooms/user/reservations/${id}`)
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
 const addReservation = async (roomId, date, time, userId) => {
     try {
         validator.addReservationValidator(roomId, date, time, userId)
@@ -124,6 +133,7 @@ export default function roomData() {
         getRooms,
         getRoom,
         getReservations,
+        getReservationsByUserId,
         addReservation,
         deleteReservation
     }
