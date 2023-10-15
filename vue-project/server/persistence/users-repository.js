@@ -45,6 +45,7 @@ const deleteUser = async id => {
 };
 
 const modifyUser = async (id, user) => {
+    console.log(id)
     const query =
         "UPDATE users SET room = ?, keyp = ?, name = ?, role = ? WHERE id = ?;";
     const [result] = await database.execute(query, [
@@ -59,10 +60,17 @@ const modifyUser = async (id, user) => {
     }
 }
 
+const findUserByKey = async (key) => {
+    const query = "SELECT id, room, keyp, name, role FROM users WHERE keyp = ?;";
+    const [rows] = await database.execute(query, [key]);
+    return rows.length > 0 ? mapUser(rows[0]) : null;
+}
+
 export default {
   findUsers,
   findUser,
   addUser,
   deleteUser,
-  modifyUser
+  modifyUser,
+  findUserByKey
 };

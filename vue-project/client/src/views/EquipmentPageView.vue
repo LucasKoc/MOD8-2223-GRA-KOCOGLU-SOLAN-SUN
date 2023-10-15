@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import Equipment from '../components/Equipment.vue'
 import EquipmentReservation from '../components/EquipmentReservation.vue'
 import equipmentData from '../services/equipment.js'
@@ -11,9 +11,17 @@ const equipmentforTypeDataSelected = ref()
 const equipmentSelected = ref()
 const user = ref(userData().getConnectedUser())
 
-const equipmentReservation = ref(equipment.getEquipments())
+const equipmentReservation = ref([])
 
-const test = equipment.isEquipmentAvailable(equipmentReservation.value[1])
+const fetchData = async () => {
+  try {
+    equipmentReservation.value = await equipment.getEquipments()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+onMounted(fetchData)
 
 const typeOfEquipment = computed(() => {
   let equipmentTypes = {}
@@ -42,7 +50,7 @@ function activateModal(data) {
 
 function saveData(data) {
   if (data) {
-    equipment.modifyEquipment(data)
+    equipment.reserveEquipment(data.id, data.reservations.time, user.value.id)
   }
   equipmentManage.value = false
 }
