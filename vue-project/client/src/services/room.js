@@ -52,7 +52,7 @@ const getReservations = async (id) => {
 const addReservation = async (roomId, date, time, userId) => {
     try {
         validator.addReservationValidator(roomId, date, time, userId)
-        const response = await axios.post(`/rooms/${roomId}/reservations`, {roomId, date, time, userId})
+        const response = await axios.post(`/rooms/reservations`, {roomId, date, time, userId})
         return response.data
     } catch (error) {
         return handleError(error)
