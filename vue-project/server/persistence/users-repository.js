@@ -26,6 +26,9 @@ const findUser = async id => {
 const addUser = async user => {
   const query =
     "INSERT INTO users (room, keyp, name, role) VALUES (?, ?, ?, ?);";
+    console.log(user)
+  if (!user.role)
+    user.role = "user"
   const [result] = await database.execute(query, [
     user.room,
     user.keyp,

@@ -14,12 +14,11 @@ const equipmentReservation = ref()
 
 async function getRoombyUserId() {
   let roombyid = []
-  console.log(room.value)
   for (let i = 0; i < room.value.length; i++) {
-    const reservation = roomData().getReservations(room.value[i].id)
+    const reservation = await roomData().getReservations(room.value[i].id)
     for (let j = 0; j < reservation.length; j++) {
-      if (room.value[i].reservation[j].userid === user.value.id) {
-        let data = room.value[i].reservation[j]
+      if (reservation[j].userId === user.value.id) {
+        let data = reservation[j]
         data.roomname = room.value[i].roomname
         roombyid.push(data)
       }
