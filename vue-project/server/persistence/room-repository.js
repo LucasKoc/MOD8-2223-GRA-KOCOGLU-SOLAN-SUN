@@ -20,6 +20,12 @@ const findRoom = async (id) => {
   return rows.length > 0 ? mapRoom(rows[0]) : null
 }
 
+const findUserRoomReservations = async (userId) => {
+    const query = 'SELECT rooms.roomname, reservations.room_id, reservations.date, reservations.time FROM rooms JOIN reservations ON rooms.id = reservations.room_id WHERE reservations.user_id = ?;'
+    const [rows] = await database.execute(query, [userId])
+    return rows.map(mapReservation)
+}
+
 const addRoom = async (room) => {
     const query = 'INSERT INTO rooms (roomname, roomtype) VALUES (?, ?);'
     const [result] = await database.execute(query, [room.roomname, room.roomtype])
@@ -65,15 +71,16 @@ const createReservation = async (reservation) => {
   throw new Error(`Failed to create reservation ${reservation.id}.`)
 }
 
-const deleteReservation = async (id) => {
-  const query = 'DELETE FROM reservations WHERE id = ?;'
-  const [result] = await database.execute(query, [id])
+const deleteReservation = async (id, roomId) => {
+  const query = 'DELETE FROM reservations WHERE id = ? AND room_id = ?;'
+  const [result] = await database.execute(query, [id, roomId])
   return result.affectedRows > 0
 }
 
 export default {
     findRooms,
     findRoom,
+    findUserRoomReservations,
     addRoom,
     deleteRoom,
     findReservations,

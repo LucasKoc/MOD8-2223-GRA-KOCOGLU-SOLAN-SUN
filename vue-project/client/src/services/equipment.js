@@ -41,11 +41,11 @@ const getEquipment = async (id) => {
     }
 }
 
-const reserveEquipment = async (id, time, user_id) => {
-    console.log(id, time, user_id)
+const reserveEquipment = async (id, time, userId) => {
+    console.log(id, time, userId)
     try {
       // TODO: Assert Validator isEquipmentAvailable
-        const response = await axios.patch(`/equipments/${id}/reservation`, { time, user_id })
+        const response = await axios.patch(`/equipments/${id}/reservation`, { time, userId })
         return response.data
     } catch (error) {
         return handleError(error)
