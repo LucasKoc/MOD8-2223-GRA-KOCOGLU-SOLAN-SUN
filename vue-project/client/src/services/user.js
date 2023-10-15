@@ -5,13 +5,9 @@ const users = []
 let connectedUser = false
 
 
-const addUser = async (user) => {
-  try {
-    const response = await axios.post('/users', { user })
-    return response.data
-  } catch (error) {
-    return handleError(error)
-  }
+function addUser(user) {
+  user.id = id++
+  users.push(user)
 }
 
 function getUsers() {
