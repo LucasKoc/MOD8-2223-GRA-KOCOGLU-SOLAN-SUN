@@ -30,16 +30,26 @@ router.delete('/rooms/:id', async (req, res,next) => {
         } else {
             res.status(404).json({error: 'Room does not exist or could not be deleted.'});
         }
-
-
     }
-
 )
-
 
 router.get('/rooms/:id/reservations', async (req, res) => { res.status(200).json(await room.findReservations(req.params.id)) })
 
 router.post('/rooms/:id/reservations', async (req, res) => { res.status(201).json(await room.createReservation(req.body)) })
 
-router.delete('/rooms/:id/reservations/', async (req, res) => { res.status(202).json(await room.deleteReservation(req.params.id)) })
+router.delete('/rooms/:ids/reservations/:id', async (req, res,next) => {
+        const id = Number.parseInt(req.params.id)
+        const err = validator.validateDeleteRoomReservation(id)
+        if (err) {
+        res.status(400).json({error: err});
+        return next(err)
+        }
+        const del = await room.deleteReservation(req.params.id);
+        if (del) {
+            res.status(202).json({message: 'Reservation has been successfully deleted'})
+        } else {
+            res.status(404).json({error: 'Reservation does not exist or could not be deleted.'});
+        }
+    }
+)
 export default router
