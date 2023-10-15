@@ -9,13 +9,13 @@ const equipmentManage = ref(false)
 const equipment = equipmentData()
 const equipmentforTypeDataSelected = ref()
 const equipmentSelected = ref()
-const user = ref(userData().getConnectedUser())
-
+const user = ref()
 const equipmentReservation = ref([])
 
 const fetchData = async () => {
   try {
     equipmentReservation.value = await equipment.getEquipments()
+    user.value = await userData().getConnectedUser()
   } catch (error) {
     console.log(error)
   }
