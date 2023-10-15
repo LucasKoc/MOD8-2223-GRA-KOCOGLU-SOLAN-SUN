@@ -2,66 +2,61 @@ import axios from "axios";
 
 let id = 1
 const users = []
-let connectedUser = false
-
 
 function addUser(user) {
-  user.id = id++
-  users.push(user)
+  axios.post('/users', user)
 }
 
-function getUsers() {
-  return users
+async function getUsers() {
+  const response = await axios.get(`/users`)
+  return response.data
 }
 
-function getUser(id) {
-  return users.find((user) => user.id === id)
+async function getUser(id) {
+  const response = await axios.get(`/users/${id}`)
+  return response.data
 }
 
 function modifyUser(id, user) {
-  if (!id) {
-    addUser(user)
+  const response = axios.get(`/users/${id}`)
+  if (!response.data) {
+    axios.post('/users', user)
     return
   }
-  const index = users.findIndex((user) => user.id === id)
-  users[index] = user
+  axios.patch(`/users/${id}`, user)
 }
 
-function verifyUser(key, room, name) {
-  const index = users.findIndex((user) => user.key === key)
-
-  if (index >= 0 && users[index].room == room && users[index].name == name) {
-    return true
-  }
-
-  return false
+async function verifyUser(key, room, name) {
+  const response = await axios.get('/users/verify', { params: { key, room, name } })
+  return response.data
 }
 
-function login(key, room, name) {
-  if (verifyUser(key, room, name)) {
-    connectedUser = users.filter((user) => user.key === key)[0]
-    return true
-  }
-  return false
+async function login(key, room, name) {
+  const response = await axios.post('/users/login', { key, room, name })
+  console.log(response.data);
+  document.cookie = `session-id=${response.data}`
+  console.log(document.cookie)
+  console.log(document.cookie.split('=')[1])
+  return response.data
 }
 
-function getConnectedUser() {
-  if (connectedUser) {
-    return connectedUser
+async function getConnectedUser() {
+  const id = document.cookie.split('=')[1]
+  console.log(id)
+  if (id == undefined) {
+    return null
   }
-  return false
+  const session = await axios.get(`/users/${id}/connected`)
+  const user = await axios.get(`/users/${id}`)
+  console.log( session.data, user.data)
+  return session.data ? user.data : null
 }
 
 function resetConnectedUser() {
-  if (connectedUser) {
-    connectedUser = false
-  }
+  const id = document.cookie.split('=')[1]
+  axios.post(`/users/${id}/logout`)
+  document.cookie = `session-id=`
 }
-
-addUser({ room: 202, key: '1234', name: 'John' })
-addUser({ room: 0, key: '0', name: '0', role: 'admin' })
-addUser({ room: 206, key: '8627', name: 'John2' })
-addUser({ room: 195, key: '1268', name: 'John3' })
 
 function handleError(error) {
   if (error.response) {
@@ -82,6 +77,7 @@ export default function userData() {
   return {
     addUser,
     getUsers,
+    verifyUser,
     login,
     getConnectedUser,
     resetConnectedUser,
