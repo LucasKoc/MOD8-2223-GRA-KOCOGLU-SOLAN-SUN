@@ -41,6 +41,14 @@ const modifyUser = async (id, user) => {
     }
 }
 
+const deleteUser = async (id) => {
+    try {
+        await axios.delete(`/users/${id}`)
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
 async function verifyUser(key, room, name) {
   try {
     const response = await axios.get('/users/verify', { params: { key, room, name } })
@@ -100,6 +108,7 @@ export default function userData() {
     getConnectedUser,
     resetConnectedUser,
     modifyUser,
+    deleteUser,
     getUser
   }
 }

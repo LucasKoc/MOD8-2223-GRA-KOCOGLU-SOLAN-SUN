@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const emits = defineEmits(['getInfo'])
+const emits = defineEmits(['getInfo', 'deleteUser'])
 
 const props = defineProps({
   existsData: {
@@ -28,7 +28,7 @@ const saveChanges = () => {
 }
 
 const deleteUser = () => {
-  // Handle deleting user logic here
+  emits('deleteUser', userid.value)
 }
 
 const applyBan = () => {
