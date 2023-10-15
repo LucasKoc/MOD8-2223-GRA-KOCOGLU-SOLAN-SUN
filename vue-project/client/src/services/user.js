@@ -17,13 +17,19 @@ async function getUser(id) {
   return response.data
 }
 
-function modifyUser(id, user) {
-  const response = axios.get(`/users/${id}`)
-  if (!response.data) {
-    axios.post('/users', user)
-    return
-  }
-  axios.patch(`/users/${id}`, user)
+const modifyUser = async (id, user) => {
+    try {
+      if (user.role === undefined) user.role = null;
+        const response = await axios.get(`/users/${id}`)
+      console.log(response.data)
+      if (!response.data) {
+        await axios.post(`/users`, user)
+        return;
+      }
+      await axios.patch(`/users/${id}`, user)
+    } catch (error) {
+        return handleError(error)
+    }
 }
 
 async function verifyUser(key, room, name) {
