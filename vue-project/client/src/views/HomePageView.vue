@@ -60,13 +60,14 @@ export default {
   setup() {
     const searchQuery = ref('')
     const roomReservations = ref([])
-    const equipmentReservations = ref(equipmentData().getEquipments())
+    const equipmentReservations = ref([])
     let recommandedRooms = []
     let recommandedEquipment = []
 
     const fetchData = async () => {
       try {
         roomReservations.value = await roomData().getRooms();
+        equipmentReservations.value = await equipmentData().getEquipments();
         await recommandations();
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -149,7 +150,7 @@ export default {
 
     function saveData(data) {
       if (data) {
-        equipment.modifyEquipment(data)
+        equipment.reserveEquipment(data.id, data.reservations.time, user.value.id)
       }
       equipmentManage.value = false
     }
