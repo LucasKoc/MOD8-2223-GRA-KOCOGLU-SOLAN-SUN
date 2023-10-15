@@ -1,23 +1,45 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import Login from './components/Login.vue'
 import userData from './services/user'
 import ConnectionStatus from "@/components/ConnectionStatus.vue";
 
 const isUserModalOpen = ref(false)
-const user = ref(userData().getConnectedUser())
+const user = ref()
 const loginval = ref('Login')
 const router = useRouter()
 
-if (user.value) {
-  loginval.value = 'Log out'
+const fetchData = async () => {
+  try {
+    user.value = await userData().getConnectedUser()
+    if (user.value && user.value != null) {
+      console.log(user.value)
+      loginval.value = 'Log out'
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
 }
 
-function exit(s) {
+onMounted(fetchData)
+
+function loginBehaviour(){
+  if (loginval.value === 'Login') {
+    isUserModalOpen.value = true
+  } else {
+    userData().resetConnectedUser()
+    user.value = false
+    loginval.value = 'Login'
+    router.push('/')
+  }
+}
+
+async function exit(s) {
   if (s) {
+    user.value = await userData().getConnectedUser()
+    console.log("useval", user.value)
     loginval.value = 'Log out'
-    user.value = userData().getConnectedUser()
   }
   isUserModalOpen.value = false
 }
@@ -64,15 +86,7 @@ function navbarButton() {
             >
           </li>
           <li>
-            <div
-                class="redirect login"
-                @click="
-              loginval === 'Login' ? (isUserModalOpen = true) : (user = false),
-                userData().resetConnectedUser(),
-                (loginval = 'Login'),
-                router.push('/')
-            "
-            >
+            <div class="redirect login" @click="loginBehaviour()">
               {{ loginval }}
             </div>
           </li>
@@ -92,15 +106,7 @@ function navbarButton() {
       <RouterLink class="redirect" v-if="user && user.role == 'admin'" to="/panel"
       >adminPanel</RouterLink
       >
-      <div
-          class="redirect login"
-          @click="
-          loginval === 'Login' ? (isUserModalOpen = true) : (user = false),
-            userData().resetConnectedUser(),
-            (loginval = 'Login'),
-            router.push('/')
-        "
-      >
+      <div class="redirect login" @click="loginBehaviour()">
         {{ loginval }}
       </div>
     </nav>

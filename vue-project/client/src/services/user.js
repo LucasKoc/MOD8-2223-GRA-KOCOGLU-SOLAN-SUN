@@ -2,48 +2,60 @@ import axios from "axios";
 
 let id = 1
 const users = []
-let connectedUser = false
-
 
 function addUser(user) {
   axios.post('/users', user)
 }
 
-function getUsers() {
-  return axios.get('/users')
+async function getUsers() {
+  const response = await axios.get(`/users`)
+  return response.data
 }
 
-function getUser(id) {
-  return axios.get(`/users/${id}`)
+async function getUser(id) {
+  const response = await axios.get(`/users/${id}`)
+  return response.data
 }
 
 function modifyUser(id, user) {
-  if (!axios.get(`/users/${id}`)) {
+  const response = axios.get(`/users/${id}`)
+  if (!response.data) {
     axios.post('/users', user)
     return
   }
   axios.patch(`/users/${id}`, user)
 }
 
-function verifyUser(key, room, name) {
-  return axios.get('/users/verify', { params: { key, room, name } })
+async function verifyUser(key, room, name) {
+  const response = await axios.get('/users/verify', { params: { key, room, name } })
+  return response.data
 }
 
-function login(key, room, name) {
-  return axios.post('/users/login', { key, room, name })
+async function login(key, room, name) {
+  const response = await axios.post('/users/login', { key, room, name })
+  console.log(response.data);
+  document.cookie = `session-id=${response.data}`
+  console.log(document.cookie)
+  console.log(document.cookie.split('=')[1])
+  return response.data
 }
 
-function getConnectedUser() {
-  if (connectedUser) {
-    return connectedUser
+async function getConnectedUser() {
+  const id = document.cookie.split('=')[1]
+  console.log(id)
+  if (id == undefined) {
+    return null
   }
-  return false
+  const session = await axios.get(`/users/${id}/connected`)
+  const user = await axios.get(`/users/${id}`)
+  console.log( session.data, user.data)
+  return session.data ? user.data : null
 }
 
 function resetConnectedUser() {
-  if (connectedUser) {
-    connectedUser = false
-  }
+  const id = document.cookie.split('=')[1]
+  axios.post(`/users/${id}/logout`)
+  document.cookie = `session-id=`
 }
 
 function handleError(error) {

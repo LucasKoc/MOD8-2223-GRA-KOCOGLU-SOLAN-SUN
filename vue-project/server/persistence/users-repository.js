@@ -74,12 +74,13 @@ const verifyUser = async (body) => {
 }
 
 const login = async (body, req) => { 
-    const [row] = verifyUser(body)
-    if  (row){
+    const row = await verifyUser(body)
+    console.log(row)
+    if (row){
       row.username = row.name
-      row.startTime = new Date()
-      row.expiryTime = new Date() + 60 * 60 * 1000
-      req.cookies['session-id'] = row.id
+      row.startTime = new Date().getTime()
+      row.expiryTime = new Date().getTime() + 60 * 60 * 1000
+      session.createSession(row)
       return row.id
     }
   return false
@@ -91,7 +92,9 @@ const logout = async (id, req) => {
 }
 
 const getConnectedUser = async (id) => {
-  return session.findSession(id)
+  const response = await session.findSession(id)
+  console.log(response)
+  return response
 }
 
 export default {

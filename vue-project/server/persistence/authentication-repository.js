@@ -16,7 +16,20 @@ function mapSession(row) {
   }
 }
 
+const extendSession = async (id, extendedTime, expiryTime) => {
+  const query = 'UPDATE sessions SET extended_time = ?, expiry_time = ? WHERE id = ?;'
+  const [result] = await database.execute(query, [extendedTime, expiryTime, id])
+  if (result.affectedRows === 0) {
+    throw new Error(`Failed to extend session ${id}.`)
+  }
+}
+
 const createSession = async (session) => {
+  const request = await findSession(session.id)
+  console.log("request", request)
+  if (request) {
+    extendSession(session.id, 60*60*1000, session.expiryTime)
+  }
   const query = 'INSERT INTO sessions (id, username, start_time, expiry_time) VALUES (?, ?, ?, ?);'
   const [result] = await database.execute(query, [session.id, session.username, session.startTime, session.expiryTime])
   if (result.affectedRows > 0) {
@@ -35,5 +48,6 @@ const deleteSession = async (id) => {
 export default {
   findSession,
   createSession,
+  extendSession,
   deleteSession
 }

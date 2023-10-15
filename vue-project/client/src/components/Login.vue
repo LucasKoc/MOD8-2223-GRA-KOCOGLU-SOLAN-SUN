@@ -8,11 +8,12 @@ const key = ref('')
 const lastName = ref('')
 const emit = defineEmits(['exit'])
 
-const submitForm = () => {
+const submitForm = async () => {
   let loop = true
 
-  loop = !userfunc.login(key.value, roomNumber.value, lastName.value)
-  if (loop) {
+  loop = await userfunc.login(key.value, roomNumber.value, lastName.value)
+  console.log("loop", loop, !loop)
+  if (!loop) {
     alert('Invalid credentials')
   } else {
     emit('exit', true)
