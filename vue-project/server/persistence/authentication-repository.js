@@ -26,14 +26,6 @@ const createSession = async (session) => {
   throw new Error(`Failed to create session ${session.id}.`)
 }
 
-const extendSession = async (id, extendedTime, expiryTime) => {
-  const query = 'UPDATE sessions SET extended_time = ?, expiry_time = ? WHERE id = ?;'
-  const [result] = await database.execute(query, [extendedTime, expiryTime, id])
-  if (result.affectedRows === 0) {
-    throw new Error(`Failed to extend session ${id}.`)
-  }
-}
-
 const deleteSession = async (id) => {
   const query = 'DELETE FROM sessions WHERE id = ?;'
   const [result] = await database.execute(query, [id])
@@ -43,6 +35,5 @@ const deleteSession = async (id) => {
 export default {
   findSession,
   createSession,
-  extendSession,
   deleteSession
 }

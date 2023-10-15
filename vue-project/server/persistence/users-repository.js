@@ -1,4 +1,5 @@
 import database from "./database.js";
+import session from "./authentication-repository.js";
 
 function mapUser(row) {
   return {
@@ -66,11 +67,42 @@ const findUserByKey = async (key) => {
     return rows.length > 0 ? mapUser(rows[0]) : null;
 }
 
+const verifyUser = async (body) => {
+    const query = "SELECT id, room, keyp, name, role FROM users WHERE keyp = ? AND room = ? AND name = ?;";
+    const [rows] = await database.execute(query, [body.key, body.room, body.name]);
+    return rows.length > 0 ? mapUser(rows[0]) : null;
+}
+
+const login = async (body, req) => { 
+    const [row] = verifyUser(body)
+    if  (row){
+      row.username = row.name
+      row.startTime = new Date()
+      row.expiryTime = new Date() + 60 * 60 * 1000
+      req.cookies['session-id'] = row.id
+      return row.id
+    }
+  return false
+}
+
+const logout = async (id, req) => {
+  req.cookies['session-id'] = null
+  return session.deleteSession(id)
+}
+
+const getConnectedUser = async (id) => {
+  return session.findSession(id)
+}
+
 export default {
   findUsers,
   findUser,
   addUser,
   deleteUser,
   modifyUser,
+  verifyUser,
+  login,
+  logout,
+  getConnectedUser,
   findUserByKey
 };

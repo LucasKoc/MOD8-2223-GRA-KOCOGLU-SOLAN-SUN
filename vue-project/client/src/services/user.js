@@ -6,43 +6,31 @@ let connectedUser = false
 
 
 function addUser(user) {
-  user.id = id++
-  users.push(user)
+  axios.post('/users', user)
 }
 
 function getUsers() {
-  return users
+  return axios.get('/users')
 }
 
 function getUser(id) {
-  return users.find((user) => user.id === id)
+  return axios.get(`/users/${id}`)
 }
 
 function modifyUser(id, user) {
-  if (!id) {
-    addUser(user)
+  if (!axios.get(`/users/${id}`)) {
+    axios.post('/users', user)
     return
   }
-  const index = users.findIndex((user) => user.id === id)
-  users[index] = user
+  axios.patch(`/users/${id}`, user)
 }
 
 function verifyUser(key, room, name) {
-  const index = users.findIndex((user) => user.key === key)
-
-  if (index >= 0 && users[index].room == room && users[index].name == name) {
-    return true
-  }
-
-  return false
+  return axios.get('/users/verify', { params: { key, room, name } })
 }
 
 function login(key, room, name) {
-  if (verifyUser(key, room, name)) {
-    connectedUser = users.filter((user) => user.key === key)[0]
-    return true
-  }
-  return false
+  return axios.post('/users/login', { key, room, name })
 }
 
 function getConnectedUser() {
@@ -57,11 +45,6 @@ function resetConnectedUser() {
     connectedUser = false
   }
 }
-
-addUser({ room: 202, key: '1234', name: 'John' })
-addUser({ room: 0, key: '0', name: '0', role: 'admin' })
-addUser({ room: 206, key: '8627', name: 'John2' })
-addUser({ room: 195, key: '1268', name: 'John3' })
 
 function handleError(error) {
   if (error.response) {
@@ -82,6 +65,7 @@ export default function userData() {
   return {
     addUser,
     getUsers,
+    verifyUser,
     login,
     getConnectedUser,
     resetConnectedUser,
