@@ -23,7 +23,7 @@ const findRoom = async (id) => {
 const findUserRoomReservations = async (userId) => {
     const query = 'SELECT rooms.roomname, reservations.room_id, reservations.date, reservations.time FROM rooms JOIN reservations ON rooms.id = reservations.room_id WHERE reservations.user_id = ?;'
     const [rows] = await database.execute(query, [userId])
-    return rows.map(mapRoom)
+    return rows.map(mapReservation)
 }
 
 const addRoom = async (room) => {
@@ -71,9 +71,9 @@ const createReservation = async (reservation) => {
   throw new Error(`Failed to create reservation ${reservation.id}.`)
 }
 
-const deleteReservation = async (id) => {
-  const query = 'DELETE FROM reservations WHERE id = ?;'
-  const [result] = await database.execute(query, [id])
+const deleteReservation = async (id, roomId) => {
+  const query = 'DELETE FROM reservations WHERE id = ? AND room_id = ?;'
+  const [result] = await database.execute(query, [id, roomId])
   return result.affectedRows > 0
 }
 

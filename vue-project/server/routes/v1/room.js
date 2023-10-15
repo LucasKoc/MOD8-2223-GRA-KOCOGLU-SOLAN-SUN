@@ -9,22 +9,22 @@ router.get('/rooms', async (req, res) => {
     res.status(200).json(await room.findRooms())}
 )
 
-router.get('/rooms/:id', async (req, res) => {
-    res.status(200).json(await room.findRoom(req.params.id)) }
+router.get('/rooms/:roomId', async (req, res) => {
+    res.status(200).json(await room.findRoom(req.params.roomId)) }
 )
 
 router.post('/rooms', async (req, res) => { res.status(201).json(await room.addRoom(req.body)) })
 
-router.delete('/rooms/:id', async (req, res,next) => {
+router.delete('/rooms/:roomId', async (req, res,next) => {
 
 
-        const id = Number.parseInt(req.params.id)
-        const err = validator.validateDeleteRoom(id)
+        const roomId = Number.parseInt(req.params.roomId)
+        const err = validator.validateDeleteRoom(roomId)
         if (err) {
             res.status(400).json({error: err});
             return next(err)
         }
-        const del = await room.deleteRoom(req.params.id);
+        const del = await room.deleteRoom(req.params.roomId);
         if (del) {
             res.status(202).json({message: 'Room has been successfully deleted.'});
         } else {
@@ -33,20 +33,20 @@ router.delete('/rooms/:id', async (req, res,next) => {
     }
 )
 
-router.get('/rooms/:id/reservations', async (req, res) => { res.status(200).json(await room.findReservations(req.params.id)) })
+router.get('/rooms/:roomId/reservations', async (req, res) => { res.status(200).json(await room.findReservations(req.params.roomId)) })
 
-router.post('/rooms/:id/reservations', async (req, res) => { res.status(201).json(await room.createReservation(req.body)) })
+router.post('/rooms/:roomId/reservations', async (req, res) => { res.status(201).json(await room.createReservation(req.body)) })
 
 router.get('/rooms/user/reservations/:userId', async (req, res) => { res.status(200).json(await room.findUserRoomReservations(req.params.userId)) })
 
-router.delete('/rooms/:roomId/reservations/:id', async (req, res,next) => {
-        const id = Number.parseInt(req.params.id)
-        const err = validator.validateDeleteRoomReservation(id)
+router.delete('/rooms/:roomId/reservations/:resId', async (req, res,next) => {
+        const resId = Number.parseInt(req.params.resId)
+        const err = validator.validateDeleteRoomReservation(resId)
         if (err) {
         res.status(400).json({error: err});
         return next(err)
         }
-        const del = await room.deleteReservation(req.params.id);
+        const del = await room.deleteReservation(req.params.resId, req.params.roomId);
         if (del) {
             res.status(202).json({message: 'Reservation has been successfully deleted'})
         } else {
