@@ -42,4 +42,7 @@ router.get('/rooms/:id/reservations', async (req, res) => { res.status(200).json
 router.post('/rooms/:id/reservations', async (req, res) => { res.status(201).json(await room.createReservation(req.body)) })
 
 router.delete('/rooms/:id/reservations/', async (req, res) => { res.status(202).json(await room.deleteReservation(req.params.id)) })
+
+router.get('/rooms/user/reservations/:userId', async (req, res) => { res.status(200).json(await room.findUserRoomReservations(req.params.userId)) })
+
 export default router
