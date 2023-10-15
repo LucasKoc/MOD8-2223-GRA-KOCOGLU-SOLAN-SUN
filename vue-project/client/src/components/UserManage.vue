@@ -22,7 +22,7 @@ const saveChanges = () => {
   emits('getInfo', {
     id: userid.value,
     room: userRoom.value,
-    key: userKey.value,
+    keyp: userKey.value,
     name: userName.value
   })
 }

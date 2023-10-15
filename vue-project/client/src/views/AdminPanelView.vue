@@ -8,13 +8,14 @@ import { useRouter } from 'vue-router'
 const userManage = ref(false)
 
 const userInformation = ref()
-const singleUser = ref({})
+const singleUser = ref()
 const router = useRouter()
 
 const fetchData = async () => {
   try {
-    userInformation.value = await userData().getConnectedUser()
-    if (!(userInformation.value .role == 'admin')) {
+    singleUser.value = await userData().getConnectedUser()
+    userInformation.value = await userData().getUsers()
+    if (!(singleUser.value.role == 'admin')) {
       alert('You must be an administrator to access this page')
       router.push('/')
     }
@@ -49,7 +50,7 @@ function saveData(data) {
     <div class="flexdiv">
       <div>
         <div class="title-res">
-          <h3>Room reservation</h3>
+          <h3>Users List</h3>
           <button class="add" @click="userManage = true">Add User</button>
         </div>
         <div class="reservation">
