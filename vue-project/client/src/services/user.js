@@ -4,17 +4,29 @@ let id = 1
 const users = []
 
 function addUser(user) {
-  axios.post('/users', user)
+  try {
+    axios.post('/users', user)
+    } catch (error) {
+    return handleError(error)
+  }
 }
 
 async function getUsers() {
-  const response = await axios.get(`/users`)
-  return response.data
+  try {
+    const response = await axios.get(`/users`)
+    return response.data
+  } catch (error) {
+  return handleError(error)
+}
 }
 
 async function getUser(id) {
-  const response = await axios.get(`/users/${id}`)
-  return response.data
+  try {
+    const response = await axios.get(`/users/${id}`)
+    return response.data
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
 const modifyUser = async (id, user) => {
@@ -33,28 +45,31 @@ const modifyUser = async (id, user) => {
 }
 
 async function verifyUser(key, room, name) {
-  const response = await axios.get('/users/verify', { params: { key, room, name } })
-  return response.data
+  try {
+    const response = await axios.get('/users/verify', { params: { key, room, name } })
+    return response.data
+    } catch (error) {
+    return handleError(error)
+  }
 }
 
 async function login(key, room, name) {
-  const response = await axios.post('/users/login', { key, room, name })
-  console.log(response.data);
-  document.cookie = `session-id=${response.data}`
-  console.log(document.cookie)
-  console.log(document.cookie.split('=')[1])
-  return response.data
+  try {
+    const response = await axios.post('/users/login', { key, room, name })
+    document.cookie = `session-id=${response.data}`
+    return response.data
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
 async function getConnectedUser() {
   const id = document.cookie.split('=')[1]
-  console.log(id)
   if (id === undefined || id === '' || id === null) {
     return null
   }
   const session = await axios.get(`/users/${id}/connected`)
   const user = await axios.get(`/users/${id}`)
-  console.log(session.data, user.data)
   return session.data ? user.data : null
 }
 
