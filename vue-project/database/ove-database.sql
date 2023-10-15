@@ -31,9 +31,9 @@ DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
   `id` char(36) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `start_time` datetime(6) NOT NULL,
-  `extended_time` datetime(6) DEFAULT NULL,
-  `expiry_time` datetime(6) NOT NULL,
+  `start_time` bigint NOT NULL,
+  `extended_time` bigint DEFAULT NULL,
+  `expiry_time` bigint NOT NULL,
   PRIMARY KEY (`id`)
 );
 
