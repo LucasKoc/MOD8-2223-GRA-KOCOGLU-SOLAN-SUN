@@ -9,6 +9,11 @@ const userManage = ref(false)
 
 const userInformation = ref()
 const singleUser = ref()
+const blankUser = ref({
+  name: '',
+  key: '',
+  room: '',
+})
 const router = useRouter()
 
 const fetchData = async () => {
@@ -26,19 +31,26 @@ const fetchData = async () => {
 
 onMounted(fetchData)
 
-
-
 function modifyUser(user) {
-  singleUser.value = user
+  blankUser.value = user
+  userManage.value = true
+}
+
+function addUser() {
   userManage.value = true
 }
 
 function saveData(data) {
   if (data) {
-    userData().modifyUser(data.id, data)
+    if (data.id) userData().modifyUser(data.id, data)
+    else userData().addUser(data)
   }
   userManage.value = false
-  singleUser.value = {}
+  blankUser.value = {
+    name: '',
+    key: '',
+    room: '',
+  }
 }
 </script>
 
@@ -51,7 +63,7 @@ function saveData(data) {
       <div>
         <div class="title-res">
           <h3>Users List</h3>
-          <button class="add" @click="userManage = true">Add User</button>
+          <button class="add" @click="addUser(user)">Add User</button>
         </div>
         <div class="reservation">
           <ul class="reservation-list">
@@ -68,7 +80,7 @@ function saveData(data) {
     class="user-modal"
     v-if="userManage"
     @getInfo="(data) => saveData(data)"
-    :existsData="singleUser"
+    :existsData="blankUser"
   />
 </template>
 

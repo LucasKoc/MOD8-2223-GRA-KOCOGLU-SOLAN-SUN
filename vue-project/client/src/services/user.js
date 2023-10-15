@@ -1,8 +1,5 @@
 import axios from "axios";
 
-let id = 1
-const users = []
-
 function addUser(user) {
   try {
     axios.post('/users', user)
@@ -35,7 +32,7 @@ const modifyUser = async (id, user) => {
         const response = await axios.get(`/users/${id}`)
       console.log(response.data)
       if (!response.data) {
-        await axios.post(`/users`, user)
+        await addUser(user)
         return;
       }
       await axios.patch(`/users/${id}`, user)
