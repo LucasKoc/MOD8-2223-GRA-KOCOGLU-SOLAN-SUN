@@ -48,7 +48,7 @@ const applyBan = () => {
         </div>
         <div class="form-group">
           <label for="userKey">Key</label>
-          <input type="text" id="userKey" v-model="userKey" />
+          <input type="password" id="userKey" v-model="userKey" maxlength="4" />
         </div>
         <div class="form-group">
           <label for="userLastName">Room</label>

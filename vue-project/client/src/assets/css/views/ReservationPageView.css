@@ -9,7 +9,7 @@
   margin: 2%;
 }
 main {
-  margin-top: 15vh;
+  margin-top: 10vh;
   margin-bottom: 2vh;
 }
 
@@ -27,7 +27,7 @@ main {
   box-shadow: 0 0 5px 1px var(--color-border);
   border-radius: 5px;
   overflow-y: scroll;
-  height: 50vh;
+  height: 45vh;
   width: 32vw;
 }
 .reservation-equipment {

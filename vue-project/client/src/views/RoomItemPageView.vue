@@ -9,13 +9,14 @@ const roomManage = ref(false)
 const route = useRoute()
 const roomId = route.params.id
 const room = roomData().getRoom(roomId)
-const user = ref(userData().getConnectedUser())
+const user = ref()
 const roomname = ref(room.roomname)
 const roomReservations = ref([])
 
 const fetchData = async () => {
   try {
     roomReservations.value = await roomData().getReservations(roomId);
+    user.value = await userData().getConnectedUser()
   } catch (error) {
     console.error('Error fetching data:', error)
   }

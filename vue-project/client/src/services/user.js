@@ -43,12 +43,12 @@ async function login(key, room, name) {
 async function getConnectedUser() {
   const id = document.cookie.split('=')[1]
   console.log(id)
-  if (id == undefined) {
+  if (id === undefined || id === '' || id === null) {
     return null
   }
   const session = await axios.get(`/users/${id}/connected`)
   const user = await axios.get(`/users/${id}`)
-  console.log( session.data, user.data)
+  console.log(session.data, user.data)
   return session.data ? user.data : null
 }
 
