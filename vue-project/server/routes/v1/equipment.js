@@ -10,9 +10,9 @@ router.get('/equipments/:id', async (req, res) => {res.status(200).json(await eq
 router.post('/equipments', async(req,res)=>{res.status(201).json(await equipment.addEquipment(req.body)) })
 router.delete('/equipments/:id', async (req, res) => { res.status(200).json(await equipment.deleteEquipment(req.params.id)) })
 
-router.get('/equipments/:id/reservation', async (req, res) => { res.status(200).json(await equipment.setreservation(req.params.id)) })
+router.patch('/equipments/:id/reservation', async (req, res) => { res.status(202).json(await equipment.setreservation(req.params.id, req.body.time, req.body.user_id)) })
 
-router.post('/equipments/:id/reservation', async (req, res) => { res.status(201).json(await equipment.getreservation(req.body)) })
+router.get('/equipments/:id/reservation', async (req, res) => { res.status(200).json(await equipment.getreservation(req.body)) })
 
 
 export default router

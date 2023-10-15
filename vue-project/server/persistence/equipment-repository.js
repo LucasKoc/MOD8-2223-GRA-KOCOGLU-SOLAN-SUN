@@ -50,9 +50,9 @@ const deleteEquipment = async (id) => {
     return result.affectedRows > 0
 }
 
-const setreservation = async (id, time) => {
-    const query = 'UPDATE equipments SET time = ? WHERE id = ?;'
-    const [result] = await database.execute(query, [time, id])
+const setreservation = async (id, time, user_id) => {
+    const query = 'UPDATE equipments SET time = ?, user_id = ? WHERE id = ?;'
+    const [result] = await database.execute(query, [time, user_id, id])
     if (result.affectedRows === 0) {
         throw new Error(`Failed to set time for equipment ${id}.`)
     }
