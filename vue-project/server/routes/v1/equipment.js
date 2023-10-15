@@ -14,5 +14,6 @@ router.patch('/equipments/:id/reservation', async (req, res) => { res.status(202
 
 router.get('/equipments/:id/reservation', async (req, res) => { res.status(200).json(await equipment.getreservation(req.body)) })
 
+router.get('/equipments/user/reservation/:userId', async (req, res) => { res.status(200).json(await equipment.findUserEquipmentsReservations(req.params.userId)) })
 
 export default router

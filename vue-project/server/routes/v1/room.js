@@ -37,7 +37,9 @@ router.get('/rooms/:id/reservations', async (req, res) => { res.status(200).json
 
 router.post('/rooms/:id/reservations', async (req, res) => { res.status(201).json(await room.createReservation(req.body)) })
 
-router.delete('/rooms/:ids/reservations/:id', async (req, res,next) => {
+router.get('/rooms/user/reservations/:userId', async (req, res) => { res.status(200).json(await room.findUserRoomReservations(req.params.userId)) })
+
+router.delete('/rooms/:roomId/reservations/:id', async (req, res,next) => {
         const id = Number.parseInt(req.params.id)
         const err = validator.validateDeleteRoomReservation(id)
         if (err) {

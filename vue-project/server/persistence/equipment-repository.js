@@ -34,6 +34,12 @@ const findEquipment = async (id) => {
   return rows.length > 0 ? mapEquipment(rows[0]) : null
 }
 
+const findUserEquipmentsReservations = async (userId) => {
+    const query = 'SELECT id, name, category, time, user_id FROM equipments WHERE user_id = ?;'
+    const [rows] = await database.execute(query, [userId])
+    return rows.map(mapEquipment)
+}
+
 const addEquipment = async (equipment) => {
     const query = 'INSERT INTO equipments (name, category) VALUES (?, ?);'
     const [result] = await database.execute(query, [equipment.name, equipment.category])
@@ -67,6 +73,7 @@ const getreservation = async (id) => {
 export default {
   findEquipments,
   findEquipment,
+  findUserEquipmentsReservations,
   addEquipment,
   deleteEquipment,
   setreservation,
