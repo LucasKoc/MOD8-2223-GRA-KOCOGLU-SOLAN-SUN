@@ -33,7 +33,7 @@ function saveData(data) {
 }
 
 function openModal() {
-  if (!user.value.id) {
+  if (!user.value || !user.value.id) {
     alert('You must be logged in order to make a reservation')
   } else {
     roomManage.value = true

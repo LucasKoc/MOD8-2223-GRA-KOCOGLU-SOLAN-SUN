@@ -39,7 +39,7 @@ const typeOfEquipment = computed(() => {
 })
 
 function activateModal(data) {
-  if (!user.value.id) {
+  if (!user.value || !user.value.id) {
     alert('You must be logged in to be able to make a reservation')
   } else {
     equipmentSelected.value = data

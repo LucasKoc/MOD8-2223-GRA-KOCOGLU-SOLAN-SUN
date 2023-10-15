@@ -13,7 +13,7 @@ const equipmentReservation = ref()
 const fetchData = async () => {
   try {
     user.value = await userData().getConnectedUser()
-    if (!user.value.id) {
+    if (!user.value || !user.value.id) {
       alert('You must be logged in to access this page')
       router.push({ name: 'home' })
     }
