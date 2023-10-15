@@ -54,6 +54,7 @@ import equipmentData from '@/services/equipment.js'
 import Equipment from '@/components/Equipment.vue'
 import EquipmentReservation from '@/components/EquipmentReservation.vue'
 import userData from '@/services/user'
+import {route} from "express/lib/router";
 
 export default {
   components: {EquipmentReservation, Equipment, RoomThumbnail},
@@ -134,12 +135,21 @@ export default {
 
     const equipmentManage = ref(false)
     const equipmentforTypeDataSelected = ref()
-    const user = ref(userData().getConnectedUser())
+    const user = ref()
     const equipment = equipmentData()
     const equipmentSelected = ref()
 
-    function activateModal(data) {
-      if (user.value.id === undefined) {
+    const fetchLogin = async () => {
+      try {
+        user.value = await userData().getConnectedUser()
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    async function activateModal(data) {
+      await fetchLogin()
+      if (!user.value || !user.value.id) {
         alert('You must be logged in to be able to make a reservation')
       } else {
         equipmentSelected.value = data
@@ -151,6 +161,7 @@ export default {
     function saveData(data) {
       if (data) {
         equipment.reserveEquipment(data.id, data.reservations.time, user.value.id)
+        route.push({name: 'EquipmentPageView'})
       }
       equipmentManage.value = false
     }
