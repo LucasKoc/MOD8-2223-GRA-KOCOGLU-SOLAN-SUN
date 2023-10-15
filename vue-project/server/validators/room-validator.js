@@ -17,7 +17,13 @@ function validateID(id) {
     return null
 }
 
+function validateDeleteRoomReservation(id)
+{
+    return validateID(id)
+}
+
 export default{
     validateDeleteRoom,
+    validateDeleteRoomReservation,
     validateID
 }
