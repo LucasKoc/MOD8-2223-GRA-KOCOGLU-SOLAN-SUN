@@ -56,6 +56,12 @@ const deleteEquipment = async (id) => {
     return result.affectedRows > 0
 }
 
+const deleteUserEquipmentsReservations = async (userId) => {
+    const query = 'UPDATE equipments SET time = NULL, user_id = NULL WHERE user_id = ?;'
+    const [result] = await database.execute(query, [userId])
+    return result.affectedRows > 0
+}
+
 const setreservation = async (id, time, user_id) => {
     const query = 'UPDATE equipments SET time = ?, user_id = ? WHERE id = ?;'
     const [result] = await database.execute(query, [time, user_id, id])
@@ -77,7 +83,8 @@ export default {
   addEquipment,
   deleteEquipment,
   setreservation,
-  getreservation
+  getreservation,
+  deleteUserEquipmentsReservations,
 }
 
 

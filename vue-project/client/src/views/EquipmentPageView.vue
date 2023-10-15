@@ -15,13 +15,20 @@ const equipmentReservation = ref([])
 const fetchData = async () => {
   try {
     equipmentReservation.value = await equipment.getEquipments()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const fetchLogin = async () => {
+  try {
     user.value = await userData().getConnectedUser()
   } catch (error) {
     console.log(error)
   }
 }
 
-onMounted(fetchData)
+onMounted(fetchData, fetchLogin)
 
 const typeOfEquipment = computed(() => {
   let equipmentTypes = {}
@@ -38,8 +45,9 @@ const typeOfEquipment = computed(() => {
   return equipmentTypes
 })
 
-function activateModal(data) {
-  if (!user.value.id) {
+async function activateModal(data) {
+  await fetchLogin()
+  if (!user.value || !user.value.id) {
     alert('You must be logged in to be able to make a reservation')
   } else {
     equipmentSelected.value = data
@@ -51,6 +59,7 @@ function activateModal(data) {
 function saveData(data) {
   if (data) {
     equipment.reserveEquipment(data.id, data.reservations.time, user.value.id)
+    window.location.reload()
   }
   equipmentManage.value = false
 }

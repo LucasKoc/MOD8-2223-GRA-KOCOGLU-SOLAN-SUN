@@ -7,38 +7,19 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const user = ref()
-const room = ref()
-const equip = ref()
 const roomReservations = ref()
 const equipmentReservation = ref()
-
-async function getRoombyUserId() {
-  let roombyid = []
-  for (let i = 0; i < room.value.length; i++) {
-    const reservation = await roomData().getReservations(room.value[i].id)
-    for (let j = 0; j < reservation.length; j++) {
-      if (reservation[j].userId === user.value.id) {
-        let data = reservation[j]
-        data.roomname = room.value[i].roomname
-        roombyid.push(data)
-      }
-    }
-  }
-  return roombyid
-}
-
 
 const fetchData = async () => {
   try {
     user.value = await userData().getConnectedUser()
-    if (!user.value.id) {
+    if (!user.value || !user.value.id) {
       alert('You must be logged in to access this page')
       router.push({ name: 'home' })
     }
-    room.value = await roomData().getRooms()
-    equip.value = await equipmentData().getEquipments()
-    roomReservations.value = await getRoombyUserId()
-    equipmentReservation.value = equip.value.filter((e) => e.reservation && e.reservation.id === user.value.id)[0]
+    roomReservations.value = await roomData().getReservationsByUserId(user.value.id)
+    equipmentReservation.value = await equipmentData().getEquipmentReservationByUserId(user.value.id)
+    equipmentReservation.value = equipmentReservation.value[0]
   } catch (error) {
     console.error('Error fetching data:', error)
   }

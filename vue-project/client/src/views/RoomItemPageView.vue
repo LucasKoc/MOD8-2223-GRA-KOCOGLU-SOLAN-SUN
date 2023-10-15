@@ -16,24 +16,33 @@ const roomReservations = ref([])
 const fetchData = async () => {
   try {
     roomReservations.value = await roomData().getReservations(roomId);
-    user.value = await userData().getConnectedUser()
   } catch (error) {
     console.error('Error fetching data:', error)
   }
 }
 
-onMounted(fetchData);
+const fetchLogin = async () => {
+  try {
+    user.value = await userData().getConnectedUser()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+onMounted(fetchData, fetchLogin);
 
 function saveData(data) {
   if (data) {
     data.userId = user.value.id
     roomData().addReservation(roomId, data.date, data.time, data.userId)
+    window.location.reload()
   }
   roomManage.value = false
 }
 
-function openModal() {
-  if (!user.value.id) {
+async function openModal() {
+  await fetchLogin();
+  if (!user.value || !user.value.id) {
     alert('You must be logged in order to make a reservation')
   } else {
     roomManage.value = true

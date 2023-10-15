@@ -34,7 +34,7 @@ label {
 
 input[type='text'],
 input[type='password'],
-input[type='number'] {
+input[type='number'], input[type='number']#userRoom {
   width: 90%;
   padding: 10px;
   border: 1px solid var(--color-border);
@@ -102,7 +102,7 @@ button:hover {
 
   input[type='text'],
   input[type='password'],
-  input[type='number'] {
+  input[type='number'], input[type='number']#userRoom {
     padding: 5px 10px 5px 10px;
   }
 

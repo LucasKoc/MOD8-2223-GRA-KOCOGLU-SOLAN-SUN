@@ -41,6 +41,15 @@ const getEquipment = async (id) => {
     }
 }
 
+const getEquipmentReservationByUserId = async (id) => {
+    try {
+        const response = await axios.get(`/equipments/user/reservation/${id}`)
+        return response.data
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
 const reserveEquipment = async (id, time, userId) => {
     console.log(id, time, userId)
     try {
@@ -88,6 +97,7 @@ export default function equipmentData() {
     getEquipments,
     reserveEquipment,
     isEquipmentAvailable,
-    getEquipment
+    getEquipment,
+    getEquipmentReservationByUserId
   }
 }

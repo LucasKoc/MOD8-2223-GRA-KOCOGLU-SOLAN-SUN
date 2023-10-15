@@ -1,54 +1,84 @@
 import axios from "axios";
 
-let id = 1
-const users = []
-
 function addUser(user) {
-  axios.post('/users', user)
+  try {
+    axios.post('/users', user)
+    } catch (error) {
+    return handleError(error)
+  }
 }
 
 async function getUsers() {
-  const response = await axios.get(`/users`)
-  return response.data
+  try {
+    const response = await axios.get(`/users`)
+    return response.data
+  } catch (error) {
+  return handleError(error)
+}
 }
 
 async function getUser(id) {
-  const response = await axios.get(`/users/${id}`)
-  return response.data
+  try {
+    const response = await axios.get(`/users/${id}`)
+    return response.data
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
-function modifyUser(id, user) {
-  const response = axios.get(`/users/${id}`)
-  if (!response.data) {
-    axios.post('/users', user)
-    return
-  }
-  axios.patch(`/users/${id}`, user)
+const modifyUser = async (id, user) => {
+    try {
+      if (user.role === undefined) user.role = null;
+        const response = await axios.get(`/users/${id}`)
+      console.log(response.data)
+      if (!response.data) {
+        await addUser(user)
+        return;
+      }
+      await axios.patch(`/users/${id}`, user)
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
+const deleteUser = async (id) => {
+    try {
+      await axios.delete(`/rooms/user/reservations/${id}`)
+      await axios.patch(`/equipments/user/reservation/${id}`)
+      await axios.post(`/users/${id}/logout`)
+      await axios.delete(`/users/${id}`)
+        return true
+    } catch (error) {
+        return handleError(error)
+    }
 }
 
 async function verifyUser(key, room, name) {
-  const response = await axios.get('/users/verify', { params: { key, room, name } })
-  return response.data
+  try {
+    const response = await axios.get('/users/verify', { params: { key, room, name } })
+    return response.data
+    } catch (error) {
+    return handleError(error)
+  }
 }
 
 async function login(key, room, name) {
-  const response = await axios.post('/users/login', { key, room, name })
-  console.log(response.data);
-  document.cookie = `session-id=${response.data}`
-  console.log(document.cookie)
-  console.log(document.cookie.split('=')[1])
-  return response.data
+  try {
+    const response = await axios.post('/users/login', { key, room, name })
+    document.cookie = `session-id=${response.data}`
+    return response.data
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
 async function getConnectedUser() {
   const id = document.cookie.split('=')[1]
-  console.log(id)
   if (id === undefined || id === '' || id === null) {
     return null
   }
   const session = await axios.get(`/users/${id}/connected`)
   const user = await axios.get(`/users/${id}`)
-  console.log(session.data, user.data)
   return session.data ? user.data : null
 }
 
@@ -82,6 +112,7 @@ export default function userData() {
     getConnectedUser,
     resetConnectedUser,
     modifyUser,
+    deleteUser,
     getUser
   }
 }

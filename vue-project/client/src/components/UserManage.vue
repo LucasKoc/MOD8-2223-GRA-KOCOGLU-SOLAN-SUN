@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const emits = defineEmits(['getInfo'])
+const emits = defineEmits(['getInfo', 'deleteUser'])
 
 const props = defineProps({
   existsData: {
@@ -25,14 +25,17 @@ const saveChanges = () => {
     keyp: userKey.value,
     name: userName.value
   })
+  window.location.reload();
 }
 
 const deleteUser = () => {
-  // Handle deleting user logic here
+  emits('deleteUser', userid.value)
+  window.location.reload();
 }
 
 const applyBan = () => {
   // Handle applying a ban logic here
+  // window.location.reload();
 }
 </script>
 
@@ -43,16 +46,16 @@ const applyBan = () => {
       <div class="user-details">
         <h2>User Details</h2>
         <div class="form-group">
-          <label for="userName">User Name</label>
-          <input type="text" id="userName" v-model="userName" />
+          <label for="userLastName">Room</label>
+          <input type="number" id="userRoom" v-model="userRoom" required/>
         </div>
         <div class="form-group">
           <label for="userKey">Key</label>
-          <input type="password" id="userKey" v-model="userKey" maxlength="4" />
+          <input type="password" id="userKey" v-model="userKey" maxlength="4" required/>
         </div>
         <div class="form-group">
-          <label for="userLastName">Room</label>
-          <input type="text" id="userRoom" v-model="userRoom" />
+          <label for="userName">User Name</label>
+          <input type="text" id="userName" v-model="userName" required/>
         </div>
         <div class="button-group">
           <button @click="saveChanges">Save Changes</button>

@@ -48,7 +48,10 @@ function selectedEquipment(equipment) {
 
 try {
   selectedEquipment(props.equipmentSelected)
-} catch (error) {}
+} catch (error) {
+  console.log(error)
+}
+
 </script>
 
 <template>

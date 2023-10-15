@@ -77,6 +77,12 @@ const deleteReservation = async (id, roomId) => {
   return result.affectedRows > 0
 }
 
+const deleteUserRoomReservations = async (userId) => {
+    const query = 'DELETE FROM reservations WHERE user_id = ?;'
+    const [result] = await database.execute(query, [userId])
+    return result.affectedRows > 0
+}
+
 export default {
     findRooms,
     findRoom,
@@ -85,5 +91,6 @@ export default {
     deleteRoom,
     findReservations,
     createReservation,
-    deleteReservation
+    deleteReservation,
+    deleteUserRoomReservations
 }
