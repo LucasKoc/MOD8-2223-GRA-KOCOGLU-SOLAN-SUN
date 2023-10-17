@@ -28,7 +28,7 @@ const fetchLogin = async () => {
   }
 }
 
-onMounted(fetchData, fetchLogin)
+onMounted(fetchData)
 
 const typeOfEquipment = computed(() => {
   let equipmentTypes = {}
