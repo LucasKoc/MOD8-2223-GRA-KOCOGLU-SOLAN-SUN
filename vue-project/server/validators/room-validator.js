@@ -152,8 +152,7 @@ function validateDate(date) {
     }
     const currentDate = new Date();
     const providedDate = new Date(`${date}T00:00:00Z`);
-    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-    currentDate.setDate(currentDate.getDate() + 1);
+
 
     if(providedDate< currentDate)
     {
