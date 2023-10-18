@@ -43,7 +43,7 @@ const getEquipment = async (id) => {
 
 const getEquipmentReservationByUserId = async (id) => {
     try {
-        const response = await axios.get(`/equipments/user/reservation/${id}`)
+        const response = await axios.get(`/equipments/user/reservation/${id}`, {headers: {"X-Origin-URL": window.location.pathname}})
         return response.data
     } catch (error) {
         return handleError(error)

@@ -130,12 +130,11 @@ router.get('/rooms/user/reservations/:userId', async (req, res,next) => {
         return next(err)
     }
     const findReservations = await room.findUserRoomReservations(req.params.userId)
-    if (findReservations && findReservations.length > 0){
+    if (findReservations && findReservations.length > 0)
         res.status(200).json(await room.findUserRoomReservations(req.params.userId))
-    }
-    else{
-        res.status(404).json({message: 'Reservation does not exist.'});
-    }
+    else if (findReservations.length <= 0 && req.headers['x-origin-url'] === "/reservation")
+        res.status(202).json({message: 'Reservation does not exist.'});
+    else res.status(404).json({error: 'Reservation does not exist.'});
 })
 
 
