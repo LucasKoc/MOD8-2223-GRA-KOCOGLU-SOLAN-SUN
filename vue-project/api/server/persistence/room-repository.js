@@ -23,7 +23,18 @@ const findRoom = async (id) => {
 const findUserRoomReservations = async (userId) => {
     const query = 'SELECT rooms.roomname, reservations.room_id, reservations.date, reservations.time FROM rooms JOIN reservations ON rooms.id = reservations.room_id WHERE reservations.user_id = ?;'
     const [rows] = await database.execute(query, [userId])
-    return rows.map(mapReservation)
+    return rows.map(mapUserReservation)
+}
+
+function mapUserReservation(row) {
+    return {
+        id: row.id,
+        roomname: row.roomname,
+        roomId: row.room_id,
+        date: row.date,
+        time: row.time,
+        userId: row.user_id
+    }
 }
 
 const addRoom = async (room) => {

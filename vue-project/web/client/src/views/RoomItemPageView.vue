@@ -75,7 +75,7 @@ async function openModal() {
 function isReservationInPast(date) {
   const timestamp = new Date();
   const reservationDate = new Date(date);
-  timestamp.setHours(0, 0, 0, 0); // Reset hours, minutes, seconds, and milliseconds
+  timestamp.setHours(0, 0, 0, 0);
   return reservationDate < timestamp;
 }
 
