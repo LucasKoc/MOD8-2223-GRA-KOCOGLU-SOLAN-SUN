@@ -1,29 +1,26 @@
 import userRepository from "../persistence/users-repository.js";
 import roomRepository from "../persistence/room-repository.js";
-function validateDeleteRoom(id)
-{
+function validateDeleteRoom(id) {
+    return validateID(id)
+}
+
+function validateFindRoom(id) {
+    return validateID(id)
+}
+
+function validateDeleteRoomReservation(id) {
+    return validateID(id)
+}
+function validateFindRoomReservation(id) {
+    return validateID(id)
+}
+
+function validateDeleteUserRoomReservation(id){
     return validateID(id)
 }
 
 
-
-function validateFindRoom(id)
-{
-    return validateID(id)
-}
-
-function validateDeleteRoomReservation(id)
-{
-    return validateID(id)
-}
-function validateFindRoomReservation(id)
-{
-    return validateID(id)
-}
-
-
-function validateCreateRoom(name,description)
-{
+function validateCreateRoom(name,description) {
     return (
         validateRoom(name) ??
         validateDescription(description)
@@ -31,8 +28,7 @@ function validateCreateRoom(name,description)
     )
 }
 
-function validateCreateRoomReservation(date,time)
-{
+function validateCreateRoomReservation(date,time) {
     return (
 
         validateDate(date) ??
@@ -207,6 +203,7 @@ export default{
     validateCreateRoomReservation,
     validateFindUserRoomReservation,
     validateUserID,
-    validateRoomId
+    validateRoomId,
+    validateDeleteUserRoomReservation
 
 }
