@@ -7,8 +7,8 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const user = ref()
-const roomReservations = ref()
-const equipmentReservation = ref()
+const roomReservations = ref([])
+const equipmentReservation = ref([])
 
 const fetchData = async () => {
   try {
@@ -18,6 +18,11 @@ const fetchData = async () => {
       router.push({ name: 'home' })
     }
     roomReservations.value = await roomData().getReservationsByUserId(user.value.id)
+    if (roomReservations.value.message !== undefined) {
+      if (roomReservations.value.message === 'Reservation does not exist.') {
+        roomReservations.value = []
+      }
+    }
     equipmentReservation.value = await equipmentData().getEquipmentReservationByUserId(user.value.id)
     equipmentReservation.value = equipmentReservation.value[0]
   } catch (error) {
@@ -45,6 +50,11 @@ onMounted(fetchData)
                   <span>Room: {{ roomReservation.roomname }}</span>
                   <span>Date: {{ roomReservation.date.split("T")[0] }}</span>
                   <span>Hours: {{ roomReservation.time }}</span>
+                </li>
+              </ul>
+              <ul v-else>
+                <li class="emptyReservation">
+                  <span class="emptyReservation">No room reservation</span>
                 </li>
               </ul>
             </div>

@@ -51,7 +51,7 @@ const getReservations = async (id) => {
 
 const getReservationsByUserId = async (id) => {
     try {
-        const response = await axios.get(`/rooms/user/reservations/${id}`)
+        const response = await axios.get(`/rooms/user/reservations/${id}`, {headers: {"X-Origin-URL": window.location.pathname}})
         return response.data
     } catch (error) {
         return handleError(error)
