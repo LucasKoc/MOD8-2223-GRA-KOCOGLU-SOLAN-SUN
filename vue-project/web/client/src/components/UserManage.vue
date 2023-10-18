@@ -25,21 +25,17 @@ const saveChanges = () => {
     keyp: userKey.value,
     name: userName.value
   })
-  window.location.reload();
 }
 
 const deleteUser = () => {
   emits('deleteUser', userid.value)
-  window.location.reload();
 }
 
 const applyBan = () => {
-  // Handle applying a ban logic here
   emits('banUser', {
     id: userid.value,
     ban: banDuration.value
   })
-  // window.location.reload();
 }
 </script>
 

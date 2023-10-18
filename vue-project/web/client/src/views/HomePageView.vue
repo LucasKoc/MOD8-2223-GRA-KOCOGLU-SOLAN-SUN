@@ -163,7 +163,7 @@ export default {
     function saveData(data) {
       if (data) {
         equipment.reserveEquipment(data.id, data.reservations.time, user.value.id)
-        route.push({name: 'EquipmentPageView'})
+        window.location.replace('/equipments')
       }
       equipmentManage.value = false
     }

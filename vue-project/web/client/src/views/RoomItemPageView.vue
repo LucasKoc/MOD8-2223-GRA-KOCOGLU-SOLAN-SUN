@@ -54,13 +54,17 @@ const fetchUsers = async () => {
 
 onMounted(fetchData)
 
-function saveData(data) {
-  if (data) {
-    data.userId = user.value.id
-    roomData().addReservation(roomId, data.date, data.time, data.userId)
-    window.location.reload()
+async function saveData(data) {
+  try {
+    if (data) {
+      data.userId = user.value.id
+      await roomData().addReservation(roomId, data.date, data.time, data.userId)
+    }
+  } catch (error) {
+    console.error('Error generating recommandation:', error)
   }
   roomManage.value = false
+  window.location.reload()
 }
 
 async function openModal() {
