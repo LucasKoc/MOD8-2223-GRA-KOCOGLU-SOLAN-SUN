@@ -35,7 +35,6 @@ router.post('/rooms', async (req, res,next  ) => {
         return next(err)
     }
     const create = await room.addRoom(req.body)
-    console.log(create)
     if (create) {
         res.status(201).json({message: 'Room is created.'});
     } else {

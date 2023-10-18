@@ -139,7 +139,6 @@ async function validateRoomId(id) {
     }
 }
 function validateID(id) {
-    console.log(parseInt(id))
     if (id === undefined) {
         return new Error('Id is missing.')
     }

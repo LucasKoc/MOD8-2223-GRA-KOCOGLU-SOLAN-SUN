@@ -30,7 +30,6 @@ const modifyUser = async (id, user) => {
     try {
       if (user.role === undefined) user.role = null;
         const response = await axios.get(`/users/${id}`)
-      console.log(response.data)
       if (!response.data) {
         await addUser(user)
         return;

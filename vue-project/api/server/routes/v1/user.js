@@ -17,7 +17,6 @@ router.get('/users/:userId', async (req, res,next) => {
         return next(err)
     }
     const find = await user.findUser(req.params.userId)
-    console.log(find)
     if (find) {
         res.status(200).json(await user.findUser(req.params.userId))
     }

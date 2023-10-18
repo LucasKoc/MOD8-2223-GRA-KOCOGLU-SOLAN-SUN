@@ -51,7 +51,6 @@ const getEquipmentReservationByUserId = async (id) => {
 }
 
 const reserveEquipment = async (id, time, userId) => {
-    console.log(id, time, userId)
     try {
       // TODO: Assert Validator isEquipmentAvailable
         const response = await axios.patch(`/equipments/${id}/reservation`, { time, userId })
