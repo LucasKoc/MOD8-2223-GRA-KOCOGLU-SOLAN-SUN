@@ -42,7 +42,7 @@ const modifyUser = async (id, user) => {
 
 const deleteUser = async (id) => {
     try {
-      await axios.delete(`/rooms/user/reservations/${id}`)
+      await axios.delete(`/rooms/user/reservations/${id}`, {headers: {"X-Origin-URL": window.location.pathname}})
       await axios.patch(`/equipments/user/reservation/${id}`)
       await axios.post(`/users/${id}/logout`)
       await axios.delete(`/users/${id}`)
