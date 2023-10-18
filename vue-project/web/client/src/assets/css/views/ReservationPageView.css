@@ -82,6 +82,18 @@ p {
   margin-bottom: 10px;
 }
 
+li.emptyReservation {
+  justify-content: center;
+}
+
+.pastReservation {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-text);
+  color: var(--color-text-soft);
+  font-style: italic;
+  opacity: 0.5;
+}
+
 @media (max-width: 700px) {
   h3 {
     font-size: 3vw;

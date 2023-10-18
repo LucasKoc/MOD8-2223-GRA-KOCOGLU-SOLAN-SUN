@@ -32,6 +32,12 @@ const fetchData = async () => {
 
 onMounted(fetchData)
 
+function isReservationInPast(date) {
+  const timestamp = new Date();
+  const reservationDate = new Date(date);
+  timestamp.setHours(0, 0, 0, 0);
+  return reservationDate < timestamp;
+}
 
 </script>
 
@@ -45,8 +51,8 @@ onMounted(fetchData)
             <h3 class="title">Room Reservations</h3>
 
             <div class="reservation-room">
-              <ul>
-                <li v-for="roomReservation in roomReservations" :key="roomReservation.id">
+              <ul v-if="roomReservations.length !== 0">
+                <li v-for="roomReservation in roomReservations" :key="roomReservation.id" :class="{'pastReservation': isReservationInPast(roomReservation.date)}">
                   <span>Room: {{ roomReservation.roomname }}</span>
                   <span>Date: {{ roomReservation.date.split("T")[0] }}</span>
                   <span>Hours: {{ roomReservation.time }}</span>
