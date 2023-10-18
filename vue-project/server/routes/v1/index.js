@@ -1,6 +1,5 @@
 import express from 'express'
 import health from './health.js'
-import auth from './auth.js'
 import room from './room.js'
 import equipment from './equipment.js'
 import user from './user.js'
@@ -9,7 +8,6 @@ import user from './user.js'
 const router = express.Router()
 
 router.use(health)
-router.use(auth)
 router.use(room)
 router.use(equipment)
 router.use(user)
