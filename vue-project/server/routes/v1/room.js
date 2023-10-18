@@ -26,6 +26,7 @@ router.get('/rooms/:roomId', async (req, res,next) => {
 })
 
 router.post('/rooms', async (req, res,next  ) => {
+
     const name = req.body.roomname
     const description = req.body.roomtype
     const err = validator.validateCreateRoom(name,description)
@@ -34,6 +35,7 @@ router.post('/rooms', async (req, res,next  ) => {
         return next(err)
     }
     const create = await room.addRoom(req.body)
+    console.log(create)
     if (create) {
         res.status(201).json({message: 'Room is created.'});
     } else {

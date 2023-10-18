@@ -99,6 +99,7 @@ function validateRoom(room) {
 
 
 async function validateUserID(id) {
+    parseInt(id)
     const  idValidationError= validateID(id);
 
     if (idValidationError) {
@@ -118,6 +119,7 @@ async function validateUserID(id) {
     }
 }
 async function validateRoomId(id) {
+    id = parseInt(id)
     const  idValidationError2= validateID(id);
 
     if (idValidationError2) {
@@ -137,6 +139,7 @@ async function validateRoomId(id) {
     }
 }
 function validateID(id) {
+    console.log(parseInt(id))
     if (id === undefined) {
         return new Error('Id is missing.')
     }
@@ -174,6 +177,9 @@ function validateDate(date) {
 }
 
 function validateTime(time) {
+
+    time = time + ':00'
+
     if (time === undefined) {
         return new Error('Time is missing.');
     }

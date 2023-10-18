@@ -1,7 +1,7 @@
 import equipmentRepository from "../persistence/equipment-repository.js";
 import userRepository from "../persistence/users-repository.js";
 
-    function validateFindEquipment(id) {
+function validateFindEquipment(id) {
     return validateID(id)
 }
 
@@ -14,6 +14,17 @@ function validateCreateEquipments(name,category) {
 function validateModifyEquipments(equipTime) {
     return validateTime(equipTime)
 
+}
+
+function validateFindEquipmentReservation(id) {
+    return validateID(id)
+}
+function validateFindUserEquipmentsReservation(id) {
+    return validateID(id)
+}
+
+function validateDeleteUserEquipmentsReservation(id) {
+    return validateID(id)
 }
 
 function validateUserNotBanned(id) {
@@ -79,8 +90,9 @@ function validateCategory(category) {
     return null
 }
 
-function validateTime(time) {
+function validateTime(timed) {
 
+        const time = timed + ':00'
     if (time === undefined) {
         return new Error('Time is missing.');
     }
@@ -118,6 +130,7 @@ async function validateUserID(id) {
 
 
 function validateID(id) {
+    id = Number.parseInt(id)
     if (id === undefined) {
         return new Error('Id is missing.')
     }
@@ -136,6 +149,9 @@ export default {
     validateCreateEquipments,
     validateDeleteEquipment,
     validateModifyEquipments,
+    validateFindEquipmentReservation,
+    validateFindUserEquipmentsReservation,
+    validateDeleteUserEquipmentsReservation,
     validateUserNotBanned,
     validateUserID
 }
