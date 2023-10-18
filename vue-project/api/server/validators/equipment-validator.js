@@ -61,7 +61,7 @@ function validateEquipment(name) {
 }
 
 function validateUserBanned(id) {
-    const banDate = userRepository.isUserBanned(id) 
+    const banDate = userRepository.isUserBanned(id)
     if (banDate > new Date().getTime()) {
         return new Error('User is banned.')
     }
@@ -92,7 +92,7 @@ function validateCategory(category) {
 
 function validateTime(timed) {
 
-        const time = timed + ':00'
+    const time = timed + ':00'
     if (time === undefined) {
         return new Error('Time is missing.');
     }
@@ -105,6 +105,7 @@ function validateTime(timed) {
         return new Error('Time format is incorrect. Use HH:MM:SS.');
 
     }
+    return null
 }
 
 async function validateUserID(id) {
