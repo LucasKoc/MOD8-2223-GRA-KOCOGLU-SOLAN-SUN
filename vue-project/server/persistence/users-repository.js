@@ -71,7 +71,7 @@ const findUserByKey = async (key) => {
     return rows.length > 0 ? mapUser(rows[0]) : null;
 }
 
-const banUser = async (id, bantime) => {
+const banUser = async (bantime, id) => {
     const query = "UPDATE users SET ban = ? WHERE id = ?;";
     const [result] = await database.execute(query, [bantime, id]);
     if (result.affectedRows === 0) {

@@ -2,10 +2,6 @@ import express from 'express'
 import equipment from '../../persistence/equipment-repository.js'
 import validator from "../../validators/equipment-validator.js";
 
-
-
-
-
 const router = express.Router()
 
 router.get('/equipments', async (req, res) => {
@@ -79,6 +75,12 @@ router.patch('/equipments/:equipId/reservation', async (req, res,next) => {
     if (userIdError) {
         res.status(400).json({ error: userIdError.message });
         return next(userIdError);
+    }
+
+    const UserBannedError = await validator.validateUserNotBanned(equipUserId);
+    if (UserBannedError) {
+        res.status(400).json({ error: UserBannedError.message });
+        return next(UserBannedError);
     }
 
     const errInfo = validator.validateModifyEquipments(equipTime)
