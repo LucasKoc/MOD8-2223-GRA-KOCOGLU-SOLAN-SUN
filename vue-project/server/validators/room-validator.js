@@ -28,9 +28,15 @@ function validateCreateRoom(name,description) {
     )
 }
 
+function validateUserNotBanned(id) {
+    return (
+        validateUserID(id) ??
+        validateUserBanned(id)
+    )
+}
+
 function validateCreateRoomReservation(date,time) {
     return (
-
         validateDate(date) ??
         validateTime(time)
     )
@@ -38,6 +44,15 @@ function validateCreateRoomReservation(date,time) {
 function validateFindUserRoomReservation(id){
     return validateID(id)
 }
+
+function validateUserBanned(id) {
+    const banDate = userRepository.isUserBanned(id) 
+    if (banDate > new Date().getTime()) {
+        return new Error('User is banned.')
+    }
+    return null
+}
+
 function validateDescription(description) {
     if (description === undefined) {
         return new Error('Description is missing.')
@@ -203,6 +218,7 @@ export default{
     validateCreateRoomReservation,
     validateFindUserRoomReservation,
     validateUserID,
+    validateUserNotBanned,
     validateRoomId,
     validateDeleteUserRoomReservation
 
