@@ -128,16 +128,15 @@ router.get('/rooms/user/reservations/:userId', async (req, res,next) => {
         res.status(404).json({message: 'Reservation does not exist.'});
     }
 })
-// res.status(200).json(await room.findUserRoomReservations(req.params.userId))
+
 
 router.delete('/rooms/user/reservations/:userId', async (req, res,next) => {
-    // TODO : Assert Validator
-        /*const userId = Number.parseInt(req.params.userId)
+        const userId = Number.parseInt(req.params.userId)
         const err = validator.validateDeleteUserRoomReservation(userId)
         if (err) {
         res.status(400).json({error: err});
         return next(err)
-        }*/
+        }
         const del = await room.deleteUserRoomReservations(req.params.userId);
         if (del) {
             res.status(202).json({message: 'All room reservations have been successfully deleted'})
