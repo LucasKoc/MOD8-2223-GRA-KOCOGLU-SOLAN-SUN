@@ -56,7 +56,7 @@ function mapReservation(row) {
 }
 
 const findReservations = async (id) => {
-  const query = 'SELECT id, room_id, date, time, user_id FROM reservations WHERE room_id = ?;'
+  const query = 'SELECT id, room_id, date, time, user_id FROM reservations WHERE room_id = ? ORDER BY date DESC;'
   const [rows] = await database.execute(query, [id])
   return rows.map(mapReservation)
 }
