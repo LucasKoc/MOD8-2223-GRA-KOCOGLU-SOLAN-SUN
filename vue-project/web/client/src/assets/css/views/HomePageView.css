@@ -41,6 +41,10 @@ ul li:last-child {
   border-bottom: none;
 }
 
+::placeholder {
+  color: var(--color-placeholder-input-field-contrast);
+}
+
 @media (max-width: 844px) {
   main {
     font-size: 18px;
