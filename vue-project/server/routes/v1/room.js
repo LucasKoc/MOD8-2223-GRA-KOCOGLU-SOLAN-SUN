@@ -69,13 +69,13 @@ router.get('/rooms/:roomId/reservations', async (req, res,next) => {
         return next(err)
     }
     const findReservations = await room.findReservations(req.params.roomId)
-    if (findReservations && findReservations.length > 0){
+    if (findReservations && findReservations.length > 0) {
         res.status(200).json(await room.findReservations(req.params.roomId))
+    } else if (findReservations <= 0 && (req.headers['x-origin-url'].includes("/rooms") || req.headers['x-origin-url'] === "/")) {
+        res.status(202).json({message: 'Room reservation does not exist or could not be find.'});
+    } else {
+        res.status(404).json({error: 'Room reservation does not exist or could not be find.'});
     }
-    else{
-        res.status(404).json({message: 'Reservation does not exist.'});
-    }
-
 })
 
 router.post('/rooms/reservations', async (req, res,next) => {
