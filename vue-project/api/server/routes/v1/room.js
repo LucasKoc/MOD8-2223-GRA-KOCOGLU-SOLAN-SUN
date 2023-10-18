@@ -35,7 +35,6 @@ router.post('/rooms', async (req, res,next  ) => {
         return next(err)
     }
     const create = await room.addRoom(req.body)
-    console.log(create)
     if (create) {
         res.status(201).json({message: 'Room is created.'});
     } else {
@@ -148,9 +147,11 @@ router.delete('/rooms/user/reservations/:userId', async (req, res,next) => {
         const del = await room.deleteUserRoomReservations(req.params.userId);
         if (del) {
             res.status(202).json({message: 'All room reservations have been successfully deleted'})
-        } else {
+        } else if (del === false && req.headers['x-origin-url'] === "/panel") {
             // Not an error, user have no reservations
-            res.status(202).json({error: 'Room reservations associated with this id do not exist or could not be deleted.'});
+            res.status(202).json({message: 'Room reservations associated with this id do not exist or could not be deleted.'});
+        } else {
+            res.status(404).json({error: 'Room reservations associated with this id do not exist or could not be deleted.'});
         }
     }
 )

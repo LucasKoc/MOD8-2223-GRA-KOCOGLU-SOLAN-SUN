@@ -41,20 +41,34 @@ function addUser() {
   userManage.value = true
 }
 
-function deleteUser(id) {
-  userData().deleteUser(id)
+async function deleteUser(id) {
+  try {
+    await userData().deleteUser(id)
+  } catch (error) {
+    console.error('Error deleting user:', error)
+  }
   userManage.value = false
+  window.location.reload()
 }
 
-function banUser(data) {
-  userData().banUser(data.id, data.ban)
+async function banUser(data) {
+  try {
+    await userData().banUser(data.id, data.ban)
+  } catch (error) {
+    console.error('Error banning user:', error)
+  }
   userManage.value = false
+  window.location.reload()
 }
 
-function saveData(data) {
-  if (data) {
-    if (data.id) userData().modifyUser(data.id, data)
-    else userData().addUser(data)
+async function saveData(data) {
+  try {
+    if (data) {
+      if (data.id) await userData().modifyUser(data.id, data)
+      else await userData().addUser(data)
+    }
+  } catch (error) {
+    console.error('Error saving data:', error)
   }
   userManage.value = false
   blankUser.value = {
@@ -62,6 +76,7 @@ function saveData(data) {
     key: '',
     room: '',
   }
+  window.location.reload()
 }
 </script>
 

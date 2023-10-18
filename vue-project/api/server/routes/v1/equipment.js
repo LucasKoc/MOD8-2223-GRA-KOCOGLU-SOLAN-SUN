@@ -33,7 +33,6 @@ router.post('/equipments', async(req,res,next)=>{
         return next(err)
     }
     const create = await equipment.addEquipment(req.body)
-    console.log(create)
     if (create) {
         res.status(201).json({message: 'equipment is created.'});
     } else {
@@ -90,7 +89,6 @@ router.patch('/equipments/:equipId/reservation', async (req, res,next) => {
         return next(errInfo)
     }
     const modify = await equipment.setreservation(req.params.equipId, req.body.time, req.body.userId)
-    console.log(modify)
     if (!modify) {
         res.status(202).json({message: 'equipment is modified.'});
     } else {
