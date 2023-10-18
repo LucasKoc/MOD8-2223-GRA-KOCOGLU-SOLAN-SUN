@@ -43,7 +43,7 @@ onMounted(fetchData)
               <ul>
                 <li v-for="roomReservation in roomReservations" :key="roomReservation.id">
                   <span>Room: {{ roomReservation.roomname }}</span>
-                  <span>Date: {{ roomReservation.date }}</span>
+                  <span>Date: {{ roomReservation.date.split("T")[0] }}</span>
                   <span>Hours: {{ roomReservation.time }}</span>
                 </li>
               </ul>
