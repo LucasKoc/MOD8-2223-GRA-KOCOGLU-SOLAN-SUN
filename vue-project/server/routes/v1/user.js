@@ -10,6 +10,12 @@ router.delete('/users/:id', async (req, res) => { res.status(200).json(await use
 router.patch('/users/:id', async (req, res) => {res.status(202).json(await user.modifyUser(req.params.id, req.body)) })
 router.get('/users/key/:key', async (req, res) => {res.status(200).json(await user.findUserByKey(req.params.key)) })
 
+router.put('/users/:id/ban/:bantime', async (req, res) => {
+    const banTime = new Date().getTime() + req.params.bantime * 60 * 1000 * 60 *24
+    res.status(200).json(await user.banUser(banTime, req.params.id)) 
+})
+router.get('/users/:id/ban', async (req, res) => {res.status(200).json(await user.isUserBanned(req.params.id)) })
+
 router.get('/users/verify', async (req, res) => {res.status(200).json(await user.verifyUser(req.body)) })
 router.post('/users/login', async (req, res) => {
     res.status(200).json(await user.login(req.body, req))

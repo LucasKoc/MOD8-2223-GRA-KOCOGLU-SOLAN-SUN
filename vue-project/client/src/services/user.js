@@ -53,6 +53,14 @@ const deleteUser = async (id) => {
     }
 }
 
+const banUser = async (id, bantime) => {
+    try {
+      axios.put(`/users/${id}/ban/${bantime}`)
+    } catch (error) {
+      return handleError(error)
+    }
+}
+
 async function verifyUser(key, room, name) {
   try {
     const response = await axios.get('/users/verify', { params: { key, room, name } })
@@ -109,6 +117,7 @@ export default function userData() {
     getUsers,
     verifyUser,
     login,
+    banUser,
     getConnectedUser,
     resetConnectedUser,
     modifyUser,

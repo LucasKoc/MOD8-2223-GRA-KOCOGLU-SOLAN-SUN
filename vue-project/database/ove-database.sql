@@ -13,7 +13,8 @@ CREATE TABLE users (
     room INT NOT NULL,
     keyp VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    role VARCHAR(255) DEFAULT NULL
+    role VARCHAR(255) DEFAULT NULL,
+    ban BIGINT DEFAULT NULL
 );
 
 -- Create the "equipments" table

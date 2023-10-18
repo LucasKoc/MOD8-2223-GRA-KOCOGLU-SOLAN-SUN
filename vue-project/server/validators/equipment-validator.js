@@ -16,6 +16,12 @@ function validateModifyEquipments(equipTime) {
 
 }
 
+function validateUserNotBanned(id) {
+    return (
+        validateUserID(id) ??
+        validateUserBanned(id)
+    )
+}
 
 function validateDeleteEquipment(id) {
     return validateID(id)
@@ -40,6 +46,14 @@ function validateEquipment(name) {
         return new Error('name must be no longer than 100 characters.')
     }
 
+    return null
+}
+
+function validateUserBanned(id) {
+    const banDate = userRepository.isUserBanned(id) 
+    if (banDate > new Date().getTime()) {
+        return new Error('User is banned.')
+    }
     return null
 }
 
@@ -122,5 +136,6 @@ export default {
     validateCreateEquipments,
     validateDeleteEquipment,
     validateModifyEquipments,
+    validateUserNotBanned,
     validateUserID
 }
