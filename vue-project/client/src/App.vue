@@ -5,6 +5,8 @@ import Login from './components/Login.vue'
 import userData from './services/user'
 import ConnectionStatus from "@/components/ConnectionStatus.vue";
 
+const debugMode = false;
+
 const isUserModalOpen = ref(false)
 const user = ref()
 const loginval = ref('Login')
@@ -120,7 +122,7 @@ function navbarButton() {
     <p>
       &copy; OVE - Vieux Montreal - Since 2023 |
       <RouterLink to="/about">Learn more about OVE</RouterLink>
-      <ConnectionStatus />
+      <ConnectionStatus v-if="debugMode" />
     </p>
   </footer>
 

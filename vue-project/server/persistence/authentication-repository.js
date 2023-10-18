@@ -26,9 +26,9 @@ const extendSession = async (id, extendedTime, expiryTime) => {
 
 const createSession = async (session) => {
   const request = await findSession(session.id)
-  console.log("request", request)
   if (request) {
     extendSession(session.id, 60*60*1000, session.expiryTime)
+    return request
   }
   const query = 'INSERT INTO sessions (id, username, start_time, expiry_time) VALUES (?, ?, ?, ?);'
   const [result] = await database.execute(query, [session.id, session.username, session.startTime, session.expiryTime])

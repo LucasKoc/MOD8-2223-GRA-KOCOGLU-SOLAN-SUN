@@ -7,18 +7,19 @@ function mapUser(row) {
     room: row.room,
     keyp: row.keyp,
     name: row.name,
-    role: row.role
+    role: row.role,
+    ban: row.ban
   };
 }
 
 const findUsers = async () => {
-  const query = "SELECT id, room, keyp, name, role FROM users;";
+  const query = "SELECT id, room, keyp, name, role, ban FROM users;";
   const [rows] = await database.execute(query);
   return rows.map(mapUser);
 };
 
 const findUser = async id => {
-  const query = "SELECT id, room, keyp, name, role FROM users WHERE id = ?;";
+  const query = "SELECT id, room, keyp, name, role, ban FROM users WHERE id = ?;";
   const [rows] = await database.execute(query, [id]);
   return rows.length > 0 ? mapUser(rows[0]) : null;
 };
@@ -70,6 +71,20 @@ const findUserByKey = async (key) => {
     return rows.length > 0 ? mapUser(rows[0]) : null;
 }
 
+const banUser = async (bantime, id) => {
+    const query = "UPDATE users SET ban = ? WHERE id = ?;";
+    const [result] = await database.execute(query, [bantime, id]);
+    if (result.affectedRows === 0) {
+        throw new Error(`Failed to ban user ${id}.`);
+    }
+}
+
+const isUserBanned = async (id) => {
+    const query = "SELECT ban FROM users WHERE id = ?;";
+    const [rows] = await database.execute(query, [id]);
+    return rows.length > 0 ? rows[0].ban : null;
+}
+
 const verifyUser = async (body) => {
     const query = "SELECT id, room, keyp, name, role FROM users WHERE keyp = ? AND room = ? AND name = ?;";
     const [rows] = await database.execute(query, [body.key, body.room, body.name]);
@@ -104,6 +119,8 @@ export default {
   findUsers,
   findUser,
   addUser,
+  banUser,
+  isUserBanned,
   deleteUser,
   modifyUser,
   verifyUser,

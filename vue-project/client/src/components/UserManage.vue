@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const emits = defineEmits(['getInfo', 'deleteUser'])
+const emits = defineEmits(['getInfo', 'deleteUser', 'banUser'])
 
 const props = defineProps({
   existsData: {
@@ -35,6 +35,10 @@ const deleteUser = () => {
 
 const applyBan = () => {
   // Handle applying a ban logic here
+  emits('banUser', {
+    id: userid.value,
+    ban: banDuration.value
+  })
   // window.location.reload();
 }
 </script>

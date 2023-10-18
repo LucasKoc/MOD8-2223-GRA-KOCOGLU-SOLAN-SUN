@@ -105,3 +105,29 @@ p.v-if {
   justify-content: space-between;
   width: 99%;
 }
+
+li.emptyReservation {
+  justify-content: center;
+}
+
+span.emptyReservation {
+  color: var(--color-available);
+}
+
+main {
+  margin-top: 10vh;
+}
+
+.pastReservation {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-text);
+  color: var(--color-text-soft);
+  font-style: italic;
+  opacity: 0.5;
+}
+
+@media (max-width: 1020px) {
+  main {
+    margin-top: 13vh;
+  }
+}

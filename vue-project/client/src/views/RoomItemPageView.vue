@@ -12,10 +12,19 @@ const room = roomData().getRoom(roomId)
 const user = ref()
 const roomname = ref(room.roomname)
 const roomReservations = ref([])
+const username = ref({})
 
 const fetchData = async () => {
   try {
     roomReservations.value = await roomData().getReservations(roomId);
+    if (roomReservations.value.message !== undefined) {
+      if (roomReservations.value.message === 'Room reservation does not exist or could not be find.') {
+        roomReservations.value = []
+      }
+    }
+    else {
+      await fetchUsers();
+    }
   } catch (error) {
     console.error('Error fetching data:', error)
   }
@@ -29,7 +38,21 @@ const fetchLogin = async () => {
   }
 }
 
-onMounted(fetchData);
+const fetchUsers = async () => {
+  try {
+    for (const reservation of roomReservations.value) {
+      const userId = reservation.userId;
+      if (!username.value[userId]) {
+        username.value[userId] = await userData().getUser(userId);
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+
+onMounted(fetchData)
 
 function saveData(data) {
   if (data) {
@@ -48,9 +71,18 @@ async function openModal() {
     roomManage.value = true
   }
 }
+
+function isReservationInPast(date) {
+  const timestamp = new Date();
+  const reservationDate = new Date(date);
+  timestamp.setHours(0, 0, 0, 0); // Reset hours, minutes, seconds, and milliseconds
+  return reservationDate < timestamp;
+}
+
 </script>
 
 <template>
+  <main>
   <div class="reservation-view">
     <div class="flexdivtop">
       <h2>{{ roomname }}</h2>
@@ -62,10 +94,16 @@ async function openModal() {
           <button class="reservebutton" @click="openModal()">Reserve</button>
         </div>
         <div class="reservation">
-          <ul>
-            <li v-for="roomReservation in roomReservations" :key="roomReservation.id">
-              <span>Date: {{ roomReservation.date }}</span>
+          <ul v-if="roomReservations.length !== 0">
+            <li v-for="roomReservation in roomReservations" :key="roomReservation.id" :class="{'pastReservation': isReservationInPast(roomReservation.date)}">
+              <span>Date: {{ roomReservation.date.split("T")[0] }}</span>
+              <span>Reserved by: {{ username[roomReservation.userId] ? (username[roomReservation.userId].name !== undefined ? username[roomReservation.userId].name : "N/A") : "N/A" }}</span>
               <span>Hours: {{ roomReservation.time }}</span>
+            </li>
+          </ul>
+          <ul v-else>
+            <li class="emptyReservation">
+              <span class="emptyReservation">No reservations yet.</span>
             </li>
           </ul>
         </div>
@@ -74,6 +112,7 @@ async function openModal() {
   </div>
   <div class="backdrop" v-if="roomManage"></div>
   <RoomReservation class="user-modal" v-if="roomManage" @sendData="(data) => saveData(data)" />
+  </main>
 </template>
 
 <style scoped>

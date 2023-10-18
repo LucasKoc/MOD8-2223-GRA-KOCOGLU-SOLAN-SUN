@@ -1,7 +1,7 @@
 import equipmentRepository from "../persistence/equipment-repository.js";
 import userRepository from "../persistence/users-repository.js";
 
-    function validateFindEquipment(id) {
+function validateFindEquipment(id) {
     return validateID(id)
 }
 
@@ -20,11 +20,18 @@ function validateFindEquipmentReservation(id) {
     return validateID(id)
 }
 function validateFindUserEquipmentsReservation(id) {
-        return validateID(id)
+    return validateID(id)
 }
 
 function validateDeleteUserEquipmentsReservation(id) {
     return validateID(id)
+}
+
+function validateUserNotBanned(id) {
+    return (
+        validateUserID(id) ??
+        validateUserBanned(id)
+    )
 }
 
 function validateDeleteEquipment(id) {
@@ -50,6 +57,14 @@ function validateEquipment(name) {
         return new Error('name must be no longer than 100 characters.')
     }
 
+    return null
+}
+
+function validateUserBanned(id) {
+    const banDate = userRepository.isUserBanned(id) 
+    if (banDate > new Date().getTime()) {
+        return new Error('User is banned.')
+    }
     return null
 }
 
@@ -115,6 +130,7 @@ async function validateUserID(id) {
 
 
 function validateID(id) {
+    id = Number.parseInt(id)
     if (id === undefined) {
         return new Error('Id is missing.')
     }
@@ -136,5 +152,6 @@ export default {
     validateFindEquipmentReservation,
     validateFindUserEquipmentsReservation,
     validateDeleteUserEquipmentsReservation,
+    validateUserNotBanned,
     validateUserID
 }

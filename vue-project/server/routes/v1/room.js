@@ -88,6 +88,7 @@ router.post('/rooms/reservations', async (req, res,next) => {
 
     const userIdError = await validator.validateUserID(userId);
     const RoomIDError = await validator.validateRoomId(identity);
+    const UserBannedError = await validator.validateUserNotBanned(userId);
     if (RoomIDError) {
         res.status(400).json({ error: RoomIDError.message });
         return next(RoomIDError);
@@ -97,6 +98,12 @@ router.post('/rooms/reservations', async (req, res,next) => {
         res.status(400).json({ error: userIdError.message });
         return next(userIdError);
     }
+    
+    if (UserBannedError) {
+        res.status(400).json({ error: UserBannedError.message });
+        return next(UserBannedError);
+    }
+
     const err = validator.validateCreateRoomReservation(date,time)
     if (err) {
         res.status(400).json({error: err});

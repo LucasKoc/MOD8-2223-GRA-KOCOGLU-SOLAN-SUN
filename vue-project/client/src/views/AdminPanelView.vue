@@ -32,6 +32,7 @@ const fetchData = async () => {
 onMounted(fetchData)
 
 function modifyUser(user) {
+  user.ban = 0
   blankUser.value = user
   userManage.value = true
 }
@@ -42,6 +43,12 @@ function addUser() {
 
 function deleteUser(id) {
   userData().deleteUser(id)
+  userManage.value = false
+}
+
+function banUser(data) {
+  userData().banUser(data.id, data.ban)
+  userManage.value = false
 }
 
 function saveData(data) {
@@ -84,7 +91,8 @@ function saveData(data) {
     class="user-modal"
     v-if="userManage"
     @getInfo="(data) => saveData(data)"
-    @delete-user="(id) => deleteUser(id)"
+    @deleteUser="(id) => deleteUser(id)"
+    @banUser="(data) => banUser(data)"
     :existsData="blankUser"
   />
 </template>
