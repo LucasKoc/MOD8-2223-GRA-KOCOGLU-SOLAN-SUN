@@ -44,6 +44,10 @@ function deleteUser(id) {
   userData().deleteUser(id)
 }
 
+function banUser(data) {
+  userData().banUser(data.id, data.ban)
+}
+
 function saveData(data) {
   if (data) {
     if (data.id) userData().modifyUser(data.id, data)
@@ -84,7 +88,8 @@ function saveData(data) {
     class="user-modal"
     v-if="userManage"
     @getInfo="(data) => saveData(data)"
-    @delete-user="(id) => deleteUser(id)"
+    @deleteUser="(id) => deleteUser(id)"
+    @banUser="(data) => banUser(data)"
     :existsData="blankUser"
   />
 </template>

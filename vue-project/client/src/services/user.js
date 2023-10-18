@@ -53,6 +53,14 @@ const deleteUser = async (id) => {
     }
 }
 
+const banUser = async (id, bantime) => {
+    try {
+      await axios.put(`/users/${id}/ban/${bantime}`)
+    } catch (error) {
+        return handleError(error)
+    }
+}
+
 async function verifyUser(key, room, name) {
   try {
     const response = await axios.get('/users/verify', { params: { key, room, name } })
