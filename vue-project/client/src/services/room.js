@@ -42,7 +42,7 @@ const getRoom = async (id) => {
 
 const getReservations = async (id) => {
     try {
-        const response = await axios.get(`/rooms/${id}/reservations`)
+        const response = await axios.get(`/rooms/${id}/reservations`, {headers: {"X-Origin-URL": window.location.pathname}})
         return response.data
     } catch (error) {
         return handleError(error)
@@ -77,8 +77,15 @@ const deleteReservation = async (roomId, id) => {
     }
 }
 
-function isRoomAvailable(room) {
-    room.reservation = getReservations(room.id)
+async function isRoomAvailable(room) {
+    try {
+        room.reservation = await getReservations(room.id)
+    } catch (error) {
+        return handleError(error);
+    }
+
+    if (room.reservation) return "Available";
+
     let available = 'Available'
     if (room.reservation === undefined || room.reservation.length === 0) {
         return 'Available'
