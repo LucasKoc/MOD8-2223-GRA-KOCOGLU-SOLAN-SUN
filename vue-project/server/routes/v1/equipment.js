@@ -1,6 +1,7 @@
 import express from 'express'
 import equipment from '../../persistence/equipment-repository.js'
 import validator from "../../validators/equipment-validator.js";
+import room from "../../persistence/room-repository.js";
 
 
 
@@ -98,10 +99,47 @@ router.patch('/equipments/:equipId/reservation', async (req, res,next) => {
     // res.status(202).json(await equipment.setreservation(req.params.equipId, req.body.time, req.body.userId))
 })
 
-router.get('/equipments/:equipId/reservation', async (req, res) => { res.status(200).json(await equipment.getreservation(req.body)) })
+router.get('/equipments/:equipId/reservation', async (req, res,next) => {
+    const equipID = Number.parseInt(req.params.equipId)
+    const err = validator.validateFindEquipmentReservation(equipID)
+    if (err) {
+        res.status(400).json({ error: err })
+        return next(err)
+    }
+    const find = await equipment.getreservation(req.params.equipId)
+    if (find && find.length > 0) {
+        res.status(200).json(await equipment.getreservation(req.params.equipId))
+    }
+    else{
+        res.status(404).json({message: 'reservation does not exist.'});
+    }
+    // res.status(200).json(await equipment.getreservation(req.body))
+})
 
-router.get('/equipments/user/reservation/:userId', async (req, res) => { res.status(200).json(await equipment.findUserEquipmentsReservations(req.params.userId)) })
-router.patch('/equipments/user/reservation/:userId', async (req, res) => {
+router.get('/equipments/user/reservation/:userId', async (req, res,next) => {
+    const userId = Number.parseInt(req.params.userId)
+    const err = validator.validateFindUserEquipmentsReservation(userId)
+    if (err) {
+        res.status(400).json({error: err});
+        return next(err)
+    }
+    const findReservations = await equipment.findUserEquipmentsReservations(req.params.userId)
+    if (findReservations && findReservations.length > 0){
+        res.status(200).json(await equipment.findUserEquipmentsReservations(req.params.userId))
+    }
+    else{
+        res.status(404).json({message: 'Reservation does not exist.'});
+    }
+})
+
+// res.status(200).json(await equipment.findUserEquipmentsReservations(req.params.userId))
+router.patch('/equipments/user/reservation/:userId', async (req, res,next) => {
+    const userId = Number.parseInt(req.params.userId)
+    const err = validator.validateDeleteUserEquipmentsReservation(userId)
+    if (err) {
+        res.status(400).json({error: err});
+        return next(err)
+    }
     const del = await equipment.deleteUserEquipmentsReservations(req.params.userId);
     if (del) {
         res.status(202).json({message: 'All equipment reservations have been successfully deleted'})
@@ -109,7 +147,7 @@ router.patch('/equipments/user/reservation/:userId', async (req, res) => {
     else {
         // Not an error, user have no reservations
         res.status(202).json({message: 'Equipment reservations associated with this id  do not exist or could not be deleted.'});
-    }
-})
 
+         }
+})
 export default router

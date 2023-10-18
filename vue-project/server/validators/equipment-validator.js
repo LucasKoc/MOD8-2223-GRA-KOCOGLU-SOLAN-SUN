@@ -16,6 +16,16 @@ function validateModifyEquipments(equipTime) {
 
 }
 
+function validateFindEquipmentReservation(id) {
+    return validateID(id)
+}
+function validateFindUserEquipmentsReservation(id) {
+        return validateID(id)
+}
+
+function validateDeleteUserEquipmentsReservation(id) {
+    return validateID(id)
+}
 
 function validateDeleteEquipment(id) {
     return validateID(id)
@@ -65,8 +75,9 @@ function validateCategory(category) {
     return null
 }
 
-function validateTime(time) {
+function validateTime(timed) {
 
+        const time = timed + ':00'
     if (time === undefined) {
         return new Error('Time is missing.');
     }
@@ -122,5 +133,8 @@ export default {
     validateCreateEquipments,
     validateDeleteEquipment,
     validateModifyEquipments,
+    validateFindEquipmentReservation,
+    validateFindUserEquipmentsReservation,
+    validateDeleteUserEquipmentsReservation,
     validateUserID
 }
