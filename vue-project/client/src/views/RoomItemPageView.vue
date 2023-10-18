@@ -29,7 +29,7 @@ const fetchLogin = async () => {
   }
 }
 
-onMounted(fetchData, fetchLogin);
+onMounted(fetchData);
 
 function saveData(data) {
   if (data) {

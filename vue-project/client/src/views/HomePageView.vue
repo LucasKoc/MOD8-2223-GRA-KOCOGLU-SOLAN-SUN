@@ -62,8 +62,8 @@ export default {
     const searchQuery = ref('')
     const roomReservations = ref([])
     const equipmentReservations = ref([])
-    let recommandedRooms = []
-    let recommandedEquipment = []
+    const recommandedRooms = ref([]);
+    const recommandedEquipment = ref([]);
 
     const fetchData = async () => {
       try {
@@ -78,14 +78,16 @@ export default {
     const recommandations = async () => {
       try {
         // Recommanded rooms
-        for (let i = 0; i < roomReservations.value.length && recommandedRooms.length < 3; i++) {
+        for (let i = 0; i < roomReservations.value.length && recommandedRooms.value.length < 3; i++) {
           try {
+            const roomReservationAvailableStatus = await roomData().isRoomAvailable(roomReservations.value[i]);
             if (
                 Math.round(Math.random()) === 1 &&
-                !roomData().isRoomAvailable(roomReservations.value[i]).includes('in') &&
-                !roomData().isRoomAvailable(roomReservations.value[i]).includes('in')
+                !roomReservationAvailableStatus.includes('in') &&
+                !roomReservationAvailableStatus.includes('in')
             ) {
-              recommandedRooms.push(roomReservations.value[i])
+              recommandedRooms.value.push(roomReservations.value[i])
+              console.log(recommandedRooms.value)
             }
           } catch (e) {
             console.error(e)
@@ -95,7 +97,7 @@ export default {
         // Recommanded equipment
         for (
             let i = 0;
-            i < equipmentReservations.value.length && recommandedEquipment.length < 3;
+            i < equipmentReservations.value.length && recommandedEquipment.value.length < 3;
             i++
         ) {
           try {
@@ -103,7 +105,7 @@ export default {
                 Math.round(Math.random()) === 1 &&
                 !equipmentData().isEquipmentAvailable(equipmentReservations.value[i]).valid === false
             ) {
-              recommandedEquipment.push(equipmentReservations.value[i])
+              recommandedEquipment.value.push(equipmentReservations.value[i])
             }
           } catch (e) {
             console.error(e)

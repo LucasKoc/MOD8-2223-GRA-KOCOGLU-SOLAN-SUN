@@ -7,7 +7,7 @@
 
 <script setup>
 import roomData from '../services/room'
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -18,7 +18,13 @@ const props = defineProps({
   }
 })
 
-const availability = ref(roomData().isRoomAvailable(props.room))
+const availability = ref()
+
+const fetchData = async () => {
+  availability.value = await roomData().isRoomAvailable(props.room)
+}
+
+onMounted(fetchData)
 
 function hrefToRoom() {
   router.push(`/rooms/${props.room.id}`)
