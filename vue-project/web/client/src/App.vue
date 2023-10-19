@@ -16,7 +16,7 @@ const fetchData = async () => {
   try {
     user.value = await userData().getConnectedUser()
     if (user.value && user.value != null) {
-      console.log(user.value)
+
       loginval.value = 'Log out'
     }
   } catch (error) {
@@ -40,7 +40,7 @@ function loginBehaviour() {
 async function exit(s) {
   if (s) {
     user.value = await userData().getConnectedUser()
-    console.log('useval', user.value)
+
     loginval.value = 'Log out'
   }
   isUserModalOpen.value = false

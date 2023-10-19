@@ -76,8 +76,6 @@ async function saveData(data) {
 async function isRoomAvailableAtSpecificHour(roomReservations, specificDate, specificTime) {
   const targetTimestamp = new Date(specificDate + 'T' + specificTime + 'Z')
 
-  console.log(roomReservations.value)
-
   if (
     roomReservations.value === undefined ||
     roomReservations.value.length === 0 ||

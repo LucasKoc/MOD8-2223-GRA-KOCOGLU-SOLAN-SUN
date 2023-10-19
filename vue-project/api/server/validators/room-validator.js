@@ -152,7 +152,7 @@ function validateID(id) {
     return null
 }
 function validateDate(date) {
-    console.log(date)
+
     if (date === undefined) {
         return new Error('Date is missing.');
     }
