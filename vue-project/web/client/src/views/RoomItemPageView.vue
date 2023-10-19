@@ -76,13 +76,16 @@ async function openModal() {
   }
 }
 
-function isReservationInPast(date) {
-  const offset = 4; // UTC-4
-  const currentTime = new Date(new Date().getTime() + (new Date().getTimezoneOffset() + 60 * offset) * 60000);
-  const reservationDate = new Date(date);
+function isReservationInPast(date, time) {
+  console.log(date, time)
+  const currentTime = new Date();
+  const reservationDateWithTime = new Date(`${date.split('T')[0]}T${time}-04:00`);
 
-  return reservationDate < currentTime;
+  console.log(reservationDateWithTime, currentTime);
+
+  return reservationDateWithTime < currentTime;
 }
+
 
 </script>
 
@@ -100,7 +103,7 @@ function isReservationInPast(date) {
         </div>
         <div class="reservation">
           <ul v-if="roomReservations.length !== 0">
-            <li v-for="roomReservation in roomReservations" :key="roomReservation.id" :class="{'pastReservation': isReservationInPast(roomReservation.date)}">
+            <li v-for="roomReservation in roomReservations" :key="roomReservation.id" :class="{'pastReservation': isReservationInPast(roomReservation.date, roomReservation.time)}">
               <span>Date: {{ roomReservation.date.split("T")[0] }}</span>
               <span>Reserved by: {{ username[roomReservation.userId] ? (username[roomReservation.userId].name !== undefined ? username[roomReservation.userId].name : "N/A") : "N/A" }}</span>
               <span>Hours: {{ roomReservation.time }}</span>
