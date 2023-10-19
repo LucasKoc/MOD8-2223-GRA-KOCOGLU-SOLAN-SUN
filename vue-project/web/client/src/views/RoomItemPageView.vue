@@ -70,7 +70,7 @@ async function saveData(data) {
     console.error('Error adding reservation:', error)
   }
   roomManage.value = false
-  window.location.reload()
+  // window.location.reload()
 }
 
 async function isRoomAvailableAtSpecificHour(roomReservations, specificDate, specificTime) {
@@ -84,8 +84,9 @@ async function isRoomAvailableAtSpecificHour(roomReservations, specificDate, spe
   const endOfRange = targetTimestamp.getTime() + (1 * 60 * 60 * 1000);
 
   const reservationsInRange = roomReservations.value.filter(reservation => {
-    const reservationTime = new Date(reservation.date.split('T')[0] + 'T' + reservation.time + 'Z').getTime();
-    return reservationTime >= startOfRange && reservationTime <= endOfRange;
+    const reservationTimeStartRange = new Date(reservation.date.split('T')[0] + 'T' + reservation.time + 'Z').getTime();
+    const reservationTimeEndRange = new Date(reservation.date.split('T')[0] + 'T' + reservation.time + 'Z').getTime() + (1 * 60 * 60 * 1000);
+    return (reservationTimeStartRange >= startOfRange && reservationTimeStartRange <= endOfRange) || (reservationTimeEndRange >= startOfRange && reservationTimeEndRange <= endOfRange)
   });
 
   return reservationsInRange.length <= 0;
