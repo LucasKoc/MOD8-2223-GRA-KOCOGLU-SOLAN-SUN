@@ -33,10 +33,11 @@ const fetchData = async () => {
 onMounted(fetchData)
 
 function isReservationInPast(date) {
-  const timestamp = new Date();
+  const offset = 4; // UTC-4
+  const currentTime = new Date(new Date().getTime() + (new Date().getTimezoneOffset() + 60 * offset) * 60000);
   const reservationDate = new Date(date);
-  timestamp.setHours(0, 0, 0, 0);
-  return reservationDate < timestamp;
+
+  return reservationDate < currentTime;
 }
 
 </script>
