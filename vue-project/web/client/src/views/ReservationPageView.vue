@@ -44,7 +44,7 @@ function isReservationInPast(date) {
 <template>
   <main>
     <div class="reservation-view">
-      <h2>My Reservations</h2>
+      <h2>Reservations for : {{ user?.name || "Loading…" }}</h2>
       <div class="flexdiv">
         <div>
           <div class="block-room">
