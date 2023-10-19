@@ -98,10 +98,10 @@ INSERT INTO equipments (name, category) VALUES
 
 -- Insert data into "users" table
 INSERT INTO users (room, keyp, name, role) VALUES
-    (202, '1234', 'John', NULL),
+    (202, '1234', 'John', 'user'),
     (0, '0', '0', 'admin'),
-    (206, '8627', 'John2', NULL),
-    (195, '1268', 'John3', NULL);
+    (206, '8627', 'John2', 'user'),
+    (195, '1268', 'John3', 'user');
 
 -- Insert data into "rooms" table
 INSERT INTO rooms (roomname, roomtype) VALUES
@@ -134,9 +134,4 @@ INSERT INTO reservations (room_id, date, time, user_id) VALUES
     (1, '2023-10-04', '23:00', 1),
     (1, '2023-10-05', '00:00', 1),
     (2, '2021-06-01', '18:00', 2),
-    (2, '2021-06-01', '18:00', 2),
-    (2, '2021-06-01', '18:00', 2),
-    (2, '2021-06-01', '18:00', 2),
-    (2, '2021-06-01', '18:00', 2),
-    (9, '2021-06-01', '18:00', 2),
     (10, '2021-09-01', '16:00', 2);
