@@ -98,7 +98,7 @@ const login = async (body, req) => {
         row.username = row.name
         row.startTime = new Date().getTime()
         row.expiryTime = new Date().getTime() + 60 * 60 * 1000
-        session.createSession(row)
+        await session.createSession(row)
         return row.id
     }
     return false
