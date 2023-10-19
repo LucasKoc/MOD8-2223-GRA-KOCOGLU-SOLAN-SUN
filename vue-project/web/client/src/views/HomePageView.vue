@@ -93,7 +93,6 @@ export default {
               !roomReservationAvailableStatus.includes('in')
             ) {
               recommandedRooms.value.push(roomReservations.value[i])
-              console.log(recommandedRooms.value)
             }
           } catch (e) {
             console.error(e)

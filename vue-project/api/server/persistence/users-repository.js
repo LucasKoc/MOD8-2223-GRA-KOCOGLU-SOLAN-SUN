@@ -27,7 +27,7 @@ const findUser = async id => {
 const addUser = async user => {
     const query =
         "INSERT INTO users (room, keyp, name, role) VALUES (?, ?, ?, ?);";
-    console.log(user)
+
     if (!user.role)
         user.role = "user"
     const [result] = await database.execute(query, [
@@ -50,7 +50,7 @@ const deleteUser = async id => {
 };
 
 const modifyUser = async (id, user) => {
-    console.log(id)
+
     const query =
         "UPDATE users SET room = ?, keyp = ?, name = ?, role = ? WHERE id = ?;";
     const [result] = await database.execute(query, [
@@ -93,7 +93,7 @@ const verifyUser = async (body) => {
 
 const login = async (body, req) => {
     const row = await verifyUser(body)
-    console.log(row)
+
     if (row){
         row.username = row.name
         row.startTime = new Date().getTime()
@@ -111,7 +111,6 @@ const logout = async (id, req) => {
 
 const getConnectedUser = async (id) => {
     const response = await session.findSession(id)
-    console.log(response)
     return response
 }
 

@@ -142,7 +142,7 @@ function validateUserConnection(userId) {
     return validateID(userId)
 }
 function validateCode(code) {
-    console.log(code)
+
     code = Number.parseInt(code)
     if (code === undefined) {
         return new Error('key is missing.')

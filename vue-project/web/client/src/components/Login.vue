@@ -14,7 +14,6 @@ const submitForm = async () => {
   loop = await userfunc.login(key.value, roomNumber.value, lastName.value)
   if (loop.error !== undefined) loop = false
 
-  console.log('loop', loop, !loop)
   if (!loop) {
     alert('Invalid credentials')
   } else {
