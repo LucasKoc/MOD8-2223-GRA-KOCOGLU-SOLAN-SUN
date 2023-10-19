@@ -79,10 +79,15 @@ async function openModal() {
 function isReservationInPast(date, time) {
   const currentTime = new Date();
   const reservationDateWithTime = new Date(`${date.split('T')[0]}T${time}-04:00`);
+  const reservationEndTime = new Date(reservationDateWithTime.getTime() + (60 * 60 * 1000));
 
-  return reservationDateWithTime < currentTime;
+  if (reservationDateWithTime < currentTime && reservationEndTime > currentTime) {
+    return "currentReservation";
+  } else if (reservationDateWithTime < currentTime) {
+    return "pastReservation";
+  }
+  return "";
 }
-
 
 </script>
 
@@ -100,10 +105,12 @@ function isReservationInPast(date, time) {
         </div>
         <div class="reservation">
           <ul v-if="roomReservations.length !== 0">
-            <li v-for="roomReservation in roomReservations" :key="roomReservation.id" :class="{'pastReservation': isReservationInPast(roomReservation.date, roomReservation.time)}">
+            <li v-for="roomReservation in roomReservations" :key="roomReservation.id" :class="isReservationInPast(roomReservation.date, roomReservation.time)">
               <span>Date: {{ roomReservation.date.split("T")[0] }}</span>
               <span>Reserved by: {{ username[roomReservation.userId] ? (username[roomReservation.userId].name !== undefined ? username[roomReservation.userId].name : "N/A") : "N/A" }}</span>
-              <span>Hours: {{ roomReservation.time }}</span>
+              <span>Hours: {{ String(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getHours()).padStart(2, '0') }}:{{ String(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getMinutes()).padStart(2, '0') }}:{{ String(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getSeconds()).padStart(2, '0') }} - {{ String(new Date(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getTime() + 3600000).getHours()).padStart(2, '0') }}:{{ String(new Date(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getTime() + 3600000).getMinutes()).padStart(2, '0') }}:{{ String(new Date(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getTime() + 3600000).getSeconds()).padStart(2, '0') }}
+                  <span v-if="isReservationInPast(roomReservation.date, roomReservation.time) === 'currentReservation'">(Running)</span>
+                  </span>
             </li>
           </ul>
           <ul v-else>
