@@ -95,8 +95,6 @@ router.patch('/equipments/:equipId/reservation', async (req, res,next) => {
         res.status(404).json({error: 'equipment could not be modified.'});
 
     }
-
-    // res.status(202).json(await equipment.setreservation(req.params.equipId, req.body.time, req.body.userId))
 })
 
 router.get('/equipments/:equipId/reservation', async (req, res,next) => {

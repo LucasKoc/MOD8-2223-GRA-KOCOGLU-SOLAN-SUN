@@ -94,6 +94,12 @@ li.emptyReservation {
   opacity: 0.5;
 }
 
+.currentReservation span {
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--color-required);
+}
+
 @media (max-width: 700px) {
   h3 {
     font-size: 3vw;

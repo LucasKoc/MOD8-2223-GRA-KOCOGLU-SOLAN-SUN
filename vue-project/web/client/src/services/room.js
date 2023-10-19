@@ -84,37 +84,19 @@ async function isRoomAvailable(room) {
         return handleError(error);
     }
 
-    if (room.reservation) return "Available";
+    if (room.reservation === undefined || room.reservation.length === 0 || room.reservation.message === "Room reservation does not exist or could not be find.") return 'Available'
+    
+    const currentTimestamp = new Date();
+    const futureReservation = room.reservation.filter(reservation => new Date(reservation.date.split('T')[0]+'T' + reservation.time + 'Z') >= currentTimestamp.getTime() - (4 * 60 * 60 * 1000) + (1 * 60 * 60 * 1000))
+    const currentReservation = room.reservation.filter(reservation => (new Date(reservation.date.split('T')[0]+'T' + reservation.time + 'Z') >= new Date(currentTimestamp.getTime() - (4 * 60 * 60 * 1000) - (1 * 60 * 60 * 1000)) && new Date(reservation.date.split('T')[0]+'T' + reservation.time + 'Z') <= currentTimestamp.getTime() - (4 * 60 * 60 * 1000) + (1 * 60 * 60 * 1000)))
 
-    let available = 'Available'
-    if (room.reservation === undefined || room.reservation.length === 0) {
-        return 'Available'
+    if (currentReservation.length > 0 && futureReservation.length > 0) {
+        if ((new Date(futureReservation[futureReservation.length - 1].date.split('T')[0] + 'T' + futureReservation[futureReservation.length - 1].time + 'Z').getTime()) <= currentTimestamp.getTime() - (4 * 60 * 60 * 1000) + (2 * 60 * 60 * 1000))
+            return 'Unavailable'
+        else
+            return 'Available in ' + Math.round(((new Date(currentReservation[0].date.split('T')[0] + 'T' + currentReservation[0].time + 'Z').getTime() + (60 * 60 * 1000)) - (currentTimestamp.getTime() - (4 * 60 * 60 * 1000))) / (60 * 1000)) + ' minutes'
     }
-
-    for (let i = 0; i < room.reservation.length; i++) {
-        const currentTime =
-            new Date().getMinutes() +
-            new Date().getHours() * 60 +
-            new Date().getDate() * 24 * 60 +
-            (new Date().getMonth() + 1) * 30 * 24 * 60 +
-            new Date().getFullYear() * 365 * 24 * 60
-        const roomTime = room.reservation[i].time.split(':')
-        const roomDate = room.reservation[i].date.split('-')
-        const addedTime =
-            roomTime[0] * 60 +
-            parseInt(roomTime[1]) +
-            roomDate[0] * 365 * 24 * 60 +
-            roomDate[1] * 30 * 24 * 60 +
-            roomDate[2] * 24 * 60
-
-        if (addedTime - currentTime < 0 && 0 < addedTime + 60 - currentTime) {
-            if (0 < addedTime + 60 - currentTime)
-                available = 'Available in ' + (addedTime + 60 - currentTime) + ' minutes'
-            else available = 'Unavailable'
-        }
-    }
-
-    return available
+    return 'Available'
 }
 
 function handleError(error) {

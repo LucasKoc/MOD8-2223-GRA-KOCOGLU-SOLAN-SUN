@@ -21,7 +21,7 @@ const findRoom = async (id) => {
 }
 
 const findUserRoomReservations = async (userId) => {
-    const query = 'SELECT rooms.roomname, reservations.room_id, reservations.date, reservations.time FROM rooms JOIN reservations ON rooms.id = reservations.room_id WHERE reservations.user_id = ? ORDER BY date DESC;'
+    const query = 'SELECT rooms.roomname, reservations.room_id, reservations.date, reservations.time FROM rooms JOIN reservations ON rooms.id = reservations.room_id WHERE reservations.user_id = ? ORDER BY reservations.date DESC, reservations.time DESC;'
     const [rows] = await database.execute(query, [userId])
     return rows.map(mapUserReservation)
 }
@@ -67,7 +67,7 @@ function mapReservation(row) {
 }
 
 const findReservations = async (id) => {
-  const query = 'SELECT id, room_id, date, time, user_id FROM reservations WHERE room_id = ? ORDER BY date DESC;'
+  const query = 'SELECT id, room_id, date, time, user_id FROM reservations WHERE room_id = ? ORDER BY date DESC, time DESC;'
   const [rows] = await database.execute(query, [id])
   return rows.map(mapReservation)
 }

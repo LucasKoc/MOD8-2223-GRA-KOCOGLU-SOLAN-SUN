@@ -33,7 +33,7 @@ const submitForm = () => {
         <input type="date" id="reservationDate" v-model="reservationDate" required />
       </div>
       <div class="form-group">
-        <label for="reservationHours">Hours of Reservation</label>
+        <label for="reservationHours">Starting hour of Reservation (1h)</label>
         <input type="time" id="roomreservationHours" v-model="reservationHours" required />
       </div>
       <button type="submit">Reserve</button>

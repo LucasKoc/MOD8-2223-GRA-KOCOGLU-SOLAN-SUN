@@ -126,6 +126,13 @@ main {
   opacity: 0.5;
 }
 
+.currentReservation span {
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--color-required);
+}
+
+
 @media (max-width: 1020px) {
   main {
     margin-top: 13vh;

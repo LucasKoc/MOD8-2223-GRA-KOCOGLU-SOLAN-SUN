@@ -152,6 +152,7 @@ function validateID(id) {
     return null
 }
 function validateDate(date) {
+    console.log(date)
     if (date === undefined) {
         return new Error('Date is missing.');
     }
@@ -164,10 +165,10 @@ function validateDate(date) {
         return new Error('Date format is incorrect. Use YYYY-MM-DD.');
     }
     const currentDate = new Date();
-    const providedDate = new Date(`${date}T00:00:00Z`);
+    currentDate.setHours(0, 0, 0, 0);
+    const providedDate = new Date(`${date}T04:00:00Z`);
 
-
-    if(providedDate< currentDate)
+    if(providedDate < currentDate)
     {
         return new Error('You can only reserve for future.');
     }
