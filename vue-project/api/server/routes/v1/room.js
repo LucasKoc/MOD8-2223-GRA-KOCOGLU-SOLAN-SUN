@@ -4,11 +4,13 @@ import validator from '../../validators/room-validator.js'
 
 const router = express.Router()
 
+//returns all rooms
 router.get('/rooms', async (req, res) => {
 
     res.status(200).json(await room.findRooms())}
 )
 
+//returns a specific room
 router.get('/rooms/:roomId', async (req, res,next) => {
     const roomID = Number.parseInt(req.params.roomId)
     const err = validator.validateFindRoom(roomID)
@@ -25,6 +27,7 @@ router.get('/rooms/:roomId', async (req, res,next) => {
     }
 })
 
+//creates a new room
 router.post('/rooms', async (req, res,next  ) => {
 
     const name = req.body.roomname
@@ -43,6 +46,7 @@ router.post('/rooms', async (req, res,next  ) => {
     }
 })
 
+// deletes a specific room
 router.delete('/rooms/:roomId', async (req, res,next) => {
 
 
@@ -61,6 +65,7 @@ router.delete('/rooms/:roomId', async (req, res,next) => {
     }
 )
 
+//returns all reservation of a specific room
 router.get('/rooms/:roomId/reservations', async (req, res,next) => {
 
     const roomId = Number.parseInt(req.params.roomId)
@@ -79,6 +84,7 @@ router.get('/rooms/:roomId/reservations', async (req, res,next) => {
     }
 })
 
+//creates a new reservation for a specific room
 router.post('/rooms/reservations', async (req, res,next) => {
     const identity = req.body.roomId
     const date = req.body.date
@@ -119,7 +125,7 @@ router.post('/rooms/reservations', async (req, res,next) => {
 
 })
 
-
+//returns all room reservation of a specific user
 router.get('/rooms/user/reservations/:userId', async (req, res,next) => {
 
     const userId = Number.parseInt(req.params.userId)
@@ -136,7 +142,7 @@ router.get('/rooms/user/reservations/:userId', async (req, res,next) => {
     else res.status(404).json({error: 'Reservation does not exist.'});
 })
 
-
+//deletes all room reservation of a specific user
 router.delete('/rooms/user/reservations/:userId', async (req, res,next) => {
         const userId = Number.parseInt(req.params.userId)
         const err = validator.validateDeleteUserRoomReservation(userId)
@@ -156,6 +162,7 @@ router.delete('/rooms/user/reservations/:userId', async (req, res,next) => {
     }
 )
 
+//deletes a specific room reservation of a specific room
 router.delete('/rooms/:roomId/reservations/:resId', async (req, res,next) => {
         const resId = Number.parseInt(req.params.resId)
         const err = validator.validateDeleteRoomReservation(resId)

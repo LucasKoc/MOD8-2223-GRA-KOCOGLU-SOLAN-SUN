@@ -5,10 +5,12 @@ import validator from "../../validators/user-validator.js";
 
 
 const router = express.Router()
-
+//returns all users
 router.get('/users', async (req, res   ) => {
     res.status(200).json(await user.findUsers())
 })
+
+//returns a specific user
 router.get('/users/:userId', async (req, res,next) => {
     const userID = Number.parseInt(req.params.userId)
     const err = validator.validateUser(userID)
@@ -24,6 +26,8 @@ router.get('/users/:userId', async (req, res,next) => {
         res.status(404).json({message: 'user does not exist.'});
     }
 })
+
+//creates a new user
 router.post('/users', async(req,res,next)=>{
     const userId = req.body.room
     const code = req.body.keyp
@@ -44,6 +48,8 @@ router.post('/users', async(req,res,next)=>{
 
     }
 })
+
+// deletes a specific user
 router.delete('/users/:userId', async (req, res,next) => {
 
     const userID = Number.parseInt(req.params.userId)
@@ -60,8 +66,9 @@ router.delete('/users/:userId', async (req, res,next) => {
         res.status(404).json({error: 'User does not exist or could not be deleted.'});
     }
 
-
 })
+
+//modifies a specific user
 router.patch('/users/:userId', async (req, res,next) => {
     const userID = Number.parseInt(req.params.userId)
     const personalKey = req.body.key
@@ -80,6 +87,8 @@ router.patch('/users/:userId', async (req, res,next) => {
 
     // res.status(202).json(await user.modifyUser(req.params.userId, req.body))
 })
+
+//returns a specific user by key
 router.get('/users/key/:key', async (req, res,next) => {
     const key = req.params.key
     const err = validator.validateKey(key)
@@ -98,6 +107,7 @@ router.get('/users/key/:key', async (req, res,next) => {
     // res.status(200).json(await user.findUserByKey(req.params.key))
 })
 
+//ban a specific user from making reservation
 router.put('/users/:userId/ban/:bantime', async (req, res,next) => {
 
     const userID = Number.parseInt(req.params.userId)
@@ -119,6 +129,8 @@ router.put('/users/:userId/ban/:bantime', async (req, res,next) => {
 
     res.status(200).json(await user.banUser(banTime, req.params.userId))
 })
+
+//get the ban time of a specific user
 router.get('/users/:userId/ban', async (req, res,next) => {
     const userID = Number.parseInt(req.params.userId)
     const err = validator.validateUser(userID)
@@ -143,6 +155,7 @@ router.get('/users/verify', async (req, res) => {
     res.status(200).json(await user.verifyUser(req.body))
 })
 
+//Create a new session for a user
 router.post('/users/login', async (req, res,next) => {
     const roomNumber = req.body.room
     const code = req.body.keyp
@@ -162,6 +175,8 @@ router.post('/users/login', async (req, res,next) => {
     }
 
 })
+
+// Delete a session for a user
 router.post('/users/:userId/logout', async (req, res,next) => {
     const userID = Number.parseInt(req.params.userId)
     const err = validator.validateUserLogout(userID)
@@ -179,6 +194,8 @@ router.post('/users/:userId/logout', async (req, res,next) => {
     }
 
 })
+
+//verify if a user as an active session
 router.get('/users/:userId/connected', async (req, res,next) => {
     const userID = Number.parseInt(req.params.userId)
     const err = validator.validateUserConnection(userID)

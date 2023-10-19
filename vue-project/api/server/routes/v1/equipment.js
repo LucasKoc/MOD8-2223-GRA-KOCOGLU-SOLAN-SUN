@@ -5,10 +5,12 @@ import room from "../../persistence/room-repository.js";
 
 const router = express.Router()
 
+//returns all equipments
 router.get('/equipments', async (req, res) => {
     res.status(200).json(await equipment.findEquipments())
 })
 
+//returns a specific equipment
 router.get('/equipments/:equipId', async (req, res,next) => {
     const equipID = Number.parseInt(req.params.equipId)
     const err = validator.validateFindEquipment(equipID)
@@ -24,6 +26,8 @@ router.get('/equipments/:equipId', async (req, res,next) => {
         res.status(404).json({message: 'equipment does not exist.'});
     }
 })
+
+//creates a new equipment
 router.post('/equipments', async(req,res,next)=>{
     const equipName = req.body.name
     const equipCategory = req.body.category
@@ -41,9 +45,9 @@ router.post('/equipments', async(req,res,next)=>{
     }
 
 })
+
+// deletes a specific equipment
 router.delete('/equipments/:equipId', async (req, res,next) => {
-
-
     const EquipId = Number.parseInt(req.params.equipId)
     const err = validator.validateDeleteEquipment(EquipId)
     if (err) {
@@ -59,6 +63,7 @@ router.delete('/equipments/:equipId', async (req, res,next) => {
 
 })
 
+//add a reservation to a specific equipment
 router.patch('/equipments/:equipId/reservation', async (req, res,next) => {
     const EquipId = Number.parseInt(req.params.equipId)
     const equipTime = req.body.time
@@ -97,6 +102,7 @@ router.patch('/equipments/:equipId/reservation', async (req, res,next) => {
     }
 })
 
+//returns the reservations of a specific equipment
 router.get('/equipments/:equipId/reservation', async (req, res,next) => {
     const equipID = Number.parseInt(req.params.equipId)
     const err = validator.validateFindEquipmentReservation(equipID)
@@ -114,6 +120,7 @@ router.get('/equipments/:equipId/reservation', async (req, res,next) => {
     // res.status(200).json(await equipment.getreservation(req.body))
 })
 
+//returns the equipment reservation of a specific user
 router.get('/equipments/user/reservation/:userId', async (req, res,next) => {
     const userId = Number.parseInt(req.params.userId)
     const err = validator.validateFindUserEquipmentsReservation(userId)
@@ -129,7 +136,7 @@ router.get('/equipments/user/reservation/:userId', async (req, res,next) => {
     else res.status(404).json({error: 'Reservation does not exist.'});
 })
 
-// res.status(200).json(await equipment.findUserEquipmentsReservations(req.params.userId))
+//delete the reservation of an equipment for a user
 router.patch('/equipments/user/reservation/:userId', async (req, res,next) => {
     const userId = Number.parseInt(req.params.userId)
     const err = validator.validateDeleteUserEquipmentsReservation(userId)
