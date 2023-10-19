@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {ref, computed, onMounted} from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import RoomThumbnail from '@/components/RoomThumbnail.vue'
 import roomData from '../services/room.js'
 

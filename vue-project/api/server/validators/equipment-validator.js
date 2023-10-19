@@ -92,7 +92,10 @@ function validateCategory(category) {
 
 function validateTime(timed) {
 
-    const time = timed + ':00'
+    let time
+    if (timed.split(':').length === 2) {time = timed + ':00'}
+    else {time = timed}
+
     if (time === undefined) {
         return new Error('Time is missing.');
     }

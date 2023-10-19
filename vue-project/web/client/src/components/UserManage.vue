@@ -47,15 +47,15 @@ const applyBan = () => {
         <h2>User Details</h2>
         <div class="form-group">
           <label for="userLastName">Room</label>
-          <input type="number" id="userRoom" v-model="userRoom" required/>
+          <input type="number" id="userRoom" v-model="userRoom" required />
         </div>
         <div class="form-group">
           <label for="userKey">Key</label>
-          <input type="password" id="userKey" v-model="userKey" maxlength="4" required/>
+          <input type="password" id="userKey" v-model="userKey" maxlength="4" required />
         </div>
         <div class="form-group">
           <label for="userName">User Name</label>
-          <input type="text" id="userName" v-model="userName" required/>
+          <input type="text" id="userName" v-model="userName" required />
         </div>
         <div class="button-group">
           <button @click="saveChanges">Save Changes</button>

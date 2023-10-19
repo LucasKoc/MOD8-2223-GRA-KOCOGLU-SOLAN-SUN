@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Equipment from '../components/Equipment.vue'
 import EquipmentReservation from '../components/EquipmentReservation.vue'
 import equipmentData from '../services/equipment.js'
@@ -60,12 +60,12 @@ async function saveData(data) {
   try {
     if (data) {
       await equipment.reserveEquipment(data.id, data.reservations.time, user.value.id)
+      window.location.reload()
     }
   } catch (error) {
     console.log(error)
   }
   equipmentManage.value = false
-  window.location.reload()
 }
 </script>
 

@@ -103,7 +103,8 @@ nav {
   text-align: center;
 }
 
-nav.header-router, .icon {
+nav.header-router,
+.icon {
   display: none;
   margin: 0;
 }

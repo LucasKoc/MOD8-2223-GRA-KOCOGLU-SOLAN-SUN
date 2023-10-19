@@ -32,7 +32,7 @@ const addUser = async user => {
         user.role = "user"
     const [result] = await database.execute(query, [
         user.room,
-        user.key,
+        user.keyp,
         user.name,
         user.role
     ]);
@@ -55,7 +55,7 @@ const modifyUser = async (id, user) => {
         "UPDATE users SET room = ?, keyp = ?, name = ?, role = ? WHERE id = ?;";
     const [result] = await database.execute(query, [
         user.room,
-        user.key,
+        user.keyp,
         user.name,
         user.role,
         id

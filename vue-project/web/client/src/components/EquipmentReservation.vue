@@ -39,6 +39,14 @@ const submitForm = () => {
 
   const equip = equipment.filter((e) => e.id === selectedEquipmentId.value)[0]
   equip.reservations = reservation
+  console.log(equip)
+
+  if (equip.time !== null) {
+    if (equip.time > reservationHours.value) {
+      alert('Equipment is not available at this time. Please select another equipment or make reservation later.')
+      return
+    }
+  }
   emits('sendData', equip)
 }
 
@@ -51,7 +59,6 @@ try {
 } catch (error) {
   console.log(error)
 }
-
 </script>
 
 <template>

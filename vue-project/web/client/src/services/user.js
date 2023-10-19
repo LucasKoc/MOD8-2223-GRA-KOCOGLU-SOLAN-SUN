@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios'
 
 function addUser(user) {
   try {
     axios.post('/users', user)
-    } catch (error) {
+  } catch (error) {
     return handleError(error)
   }
 }
@@ -13,8 +13,8 @@ async function getUsers() {
     const response = await axios.get(`/users`)
     return response.data
   } catch (error) {
-  return handleError(error)
-}
+    return handleError(error)
+  }
 }
 
 async function getUser(id) {
@@ -27,44 +27,45 @@ async function getUser(id) {
 }
 
 const modifyUser = async (id, user) => {
-    try {
-      if (user.role === undefined) user.role = null;
-        const response = await axios.get(`/users/${id}`)
-      if (!response.data) {
-        await addUser(user)
-        return;
-      }
-      await axios.patch(`/users/${id}`, user)
-    } catch (error) {
-        return handleError(error)
+  try {
+    if (user.role === undefined) user.role = null
+    const response = await axios.get(`/users/${id}`)
+    if (!response.data) {
+      await addUser(user)
+      return
     }
+    await axios.patch(`/users/${id}`, user)
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
 const deleteUser = async (id) => {
-    try {
-      await axios.delete(`/rooms/user/reservations/${id}`, {headers: {"X-Origin-URL": window.location.pathname}})
-      await axios.patch(`/equipments/user/reservation/${id}`)
-      await axios.post(`/users/${id}/logout`)
-      await axios.delete(`/users/${id}`)
-        return true
-    } catch (error) {
-        return handleError(error)
-    }
+  try {
+    await axios.delete(`/rooms/user/reservations/${id}`, {
+      headers: { 'X-Origin-URL': window.location.pathname }
+    })
+    await axios.patch(`/equipments/user/reservation/${id}`)
+    await axios.delete(`/users/${id}`)
+    return true
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
 const banUser = async (id, bantime) => {
-    try {
-      axios.put(`/users/${id}/ban/${bantime}`)
-    } catch (error) {
-      return handleError(error)
-    }
+  try {
+    axios.put(`/users/${id}/ban/${bantime}`)
+  } catch (error) {
+    return handleError(error)
+  }
 }
 
 async function verifyUser(key, room, name) {
   try {
     const response = await axios.get('/users/verify', { params: { key, room, name } })
     return response.data
-    } catch (error) {
+  } catch (error) {
     return handleError(error)
   }
 }
