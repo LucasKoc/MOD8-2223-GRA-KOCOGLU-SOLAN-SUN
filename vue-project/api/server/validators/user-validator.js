@@ -147,6 +147,7 @@ function validateCode(code) {
     if (code === undefined) {
         return new Error('key is missing.')
     }
+    /* Key is not required to be only an integer
     try {
         console.log(code)
         if(!Number.isInteger(code)) {
@@ -155,6 +156,7 @@ function validateCode(code) {
     } catch (e) {
         return new Error('key must be an integer 2 .')
     }
+    */
     return null
 }
 function validateID(id) {

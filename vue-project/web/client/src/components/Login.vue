@@ -12,6 +12,8 @@ const submitForm = async () => {
   let loop = true
 
   loop = await userfunc.login(key.value, roomNumber.value, lastName.value)
+  if (loop.error !== undefined) loop = false
+
   console.log("loop", loop, !loop)
   if (!loop) {
     alert('Invalid credentials')
@@ -29,7 +31,7 @@ const submitForm = async () => {
       <div class="form-group">
         <label for="roomNumber">Room Number</label>
         <input
-          type="text"
+          type="number"
           id="roomNumber"
           v-model="roomNumber"
           placeholder="Enter Room Number"
@@ -38,7 +40,7 @@ const submitForm = async () => {
       </div>
       <div class="form-group">
         <label for="key">Key</label>
-        <input type="password" id="key" v-model="key" placeholder="Enter Key" required />
+        <input type="password" id="key" v-model="key" placeholder="Enter Key" maxlength="4" required />
       </div>
       <div class="form-group">
         <label for="lastName">Last Name</label>
