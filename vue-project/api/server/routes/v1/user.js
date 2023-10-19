@@ -26,7 +26,7 @@ router.get('/users/:userId', async (req, res,next) => {
 })
 router.post('/users', async(req,res,next)=>{
     const userId = req.body.room
-    const code = req.body.key
+    const code = req.body.keyp
     const name = req.body.name
 
     const err = await validator.validateUserIdentity(userId,code,name);
@@ -145,7 +145,7 @@ router.get('/users/verify', async (req, res) => {
 
 router.post('/users/login', async (req, res,next) => {
     const roomNumber = req.body.room
-    const code = req.body.key
+    const code = req.body.keyp
     const name = req.body.name
 
     const err = await validator.validateUserLogin(roomNumber, code, name);

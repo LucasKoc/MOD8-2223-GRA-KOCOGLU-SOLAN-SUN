@@ -46,7 +46,6 @@ const deleteUser = async (id) => {
       headers: { 'X-Origin-URL': window.location.pathname }
     })
     await axios.patch(`/equipments/user/reservation/${id}`)
-    await axios.post(`/users/${id}/logout`)
     await axios.delete(`/users/${id}`)
     return true
   } catch (error) {
