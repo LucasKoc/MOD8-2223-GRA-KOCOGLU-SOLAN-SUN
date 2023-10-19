@@ -33,7 +33,6 @@ const fetchData = async () => {
 onMounted(fetchData)
 
 function isReservationInPast(date, time) {
-  console.log(date, time)
   const currentTime = new Date();
   const reservationDateWithTime = new Date(`${date.split('T')[0]}T${time}-04:00`);
 
