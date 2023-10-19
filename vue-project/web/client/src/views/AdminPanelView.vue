@@ -12,7 +12,7 @@ const singleUser = ref()
 const blankUser = ref({
   name: '',
   key: '',
-  room: '',
+  room: ''
 })
 const router = useRouter()
 
@@ -74,7 +74,7 @@ async function saveData(data) {
   blankUser.value = {
     name: '',
     key: '',
-    room: '',
+    room: ''
   }
   window.location.reload()
 }

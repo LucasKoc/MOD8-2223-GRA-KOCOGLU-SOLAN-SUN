@@ -132,7 +132,6 @@ main {
   color: var(--color-required);
 }
 
-
 @media (max-width: 1020px) {
   main {
     margin-top: 13vh;

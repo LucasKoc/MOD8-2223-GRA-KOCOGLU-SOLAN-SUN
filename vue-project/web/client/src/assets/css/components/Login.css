@@ -2,7 +2,7 @@
 
 input[type='text'],
 input[type='password'],
-input[type='number']{
+input[type='number'] {
   width: 95%;
   padding: 10px;
   border: 1px solid var(--color-border);
@@ -21,7 +21,8 @@ input[type='number']{
     font-size: 1em;
   }
   .login-form input[type='text'],
-  .login-form input[type='password'],input[type='number'] {
+  .login-form input[type='password'],
+  input[type='number'] {
     padding: 5px 10px 5px 10px;
   }
 }

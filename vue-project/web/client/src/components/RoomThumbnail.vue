@@ -7,7 +7,7 @@
 
 <script setup>
 import roomData from '../services/room'
-import {onMounted, ref} from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Equipment from '../components/Equipment.vue'
 import EquipmentReservation from '../components/EquipmentReservation.vue'
 import equipmentData from '../services/equipment.js'

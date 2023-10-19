@@ -23,7 +23,9 @@ const fetchData = async () => {
         roomReservations.value = []
       }
     }
-    equipmentReservation.value = await equipmentData().getEquipmentReservationByUserId(user.value.id)
+    equipmentReservation.value = await equipmentData().getEquipmentReservationByUserId(
+      user.value.id
+    )
     equipmentReservation.value = equipmentReservation.value[0]
   } catch (error) {
     console.error('Error fetching data:', error)
@@ -33,24 +35,23 @@ const fetchData = async () => {
 onMounted(fetchData)
 
 function isReservationInPast(date, time) {
-  const currentTime = new Date();
-  const reservationDateWithTime = new Date(`${date.split('T')[0]}T${time}-04:00`);
-  const reservationEndTime = new Date(reservationDateWithTime.getTime() + (60 * 60 * 1000));
+  const currentTime = new Date()
+  const reservationDateWithTime = new Date(`${date.split('T')[0]}T${time}-04:00`)
+  const reservationEndTime = new Date(reservationDateWithTime.getTime() + 60 * 60 * 1000)
 
   if (reservationDateWithTime < currentTime && reservationEndTime > currentTime) {
-    return "currentReservation";
+    return 'currentReservation'
   } else if (reservationDateWithTime < currentTime) {
-    return "pastReservation";
+    return 'pastReservation'
   }
-  return "";
+  return ''
 }
-
 </script>
 
 <template>
   <main>
     <div class="reservation-view">
-      <h2>Reservations for : {{ user?.name || "Loading…" }}</h2>
+      <h2>Reservations for : {{ user?.name || 'Loading…' }}</h2>
       <div class="flexdiv">
         <div>
           <div class="block-room">
@@ -58,11 +59,67 @@ function isReservationInPast(date, time) {
 
             <div class="reservation-room">
               <ul v-if="roomReservations.length !== 0">
-                <li v-for="roomReservation in roomReservations" :key="roomReservation.id" :class="isReservationInPast(roomReservation.date, roomReservation.time)">
+                <li
+                  v-for="roomReservation in roomReservations"
+                  :key="roomReservation.id"
+                  :class="isReservationInPast(roomReservation.date, roomReservation.time)"
+                >
                   <span>Room: {{ roomReservation.roomname }}</span>
-                  <span>Date: {{ roomReservation.date.split("T")[0]}}</span>
-                  <span>Hours: {{ String(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getHours()).padStart(2, '0') }}:{{ String(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getMinutes()).padStart(2, '0') }}:{{ String(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getSeconds()).padStart(2, '0') }} - {{ String(new Date(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getTime() + 3600000).getHours()).padStart(2, '0') }}:{{ String(new Date(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getTime() + 3600000).getMinutes()).padStart(2, '0') }}:{{ String(new Date(new Date(`${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`).getTime() + 3600000).getSeconds()).padStart(2, '0') }}
-                  <span v-if="isReservationInPast(roomReservation.date, roomReservation.time) === 'currentReservation'">(Running)</span>
+                  <span>Date: {{ roomReservation.date.split('T')[0] }}</span>
+                  <span
+                    >Hours:
+                    {{
+                      String(
+                        new Date(
+                          `${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`
+                        ).getHours()
+                      ).padStart(2, '0')
+                    }}:{{
+                      String(
+                        new Date(
+                          `${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`
+                        ).getMinutes()
+                      ).padStart(2, '0')
+                    }}:{{
+                      String(
+                        new Date(
+                          `${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`
+                        ).getSeconds()
+                      ).padStart(2, '0')
+                    }}
+                    -
+                    {{
+                      String(
+                        new Date(
+                          new Date(
+                            `${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`
+                          ).getTime() + 3600000
+                        ).getHours()
+                      ).padStart(2, '0')
+                    }}:{{
+                      String(
+                        new Date(
+                          new Date(
+                            `${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`
+                          ).getTime() + 3600000
+                        ).getMinutes()
+                      ).padStart(2, '0')
+                    }}:{{
+                      String(
+                        new Date(
+                          new Date(
+                            `${roomReservation.date.split('T')[0]}T${roomReservation.time}-04:00`
+                          ).getTime() + 3600000
+                        ).getSeconds()
+                      ).padStart(2, '0')
+                    }}
+                    <span
+                      v-if="
+                        isReservationInPast(roomReservation.date, roomReservation.time) ===
+                        'currentReservation'
+                      "
+                      >(Running)</span
+                    >
                   </span>
                 </li>
               </ul>

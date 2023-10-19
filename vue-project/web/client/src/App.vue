@@ -3,9 +3,9 @@ import { computed, ref, watch, onMounted } from 'vue'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import Login from './components/Login.vue'
 import userData from './services/user'
-import ConnectionStatus from "@/components/ConnectionStatus.vue";
+import ConnectionStatus from '@/components/ConnectionStatus.vue'
 
-const debugMode = false;
+const debugMode = false
 
 const isUserModalOpen = ref(false)
 const user = ref()
@@ -26,7 +26,7 @@ const fetchData = async () => {
 
 onMounted(fetchData)
 
-function loginBehaviour(){
+function loginBehaviour() {
   if (loginval.value === 'Login') {
     isUserModalOpen.value = true
   } else {
@@ -40,7 +40,7 @@ function loginBehaviour(){
 async function exit(s) {
   if (s) {
     user.value = await userData().getConnectedUser()
-    console.log("useval", user.value)
+    console.log('useval', user.value)
     loginval.value = 'Log out'
   }
   isUserModalOpen.value = false
@@ -49,9 +49,9 @@ async function exit(s) {
 function navbarButton() {
   let x = document.getElementById('header-router')
   if (x.classList.value === 'router-list') {
-    x.classList.add('displayed');
+    x.classList.add('displayed')
   } else {
-    x.classList.remove('displayed');
+    x.classList.remove('displayed')
   }
 }
 </script>
@@ -84,7 +84,7 @@ function navbarButton() {
         <ul class="login-button">
           <li>
             <RouterLink class="redirect" v-if="user && user.role == 'admin'" to="/panel"
-            >adminPanel</RouterLink
+              >adminPanel</RouterLink
             >
           </li>
           <li>
@@ -106,7 +106,7 @@ function navbarButton() {
       <RouterLink class="redirect" to="/equipments">Equipment List</RouterLink>
       <RouterLink class="redirect" v-if="user" to="/reservation">See Reservation</RouterLink>
       <RouterLink class="redirect" v-if="user && user.role == 'admin'" to="/panel"
-      >adminPanel</RouterLink
+        >adminPanel</RouterLink
       >
       <div class="redirect login" @click="loginBehaviour()">
         {{ loginval }}
