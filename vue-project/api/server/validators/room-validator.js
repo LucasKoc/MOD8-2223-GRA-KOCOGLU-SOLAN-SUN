@@ -178,7 +178,7 @@ function validateDate(date) {
 
 function validateTime(time) {
 
-    time = time + ':00'
+    if (time.split(':').length === 2) time = time + ':00'
 
     if (time === undefined) {
         return new Error('Time is missing.');
