@@ -64,7 +64,7 @@ async function saveData(data) {
     console.error('Error adding reservation:', error)
   }
   roomManage.value = false
-  // window.location.reload()
+  window.location.reload()
 }
 
 async function openModal() {
