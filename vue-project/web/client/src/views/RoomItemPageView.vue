@@ -8,15 +8,17 @@ import userData from '../services/user.js'
 const roomManage = ref(false)
 const route = useRoute()
 const roomId = route.params.id
-const room = roomData().getRoom(roomId)
+const room = ref([])
 const user = ref()
-const roomname = ref(room.roomname)
+const roomname = ref(null)
 const roomReservations = ref([])
 const username = ref({})
 
 const fetchData = async () => {
   try {
     roomReservations.value = await roomData().getReservations(roomId);
+    room.value = await roomData().getRoom(roomId);
+    roomname.value = room.value.roomname;
     if (roomReservations.value.message !== undefined) {
       if (roomReservations.value.message === 'Room reservation does not exist or could not be find.') {
         roomReservations.value = []
@@ -57,8 +59,12 @@ onMounted(fetchData)
 async function saveData(data) {
   try {
     if (data) {
-      data.userId = user.value.id
-      await roomData().addReservation(roomId, data.date, data.time, data.userId)
+      if (await isRoomAvailableAtSpecificHour(roomReservations, data.date, data.time)) {
+        data.userId = user.value.id
+        await roomData().addReservation(roomId, data.date, data.time, data.userId)
+      } else {
+        alert('Room is not available at this time.')
+      }
     }
   } catch (error) {
     console.error('Error adding reservation:', error)
@@ -66,6 +72,25 @@ async function saveData(data) {
   roomManage.value = false
   window.location.reload()
 }
+
+async function isRoomAvailableAtSpecificHour(roomReservations, specificDate, specificTime) {
+  const targetTimestamp = new Date(specificDate + 'T' + specificTime + 'Z');
+
+  console.log(roomReservations.value)
+
+  if (roomReservations.value === undefined || roomReservations.value.length === 0 || roomReservations.value.message === "Room reservation does not exist or could not be find.") return true;
+
+  const startOfRange = targetTimestamp.getTime();
+  const endOfRange = targetTimestamp.getTime() + (1 * 60 * 60 * 1000);
+
+  const reservationsInRange = roomReservations.value.filter(reservation => {
+    const reservationTime = new Date(reservation.date.split('T')[0] + 'T' + reservation.time + 'Z').getTime();
+    return reservationTime >= startOfRange && reservationTime <= endOfRange;
+  });
+
+  return reservationsInRange.length <= 0;
+}
+
 
 async function openModal() {
   await fetchLogin();
