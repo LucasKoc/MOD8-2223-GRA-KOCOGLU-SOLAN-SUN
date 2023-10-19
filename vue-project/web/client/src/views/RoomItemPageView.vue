@@ -81,8 +81,6 @@ function isReservationInPast(date, time) {
   const currentTime = new Date();
   const reservationDateWithTime = new Date(`${date.split('T')[0]}T${time}-04:00`);
 
-  console.log(reservationDateWithTime, currentTime);
-
   return reservationDateWithTime < currentTime;
 }
 
