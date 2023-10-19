@@ -5,7 +5,6 @@ const equipments = []
 
 const addEquipment = async (equipmentname, equipmentcategory) => {
   try {
-    // TODO: Assert Validator
     const response = await axios.post('/equipments', { equipmentname, equipmentcategory })
     return response.data
   } catch (error) {
@@ -15,7 +14,6 @@ const addEquipment = async (equipmentname, equipmentcategory) => {
 
 const deleteEquipment = async (id) => {
   try {
-    // TODO: Assert Validator
     const response = await axios.delete(`/equipments/${id}`)
     return response.data
   } catch (error) {
@@ -54,7 +52,6 @@ const getEquipmentReservationByUserId = async (id) => {
 
 const reserveEquipment = async (id, time, userId) => {
   try {
-    // TODO: Assert Validator isEquipmentAvailable
     const response = await axios.patch(`/equipments/${id}/reservation`, { time, userId })
     return response.data
   } catch (error) {
