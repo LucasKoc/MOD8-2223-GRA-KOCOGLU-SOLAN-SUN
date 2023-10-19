@@ -60,12 +60,12 @@ async function saveData(data) {
   try {
     if (data) {
       await equipment.reserveEquipment(data.id, data.reservations.time, user.value.id)
+      window.location.reload()
     }
   } catch (error) {
     console.log(error)
   }
   equipmentManage.value = false
-  window.location.reload()
 }
 </script>
 
